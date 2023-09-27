@@ -1,0 +1,725 @@
+#   Did you find a mistake in the translation?
+#   Write to discord and I will fix it
+
+en:
+  common_errors:
+    no_console: '&4This command is only available to &nplayers'
+    no_args: '&4Command entered incorrectly. Please check the correctness of the entered arguments!'
+    no_permission: '&4Insufficient permissions to use the command.'
+    no_permission_role: '&aYour role does not have enough permissions to use this command'
+    no_leader: '&aYou are not the leader of the clan'
+    no_name: '&aSpecify the name of the clan'
+    no_clan: '&aYou are not a member of the clan'
+    no_clan_uid: '&aThere is no clan with such UID.'
+    no_money: '&aYou do not have enough funds. Cost - '
+    no_player_clans: '&aPlayer is not a member of any clans'
+    no_player_clan: '&aPlayer is not a member of this clan'
+    player_clan: '&aPlayer is already a member of the clan'
+    you_player_clan: '&aYou are already a member of the clan'
+    no_players: '&aSpecify the player'
+    no_player: '&aThis player does not exist'
+    no_player_online: '&aPlayer is not online'
+    no_created_clans: '&aApparently no one has created a clan yet!'
+    no_invite: '&aYou have no invites'
+    no_verification: '&aThis command is only available for verified clans'
+    member_clan: '&aYou are already a member of a clan'
+    name_length: '&aThe length of the clan name should be from &n%s&a to &n%s&a characters'
+    name_taken: '&aThe name of the clan is already taken'
+    no_rank: '&aYou cannot change the rank of this player'
+    no_yourself: '&aNice try, but it`s not possible!'
+    limit_maxplayer: '&aMaximum number of participants already reached'
+    command_disabled: '&aCommand disabled'
+    transfer_amount: '&aIncorrect transfer amount specified'
+    no_transfer_money: '&aInsufficient funds for transfer - '
+  pages:
+    no_values: '&aIt is not possible to output this command at this time due to a lack of information'
+    no_page: '&aIncorrect page specified'
+    page: '&aPage: (%s/%s)'
+    back: '&a<< Previous&f | '
+    next: '&f | &aNext >>'
+    line: '<#066DCC>▇<#086ECA>▇<#0A6FC9>▇<#0D71C7>▇<#0F72C6>▇<#1173C4>▇<#1374C3>▇<#1575C1>▇<#1776C0>▇<#1A78BE>▇<#1C79BD>▇<#1E7ABB>▇<#207BBA>▇<#227CB8>▇<#247DB7>▇<#277FB5>▇<#2980B4>▇<#2B81B2>▇<#2F86B5>▇<#338AB8>▇<#378FBA>▇<#3B93BD>▇<#3F98C0>▇<#439CC3>▇<#47A1C5>▇<#4BA5C8>▇<#4FAACB>▇<#53AECE>▇<#57B3D0>▇<#5BB7D3>▇<#5FBCD6>▇<#63C0D9>▇<#67C5DB>▇<#6BC9DE>▇<#6FCEE1>▇'
+  main:
+    id: '&7Unique ID: &a%fc_player_clan_uid%'
+    true: '☑'
+    false: '☒'
+    open: 'Open'
+    closed: 'Closed'
+    leader: '&3Leader'
+  help:
+    msg: '&aInformation on: /%s %s'
+    msg1: '&aUsage: %s'
+    fc_msg: '&aList of admin commands:'
+    clan_msg: '&aCommand List:'
+    clan_msg1: '&aCategories: '
+    button_0: '&7[&aALL&7] '
+    button_1: '&7[&a%s&7] '
+    button_2: '&7[&a%s&7] '
+    button_3: '&7[&a%s&7] '
+    button_4: '&7[&a%s&7] '
+    button_5: '&7[&aLeader&7] '
+    button_6: '&7[&aSettings&7] '
+    button_7: '&7[&aGeneral&7] '
+  commands:
+    create:
+      errors:
+        e: '&a/clan create (name) - Create a clan'
+      message:
+        msg: '&7Clan successfully created - %fc_player_clan_name%'
+    delete:
+      errors:
+        e: '&c/clan delete - Delete a clan'
+      message:
+        line_1: '&aTo delete, press '
+        line_2: '&a(&n&lconfirm&a)'
+        line_2-1: '&f&lThis action cannot be undone!'
+        msg: '&aClan successfully deleted.'
+    info:
+      errors:
+        e: '&a/clan info - Clan information'
+      message:
+        line_1: '&7Clan name: %fc_player_clan_name%'
+        line_1-1: '%fc_player_clan_verification%'
+        line_1-2: '&7Creation date: &a%fc_player_clan_date%'
+        line_1-3: '&7Created by: &a%fc_player_clan_creator%'
+        line_2: '&7Leader: &6%fc_player_clan_leader%'
+        line_3: '&7Treasury: &6%fc_player_clan_cash%'
+        line_4: '&7Rating: &6%fc_player_clan_rating%'
+        line_5: '&7Type: &6%fc_player_clan_type%'
+        line_6: '&7Tax: &6%fc_player_clan_tax%'
+        line_7: '&7Status: &6%fc_player_clan_status%'
+        line_8: '&7Social media: '
+        line_8-1: '&6%fc_player_clan_social%'
+        line_9: '&7Members: (&a%fc_player_clan_count-player%/&4%fc_player_clan_max-player%&7)'
+        line_9-1: '&fOnline members: &a%fc_player_clan_online-player%'
+        line_10: '&7Pinned message: &6%fc_player_clan_message%'
+      message-fc:
+        line_1: '&7Clan name: '
+        line_1-1: '&7Creation date: &a'
+        line_1-2: '&7Created by: &a'
+        line_1-3: '&7UID: &a'
+        line_2: '&7Leader: &6'
+        line_3: '&7Treasury: &6'
+        line_4: '&7Rating: &6'
+        line_5: '&7Type: &6'
+        line_6: '&7Tax: &6'
+        line_7: '&7Status: &6'
+        line_8: '&7Social media: '
+        line_9: '&7Members: (&a%s&7/&4%s&7)'
+        line_9-1: '&fOnline members: &a'
+        line_10: '&7Pinned message: &6'
+    role:
+      errors:
+        e: '&b/clan settings role - List of ranks and their permissions'
+      message:
+        msg: '&aSetting access rights for ranks:'
+        line_1: '&7To get information, put your mouse over [&aHelp&7]'
+        line_1-1: '&f(?) &f- &6Permission &7(hover)'
+        line_1-2: '&a☑&7/&4☒ &7- &6Status: &aOn&7/&4Off&7 (hover and &npress&7)'
+        line_1-3: '&f1:, 2:, 3:, 4: &7- &6Ranks &7(hover)'
+        line_1-4: '&6To update the information, enter the command again or click on &7[&aHelp&7]'
+        line_2: '&fClick to change access to this permission'
+        line_2-1: '&aAbility to kick clan members'
+        line_2-2: '&aAbility to invite players to join the clan'
+        line_2-3: '&aAbility to add coins to the clan treasury'
+        line_2-4: '&aAbility to withdraw coins from the clan treasury'
+        line_2-5: '&aAbility to demote or promote clan members'
+        line_2-6: '&aAbility to write in the clan chat'
+        line_2-7: '&aAbility to write announcements in the clan chat'
+        line_2-8: '&aAbility to send and accept requests to join an alliance'
+        line_2-9: '&aAbility to dissolve the alliance'
+    setrole:
+      errors:
+        e: '&b/clan settings setrole - Set permissions for a rank (for convenience, through /clan role)'
+        e1: '&aSettings for this role are disabled'
+      message:
+          msg: '&2You have changed permission (%s&2) for &a%s&2 rank to %s'
+    members:
+      errors:
+        e: '&a/clan members - List of clan members'
+      message:
+        msg: '&aList of members: '
+    list:
+      errors:
+        e: '&a/clan list - List of clans'
+      message:
+        line_1: '&aList of clans:'
+        line_1-1: '&aVerification: %s'
+        line_1-2: '&aType: %s'
+        line_1-3: '&aStatus: %s'
+        line_1-4: '&aMembers: &7(&a%s&7/&2%s&7)'
+        line_1-5: '&aRating: %s'
+        line_1-6: '&7Unique ID: &2%s'
+        line_2: '&fClick to send a join request to the clan'
+    message:
+      errors:
+        e: '&b/clan settings message (message) - Set message'
+      message:
+        msg: '&a set a new clan message'
+    social:
+      errors:
+        e: '&b/clan settings social (social) - Set social'
+      message:
+        msg: '&a updated social link'
+    status:
+      errors:
+        e: '&b/clan settings status (status) - Set status'
+      message:
+        msg: '&a updated clan status'
+    home:
+      errors:
+        e: '&a/clan home - Clan Home'
+        e1: '&aThe clan has no home'
+      message:
+        msg: '&a Teleported to clan home'
+        msg1: '&a Clan home coordinates: World:&6%fc_player_clan_home-world% &a:&6%fc_player_clan_home-x% &a:&6%fc_player_clan_home-y% &a:&6%fc_player_clan_home-z%'
+    sethome:
+      errors:
+        e: '&b/clan settings sethome - Set clan home point'
+      message:
+      msg: '&a set clan home'
+    removehome:
+      errors:
+        e: '&b/clan settings removehome - Remove clan home point'
+      message:
+        msg: '&a removed clan home'
+    type:
+      errors:
+        e: '&b/clan settings type (type) - Set clan type(0-closed, 1-open)'
+      message:
+        msg: '&a updated clan type'
+    chat:
+      errors:
+        e: '&2/clan chat (message) - Write message in clan chat'
+        e1: '&2Nice try, but the announcement must contain at least 1 symbol'
+      message:
+        msg: ''
+    msg:
+      errors:
+        e: '&2/clan msg (announcement) - Write an announcement in the clan chat'
+        e1: '&2Nice try, but unfortunately the message must contain at least 1 character'
+      message:
+        msg: ''
+    leader:
+      errors:
+        e: '&c/clan leader (username) - Transfer leadership'
+      message:
+        msg: '&aLeadership of the clan has been transferred to - %fc_player_clan_leader%'
+    rename:
+      errors:
+        e: '&c/clan rename (new clan name) - Rename the clan'
+      message:
+        msg: '%fc_player_rank-name%, &achanged the name of the clan to %fc_player_clan_name%'
+    invite:
+      errors:
+        e: '&2/clan invite (player) - Send an invitation to join the clan'
+      message:
+        msg: '&aYou have sent a request to join the clan to %s'
+        msg1: '&aYou have already sent a request to this player'
+        msg2: '&aYou have been invited to join the clan - %fc_player_clan_name%'
+        msg2-1: '&aTo accept the invitation, type &2/clan accept'
+        msg2-2: '&aTo deny the invitation, type &2/clan deny'
+    accept:
+      errors:
+        e: '&a/clan accept - Accept an invitation to join the clan'
+        e1: '&aThis clan does not exist'
+      message:
+        msg: '&a%s has joined the clan'
+    deny:
+      errors:
+        e: '&a/clan deny - Decline an invitation to join the clan'
+      message:
+        msg: '&aYou have declined the invitation'
+    kick:
+      errors:
+        e: '&2/clan kick (player) - Kick a player from the clan'
+        e1: '&aYou cannot kick a player with a higher role than yours'
+      message:
+        msg: '&a%s has kicked %s from the clan'
+    addrank:
+      errors:
+        e: '&2/clan addrank (nickname) - Promote a member'
+        e1: '&aThis player already has the highest rank'
+      message:
+        msg: '&a%s has promoted %s'
+    removerank:
+      errors:
+        e: '&2/clan removerank (nickname) - Demote a member'
+        e1: '&aThis player already has the lowest rank'
+      message:
+        msg: '&a%s, demoted a player %s'
+    leave:
+      errors:
+        e: '&a/clan leave - Leave a clan'
+        e1: '&aYou cannot leave the clan, you are the leader.'
+      message:
+        msg: '&a%s left the clan'
+    ally:
+      errors:
+        e: '&a/clan ally - List of alliances made with clans'
+      message:
+        msg: '&aList of allies: '
+    allyadd:
+      errors:
+        e: '&2/clan ally add (UID) - Send a request to join an alliance'
+        e1: '&aYou have already sent a request to join an alliance'
+        e2: '&aYou have already made an alliance with this clan'
+      message:
+        msg: '&aAlliance created with '
+        msg1: '&aRequest sent to create an alliance from '
+        msg2: '&aYou sent a request to create an alliance'
+        msg3: '&aTo accept the alliance, enter /clan ally add '
+    allyremove:
+      errors:
+        e: '&2/clan ally remove (UID) - Break an alliance with a clan'
+        e1: '&aYou do not have an alliance with this clan yet.'
+      message:
+        msg: '&a%s dissolved the alliance with %s'
+    cashadd:
+      errors:
+        e: '&2/clan cash add (amount) - Deposit money into the clan treasury'
+      message:
+        msg: '&aYou have replenished the clan treasury with - %s'
+    cashremove:
+      errors:
+        e: '&2/clan cash remove (amount) - Withdraw money from the treasury'
+      message:
+        msg: '&aYou have withdrawn from the clan treasury - %s'
+    update_members:
+      errors:
+        e: '&c/clan update members - Increase the maximum number of clan members'
+        e1: '&aExceeded maximum player limit'
+      message:
+        msg: '&aMaximum number of clan members increased'
+    request:
+      errors:
+        e: '&a/clan request (UID) - Request an invitation to the clan'
+        e1: '&aYou can only send a request to join clans with an open type'
+      message:
+        msg: '&aYou have been invited to the clan - %fc_player_clan_name%'
+        msg1-1: '&aTo accept the request use &2/clan accept'
+        msg1-2: '&aTo reject the request use &2/clan deny'
+    top:
+      errors:
+        e: '&a/clan top - List of top clans'
+      message:
+        msg: ''
+    stats:
+      errors:
+        e: '&a/clan stats - List of top clan members'
+      message:
+        msg: ''
+  events:
+    kill:
+      msg: '&aYou earned %s rating for your clan.'
+      msg1: '&4The clan rating has reached the minimum value, clan verification has been removed.'
+  fc:
+    update:
+      errors:
+        e: '&a/fc update - Update cache'
+      message:
+        msg: '&7Cache reloaded'
+    verify:
+      errors:
+        e: '&a/fc verify (UID) - Clan verification'
+      message:
+        msg: '&7You have changed the clan verification'
+        msg1: '&4Clan verification updated'
+    info:
+      errors:
+        e: '&a/fc info (UID) - Clan information'
+      message:
+        msg: ''
+    members:
+      errors:
+        e: '&a/fc members (UID) - List of clan members'
+      message:
+        msg: ''
+    delete:
+      errors:
+        e: '&a/fc delete (UID) - Delete clan'
+    message:
+      msg: ''
+    leader:
+      errors:
+        e: '&a/fc leader (UID) (username) - Transfer clan leadership'
+      message:
+        msg: '&2Installed new clan leader - '
+  top:
+    text_0: '&aYou are not a member of a clan to view it in the clan top'
+    text_1: '&aClan top by: '
+    text_2: '&aClan member top by: '
+    text_3: '&aRating'
+    text_4: '&aMembers'
+    text_5: '&aKills'
+    text_6: '&aDeaths'
+    text_7: '&aKDR'
+    text_8: '&a<< Previous'
+    text_9: '&f | &aNext >>'
+    text_10: '&3▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇'
+    text_11: '&a↑'
+    text_12: '&a↓'
+    text_13: '&a: You are ranked &6%s &ain the clan top'
+
+
+
+# Вы нашли ошибку в переводе?
+# Напиши в discord, и я это исправлю
+
+ru:
+  common_errors:
+    no_console: '&4Данная команда доступна только для &nигроков'
+    no_args: '&4Команда введена неверно. Перепроверьте правильность введенных аргументов!'
+    no_permission: '&4Недостаточно прав для использования команды.'
+    no_permission_role: '&aУ вашего ранга недостаточно прав для использования данной команды'
+    no_leader: '&aВы не являетесь лидером клана'
+    no_name: '&aУкажите название клана'
+    no_clan: '&aВы не состоите в клане'
+    no_clan_uid: '&aКлана с таким UID не существует.'
+    no_money: '&aУ вас недостаточно средств. Стоимость - '
+    no_player_clans: '&aИгрок не состоит в кланах'
+    no_player_clan: '&aИгрок не состоит в этом клане'
+    player_clan: '&aИгрок уже состоит в клане'
+    you_player_clan: '&aВы уже состоите в клане'
+    no_players: '&aУкажите игрока'
+    no_player: '&aДанного игрока не существует'
+    no_player_online: '&aИгрок не в сети'
+    no_created_clans: '&aВидимо еще не кто не создал клан!'
+    no_invite: '&aУ вас нет приглашений'
+    no_verification: '&aКоманда доступна только для проверенных кланов'
+    member_clan: '&aВы уже состоите в клане'
+    name_length: '&aДлинна названия клана от &n%s&a до &n%s&a символов'
+    name_taken: '&aИмя клана уже занято'
+    no_rank: '&aВы не можете изменить ранг данному игроку'
+    no_yourself: '&aХорошая попытка, жаль что так нельзя!'
+    limit_maxplayer: '&aУже максимальное количество участников'
+    command_disabled: '&aКоманда отключена'
+    transfer_amount: '&aСумма перевода указана неправильно'
+    no_transfer_money: '&aНедостаточно средств для перевода - '
+  pages:
+    no_values: '&aНа данный момент невозможно вывести данную команду в связи с отсутствием информации'
+    no_page: '&aСтраница указана неверно'
+    page: '&aСтраница: (%s/%s)'
+    back: '&a<< Предыдущая&f | '
+    next: '&f | &aСледующая >>'
+    line: '<#066DCC>▇<#086ECA>▇<#0A6FC9>▇<#0D71C7>▇<#0F72C6>▇<#1173C4>▇<#1374C3>▇<#1575C1>▇<#1776C0>▇<#1A78BE>▇<#1C79BD>▇<#1E7ABB>▇<#207BBA>▇<#227CB8>▇<#247DB7>▇<#277FB5>▇<#2980B4>▇<#2B81B2>▇<#2F86B5>▇<#338AB8>▇<#378FBA>▇<#3B93BD>▇<#3F98C0>▇<#439CC3>▇<#47A1C5>▇<#4BA5C8>▇<#4FAACB>▇<#53AECE>▇<#57B3D0>▇<#5BB7D3>▇<#5FBCD6>▇<#63C0D9>▇<#67C5DB>▇<#6BC9DE>▇<#6FCEE1>▇'
+  main:
+    id: '&7Уникальный ID: &a%fc_player_clan_uid%'
+    true: '&a☑'
+    false: '&4☒'
+    open: 'Открытый'
+    closed: 'Закрытый'
+    leader: '&3Лидер'
+  help:
+    msg: '&aИнформация по: /%s %s'
+    msg1: '&aИспользование: %s'
+    fc_msg: '&aСписок команд администратора:'
+    clan_msg: '&aСписок команд:'
+    clan_msg1: '&aКатегории: '
+    button_0: '&7[&aВСЕ&7] '
+    button_1: '&7[&a%s&7] '
+    button_2: '&7[&a%s&7] '
+    button_3: '&7[&a%s&7] '
+    button_4: '&7[&a%s&7] '
+    button_5: '&7[&aЛидер&7] '
+    button_6: '&7[&aНастройки&7] '
+    button_7: '&7[&aОбщие&7] '
+  commands:
+    create:
+      errors:
+        e: '&a/clan create (название) - Создание клана'
+      message:
+        msg: '&7Клан успешно создан - %fc_player_clan_name%'
+    delete:
+      errors:
+        e: '&c/clan delete - Удалить клан'
+      message:
+        line_1: '&aДля удаления нажмите '
+        line_2: '&a(&n&lподтвердить&a)'
+        line_2-1: '&f&lДействие нельзя будет отменить!'
+        msg: '&aКлан успешно удален.'
+    info:
+      errors:
+        e: '&a/clan info - Информация о клане'
+      message:
+        line_1: '&7Название клана: %fc_player_clan_name%'
+        line_1-1: '%fc_player_clan_verification%'
+        line_1-2: '&7Дата создания: &a%fc_player_clan_date%'
+        line_1-3: '&7Создал клан: &a%fc_player_clan_creator%'
+        line_2: '&7Лидер: &6%fc_player_clan_leader%'
+        line_3: '&7Казна: &6%fc_player_clan_cash%'
+        line_4: '&7Рейтинг: &6%fc_player_clan_rating%'
+        line_5: '&7Тип: &6%fc_player_clan_type%'
+        line_6: '&7Налог: &6%fc_player_clan_tax%'
+        line_7: '&7Статус: &6%fc_player_clan_status%'
+        line_8: '&7Соц-сети: '
+        line_8-1: '&6%fc_player_clan_social%'
+        line_9: '&7Участники: (&a%fc_player_clan_count-player%&7/&4%fc_player_clan_max-player%&7)'
+        line_9-1: '&fОнлайн участники:  &a%fc_player_clan_online-player%'
+        line_10: '&7Закрепленное сообщение: &6%fc_player_clan_message%'
+      message-fc:
+        line_1: '&7Название клана: '
+        line_1-1: '&7Дата создания: &a'
+        line_1-2: '&7Создал клан: &a'
+        line_1-3: '&7UID: &a'
+        line_2: '&7Лидер: &6'
+        line_3: '&7Казна: &6'
+        line_4: '&7Рейтинг: &6'
+        line_5: '&7Тип: &6'
+        line_6: '&7Налог: &6'
+        line_7: '&7Статус: &6'
+        line_8: '&7Соц-сети: '
+        line_9: '&7Участники: (&a%s&7/&4%s&7)'
+        line_9-1: '&fОнлайн участники:  &a'
+        line_10: '&7Закрепленное сообщение: &6'
+    role:
+      errors:
+        e: '&b/clan settings role - Список рангов и их прав'
+      message:
+        msg: '&aНастройка прав доступа для рангов:'
+        line_1: '&7Для получения информации наведите на [&aПомощь&7]'
+        line_1-1: '&f(?) &f- &6Право доступа &7(навести)'
+        line_1-2: '&a☑&7/&4☒ &7- &6Состояние: &aВкл&7/&4Выкл&7 &7(навести и &nнажать&7)'
+        line_1-3: '&f1:, 2:, 3:, 4: &7 - &6Ранги &7(навести)'
+        line_1-4: '&6Для обновления информации введите команду заново или нажмите на &7[&aПомощь&7]'
+        line_2: '&fНажмите для изменения доступа к данному пункту прав'
+        line_2-1: '&aВозможность кикать участников клана'
+        line_2-2: '&aВозможность отправлять приглашение на вступление в клан'
+        line_2-3: '&aВозможность добавлять монетки в казну клана'
+        line_2-4: '&aВозможность снимать монетки с казны клана'
+        line_2-5: '&aВозможность понижать, повышать участников клана'
+        line_2-6: '&aВозможность писать в чат клана'
+        line_2-7: '&aВозможность писать объявления в чат клана'
+        line_2-8: '&aОтправлять и принимать запросы на вступление в альянс'
+        line_2-9: '&aВозможность расторгнуть альянс'
+    setrole:
+      errors:
+        e: '&b/clan settings setrole - Установить права для ранга (для удобства через /clan role)'
+        e1: '&aОтключена настройка данной роли'
+      message:
+        msg: '&2Вы изменили право (%s&2) для &a%s&2 ранга на %s'
+    members:
+      errors:
+        e: '&a/clan members - Список участников клана'
+      message:
+        msg: '&aСписок участников: '
+    list:
+      errors:
+        e: '&a/clan list - Список кланов'
+      message:
+        line_1: '&aСписок кланов:'
+        line_1-1: '&aВерификация: %s'
+        line_1-2: '&aТип: %s'
+        line_1-3: '&aСтатус: %s'
+        line_1-4: '&aУчастники: &7(&a%s&7/&2%s&7)'
+        line_1-5: '&aРейтинг: %s'
+        line_1-6: '&7Уникальный ID: &2%s'
+        line_2: '&fНажмите для отправки запроса на вступление в клан'
+    message:
+      errors:
+        e: '&b/clan settings message (сообщение) - Установить сообщение'
+      message:
+        msg: '&a, установил новое клановое сообщение'
+    social:
+      errors:
+        e: '&b/clan settings social (соцсети) - Установить соцсети'
+      message:
+        msg: '&a, обновил ссылку на соцсети'
+    status:
+      errors:
+        e: '&b/clan settings status (статус) - Установить статус'
+      message:
+        msg: '&a, обновил статус клана'
+    home:
+      errors:
+        e: '&a/clan home - Клановый дом'
+        e1: '&aУ клана нет кланового дома'
+      message:
+        msg: '&aВы телепортировались в клановый дом'
+        msg1: '&aКоординаты кланового дома: Мир:&6%fc_player_clan_home-world% &a:&6%fc_player_clan_home-x% &a:&6%fc_player_clan_home-y% &a:&6%fc_player_clan_home-z%'
+    sethome:
+      errors:
+        e: '&b/clan settings sethome - Установить точку кланового дома'
+      message:
+        msg: '&a, установил клановый дом'
+    removehome:
+      errors:
+        e: '&b/clan settings removehome - Удалить точку кланового дома'
+      message:
+        msg: '&a, удалил клановый дом'
+    type:
+      errors:
+        e: '&b/clan settings type (тип) - Установить тип клана(0-закрытый, 1-открытый)'
+      message:
+        msg: '&a, обновил тип клана'
+    chat:
+      errors:
+        e: '&2/clan chat (сообщение) - Написать сообщение в чат клана'
+        e1: '&2Хорошая попытка, но к сожалению обьявление должно содержать хотя бы 1 символ'
+      message:
+        msg: ''
+    msg:
+      errors:
+        e: '&2/clan msg (объявление) - Написать объявление в чат клана'
+        e1: '&2Хорошая попытка, но к сожалению сообщение должно содержать хотя бы 1 символ'
+      message:
+        msg: ''
+    leader:
+      errors:
+        e: '&c/clan leader (ник) - Передать лидера'
+      message:
+        msg: '&aЛидерство над кланом передано - %fc_player_clan_leader%'
+    rename:
+      errors:
+        e: '&c/clan rename (новое имя клана) - Переименовать клан'
+      message:
+        msg: '%fc_player_rank-name%, &aизменил название клана на %fc_player_clan_name%'
+    invite:
+      errors:
+        e: '&2/clan invite (игрок) - Отправить приглашение в клан'
+      message:
+        msg: '&aВы отправили запрос на вступление в клан, игроку - %s'
+        msg1: '&aВы уже отправили запрос данному игроку'
+        msg2: '&aВы были приглашены в клан - %fc_player_clan_name%'
+        msg2-1: '&aДля того что бы принять запрос &2/clan accept'
+        msg2-2: '&aДля отклонения запроса - &2/clan deny'
+    accept:
+      errors:
+        e: '&a/clan accept - Принять приглашение в клан'
+        e1: '&aДанного клана не существует'
+      message:
+        msg: '&a%s, вступил в клан'
+    deny:
+      errors:
+        e: '&a/clan deny - Отклонить приглашение в клан'
+      message:
+        msg: '&aВы отклонили запрос'
+    kick:
+      errors:
+        e: '&2/clan kick (игрок) - Кикнуть игрока с клана'
+        e1: '&aВы не можете кикнуть игрока у которого роль выше вашей'
+      message:
+        msg: '&a%s, кикнул игрока %S'
+    addrank:
+      errors:
+        e: '&2/clan addrank (ник) - Повысить ранг участника'
+        e1: '&aУ игрока максимальный ранг'
+      message:
+        msg: '&a%s, повысил игрока %s'
+    removerank:
+      errors:
+        e: '&2/clan removerank (ник) - Понизить ранг участника'
+        e1: '&aУ игрока минимальный ранг'
+      message:
+        msg: '&a%s, понизил игрока %s'
+    leave:
+      errors:
+        e: '&a/clan leave - Выйти с клана'
+        e1: '&aВы не можете покинуть клан, вы лидер.'
+      message:
+        msg: '&a%s, покинул клан'
+    ally:
+      errors:
+        e: '&a/clan ally - Список альянсов заключённых с кланов'
+      message:
+        msg: '&aСписок союзников: '
+    allyadd:
+      errors:
+        e: '&2/clan ally add (UID) - Отправить запрос на вступление в альянс'
+        e1: '&aВы уже отправили запрос на вступление в альянс'
+        e2: '&aВы уже заключили альянс с данным кланом'
+      message:
+        msg: '&aСоздан альянс с '
+        msg1: '&aОтправлен запрос на альянс, от '
+        msg2: '&aВы отправили запрос на создание альянса'
+        msg3: '&aДля принятия альянса введите /clan ally add '
+    allyremove:
+      errors:
+        e: '&2/clan ally remove (UID) - Расторгнуть альянс с кланом'
+        e1: '&aС данным кланом еще не заключен альянс.'
+      message:
+        msg: '&a%s, распустил альянс c %s'
+    cashadd:
+      errors:
+        e: '&2/clan cash add (сумма) - Положить деньги в казну'
+      message:
+        msg: '&aВы пополнили казну клана на - %s'
+    cashremove:
+      errors:
+        e: '&2/clan cash remove (сумма) - Снять деньги с казны'
+      message:
+        msg: '&aВы сняли с казны клана - %s'
+    update_members:
+      errors:
+        e: '&c/clan update members - Увеличить максимальное количество участников клана'
+        e1: '&aПревышен лимит максимального количества игроков'
+      message:
+        msg: '&aМаксимальное количество участников клана увеличено'
+    request:
+      errors:
+        e: '&a/clan request (UID) - запросить приглашение себе в клан'
+        e1: '&aОтправить запрос на приглашение можно только в кланы с открытым типом'
+      message:
+        msg: '&aВы были приглашены в клан - %fc_player_clan_name%'
+        msg1-1: '&aДля того что бы принять запрос &2/clan accept'
+        msg1-2: '&aДля отклонения запроса - &2/clan deny'
+    top:
+      errors:
+        e: '&a/clan top - Список топов кланов'
+      message:
+        msg: ''
+    stats:
+      errors:
+        e: '&a/clan stats - Список топа участников клана'
+      message:
+        msg: ''
+  events:
+    kill:
+      msg: '&aВы заработали %s рейтинга вашему клану.'
+      msg1: '&4Рейтинг клана достиг минимального значения, верификация клана снята.'
+  fc:
+    update:
+      errors:
+        e: '&a/fc update - Обновить кэш '
+      message:
+        msg: '&7Кэш перезагружен'
+    verify:
+      errors:
+        e: '&a/fc verify (UID) - Подтверждение клана'
+      message:
+        msg: '&7Вы изменили верификацию клана'
+        msg1: '&4Обновлена верификация клана'
+    info:
+      errors:
+        e: '&a/fc info (UID) - Информация о клане'
+      message:
+        msg: ''
+    members:
+      errors:
+        e: '&a/fc members (UID) - Список участников клана'
+      message:
+        msg: ''
+    delete:
+      errors:
+        e: '&a/fc delete (UID) - Удалить клан'
+      message:
+        msg: ''
+    leader:
+      errors:
+        e: '&a/fc leader (UID) (ник) - Передать лидера клана'
+      message:
+        msg: '&2Установлен новый лидер клана - '
+  top:
+    text_0: '&aВы не являетесь членом клана, чтобы просмотреть его в топе кланов'
+    text_1: '&aТоп кланов по: '
+    text_2: '&aТоп участников клана по: '
+    text_3: '&aРейтингу'
+    text_4: '&aУчастникам'
+    text_5: '&aУбиствам'
+    text_6: '&aСмертям'
+    text_7: '&aKDR'
+    text_8: '&a<< Предыдущая'
+    text_9: '&f | &aСледующая >>'
+    text_10: '&3▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇'
+    text_11: '&a↑'
+    text_12: '&a↓'
+    text_13: '&a: Вы занимаете &6%s &aместо в топе кланов'
