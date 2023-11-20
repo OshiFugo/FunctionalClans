@@ -172,11 +172,13 @@ en:
       message:
         msg: '&a Teleported to clan home'
         msg1: '&a Clan home coordinates: World:&6%fc_player_clan_home-world% &a:&6%fc_player_clan_home-x% &a:&6%fc_player_clan_home-y% &a:&6%fc_player_clan_home-z%'
+        msg2: '&aTeleportation via %s seconds...'
+        msg3: '&aTeleportation canceled. You`re moving.'
     sethome:
       errors:
         e: '&b/clan settings sethome - Set clan home point'
       message:
-      msg: '&a set clan home'
+        msg: '&a set clan home'
     removehome:
       errors:
         e: '&b/clan settings removehome - Remove clan home point'
@@ -536,6 +538,8 @@ ru:
       message:
         msg: '&aВы телепортировались в клановый дом'
         msg1: '&aКоординаты кланового дома: Мир:&6%fc_player_clan_home-world% &a:&6%fc_player_clan_home-x% &a:&6%fc_player_clan_home-y% &a:&6%fc_player_clan_home-z%'
+        msg2: '&aТелепортация через %s секунд...'
+        msg3: '&aТелепортация отменена. Вы двигаетесь.'
     sethome:
       errors:
         e: '&b/clan settings sethome - Установить точку кланового дома'

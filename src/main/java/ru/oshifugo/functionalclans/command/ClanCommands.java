@@ -731,8 +731,37 @@ public class ClanCommands implements CommandExecutor {
                 return true;
             }
             if (utility.config("home").equalsIgnoreCase("1")) {
-                ((Player) sender).teleport(Clan.getHome(clanName));
-                sender.sendMessage(utility.hex(prefix + utility.lang(sender,"commands.home.message.msg")));
+                Location homeLocation = Clan.getHome(clanName);
+                int timerInSeconds = Integer.parseInt(utility.config("home_delay"));
+                if (timerInSeconds > 0) {
+                    final int[] timer = {timerInSeconds};
+                    Location originalLocation = player.getLocation();
+                    final int[] taskId = new int[1];
+                    taskId[0] = Bukkit.getScheduler().runTaskTimer(Main.instance, new Runnable() {
+                        @Override
+                        public void run() {
+                            if (utility.config("home_protection_tp").equalsIgnoreCase("1")) {
+                                if (!player.getLocation().equals(originalLocation)) {
+                                    player.sendMessage(utility.hex(prefix + utility.lang(player, "commands.home.message.msg3")));
+                                    Bukkit.getScheduler().cancelTask(taskId[0]);
+                                    return;
+                                }
+                            }
+                            if (timer[0] > 0) {
+                                player.sendMessage(utility.hex(prefix + String.format(utility.lang(player, "commands.home.message.msg2"), timer[0])));
+                                timer[0]--;
+                            } else {
+                                player.teleport(homeLocation);
+                                player.sendMessage(utility.hex(prefix + utility.lang(player, "commands.home.message.msg")));
+                                Bukkit.getScheduler().cancelTask(taskId[0]);
+                            }
+                        }
+                    }, 0L, 20L).getTaskId();
+                } else
+                {
+                    player.teleport(homeLocation);
+                    player.sendMessage(utility.hex(prefix + utility.lang(player, "commands.home.message.msg")));
+                }
             } else {
                 Location location = Clan.getHome(clanName);
                 sender.sendMessage(utility.hex(prefix + utility.lang(sender,"commands.home.message.msg1")));

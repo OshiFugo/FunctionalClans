@@ -32,6 +32,16 @@ lang: en
 # When using the /c home command, an action is performed:
 # 0 - command (/c home, /c sethome, /c removehome) disabled, 1 - teleportation, 2 - coordinates
 home: 1
+# If home: 1 (teleportation), then set the teleportation delay (the time after which the player teleports to the house).
+# Time in seconds.
+# (default: 3)
+home_delay: 3
+# If home: 1 (teleportation), then allow to move when teleporting to the clan house
+# When setting 1 - if the player moves or takes damage, the teleport will be canceled!
+# When set to 0 - the player can move and take damage, teleport will not be canceled
+# (default: 1)
+home_protection_tp: 1
+
 # How much rating should I give to a player from another verified clan that is not in an alliance
 # # For killing a player rating "+", for death from a player rating "-"
 # (default: 5)
