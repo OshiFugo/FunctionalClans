@@ -11,34 +11,27 @@ import java.util.List;
 public class AdminTab implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if (args.length == 1) {
-            ArrayList<String> commands = new ArrayList<>();
-            if (sender.hasPermission("fc.admin.update")) {
-                commands.add("update");
-            }
-            if (sender.hasPermission("fc.admin.verify")) {
-                commands.add("verify");
-            }
-            if (sender.hasPermission("fc.admin.info")) {
-                commands.add("info");
-            }
-            if (sender.hasPermission("fc.admin.members")) {
-                commands.add("members");
-            }
-            if (sender.hasPermission("fc.admin.delete")) {
-                commands.add("delete");
-            }
-            if (sender.hasPermission("fc.admin.leader")) {
-                commands.add("leader");
-            }
-            return commands;
+        TabAccessor tabAccessor = new TabAccessor(sender, args);
+        tabAccessor.add("fc.admin.update", "update");
+        tabAccessor.add("fc.admin.verify", "verify");
+        tabAccessor.addList("fc.admin.verify", "verify", Clan.getlistUID());
+
+        tabAccessor.add("fc.admin.members","members");
+        tabAccessor.addList("fc.admin.members","members", Clan.getlistUID());
+
+        tabAccessor.add("fc.admin.delete", "delete");
+        tabAccessor.addList("fc.admin.delete", "delete", Clan.getlistUID());
+
+        tabAccessor.add("fc.admin.leader", "leader");
+        tabAccessor.addList("fc.admin.leader", "leader", Clan.getlistUID());
+        if (args.length == 2) {
+            tabAccessor.addList("fc.admin.leader", "leader", Member.getMembers(Clan.getClanNameUID(args[1])));
         }
-        if (args.length == 2 && ((args[0].equalsIgnoreCase("verify") && sender.hasPermission("fc.admin.verify")) || (args[0].equalsIgnoreCase("info") && sender.hasPermission("fc.admin.info")) || (args[0].equalsIgnoreCase("members") && sender.hasPermission("fc.admin.members")) || (args[0].equalsIgnoreCase("delete") && sender.hasPermission("fc.admin.delete")) || (args[0].equalsIgnoreCase("leader") && sender.hasPermission("fc.admin.leader")))) {
-            return Clan.getlistUID();
-        }
-        if (args.length == 3 && args[0].equalsIgnoreCase("leader") && sender.hasPermission("fc.admin.leader")) {
-            return Member.getMembers(Clan.getClanNameUID(args[1]));
-        }
-        return new ArrayList<>();
+
+        tabAccessor.add("fc.admin.info", "info");
+
+        return tabAccessor.getCommands();
+
+
     }
 }

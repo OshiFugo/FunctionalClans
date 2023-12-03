@@ -9,9 +9,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import ru.oshifugo.functionalclans.command.ClanGUI;
+import ru.oshifugo.functionalclans.sql.Clan;
+import ru.oshifugo.functionalclans.sql.Member;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +27,26 @@ public class utility {
 //        msg = ChatColor.translateAlternateColorCodes('&', msg);
 //        return msg;
 //    }
+
+    public static boolean hasAnyOfPermsOrLeader(Player player, List<String> perms) {
+
+        List<Boolean>  bPerms = new ArrayList<>();
+        perms.forEach(perm -> bPerms.add(player.hasPermission(perm)));
+        return bPerms.contains(true);
+    }
+
+    public static boolean hasAnyOfPermsOrLeader(Player player, String... _perms) {
+        String clanName = Member.getClan(player.getName());
+        if (clanName != null) {
+            if (Clan.getLeader(clanName).equals(player.getName())) {
+                return true;
+            }
+        }
+        List<String> perms = Arrays.asList(_perms);
+        List<Boolean>  bPerms = new ArrayList<>();
+        perms.forEach(perm -> bPerms.add(player.hasPermission(perm)));
+        return bPerms.contains(true);
+    }
 
     public static String config(String cfg) {
         cfg = Main.instance.getConfig().getString(cfg);

@@ -16,6 +16,13 @@
 # The plugin is under development, the final version will be different from the Beta
 
 
+gui:
+  # GUI language
+  # If you want to make your own do it by creating file gui_lang_<your lang code>.yml
+  lang: en
+  # USE IT ONLY IF gui_lang_en.yml WAS CORRUPTED.
+  # Delete your language (en) file and copy the default one
+  override-lang: false
 
 # Plugin prefix
 prefix: '&f[&6FunctionalClans&f] '
@@ -76,7 +83,8 @@ max_player_limit: 50
 # Minimum and maximum length of the clan name
 min_name: 3
 max_name: 30
-
+# Maximum length of the clan status
+max_status: 7
 
 
 # *** Clan Economy ***
@@ -212,3 +220,4 @@ role_4: '&7Dep'
 
 
 debug: false
+

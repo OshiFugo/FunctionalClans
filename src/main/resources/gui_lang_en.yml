@@ -1,0 +1,92 @@
+#    ███████╗██╗░░░██╗███╗░░██╗░█████╗░████████╗██╗░█████╗░███╗░░██╗░█████╗░██╗░░░░░
+#    ██╔════╝██║░░░██║████╗░██║██╔══██╗╚══██╔══╝██║██╔══██╗████╗░██║██╔══██╗██║░░░░░
+#    █████╗░░██║░░░██║██╔██╗██║██║░░╚═╝░░░██║░░░██║██║░░██║██╔██╗██║███████║██║░░░░░
+#    ██╔══╝░░██║░░░██║██║╚████║██║░░██╗░░░██║░░░██║██║░░██║██║╚████║██╔══██║██║░░░░░
+#    ██║░░░░░╚██████╔╝██║░╚███║╚█████╔╝░░░██║░░░██║╚█████╔╝██║░╚███║██║░░██║███████╗
+#    ╚═╝░░░░░░╚═════╝░╚═╝░░╚══╝░╚════╝░░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝╚═╝░░╚═╝╚══════╝
+#
+#    ░█████╗░██╗░░░░░░█████╗░███╗░░██╗░██████╗
+#    ██╔══██╗██║░░░░░██╔══██╗████╗░██║██╔════╝
+#    ██║░░╚═╝██║░░░░░███████║██╔██╗██║╚█████╗░
+#    ██║░░██╗██║░░░░░██╔══██║██║╚████║░╚═══██╗
+#    ╚█████╔╝███████╗██║░░██║██║░╚███║██████╔╝
+#    ░╚════╝░╚══════╝╚═╝░░╚═╝╚═╝░░╚══╝╚═════╝░
+
+# GUI Language config
+
+lang: en
+
+# You can use placeholders
+# You should use ';' to separate your lines in lore
+# preprocessor change all '&' to '§' so you can choose whatever you want of these two to format
+other:
+  perm-lack: "§cYou haven't permissions to do that!"
+  not-enough-money: "§cYou haven't enough money §b$%vault_eco_balance%/${money}"
+  charged: "§aYou was charged at §b${money}"
+  undefined-price: "§cPrice is undefined in config.yml (use -1 to make it free). Contact the administrator!"
+
+root:
+  settings:
+    name: "Settings"
+    lore: "§c%fc_player_clan_name%'s §5settings"
+  actions:
+    name: "Actions"
+  info:
+    name: "Info"
+    lore: "§5Clan info"
+  go_back:
+    name: "Back"
+    lore: "§5Go to the main menu"
+
+settings:
+
+  message:
+    name: "Welcome message"
+    lore: "§5Click to change a welcome message;Current: §e%fc_player_clan_message%"
+  status:
+    name: "Clan Status"
+    lore: "§5Click to change a clan status;Current: §e%fc_player_clan_status%"
+  rename:
+    name: "Rename clan"
+    lore: "§5Click to change a clan name;Current: §e%fc_player_clan_name%"
+  social:
+    name: "Clan Social"
+    lore: "§5Click to change a clan social;Current: §e%fc_player_clan_social%"
+  type:
+    name: "Clan Type"
+    lore: "§5Click to toggle clan type;Now: §e%fc_player_clan_type%"
+  role-manager:
+    name: "Role Manager"
+    lore: "§5Click to manage clan roles"
+
+rename:
+  n-enough-money: "§cYou haven't enough money to create a new clan! (§b${money}/$%vault_eco_balance%)"
+  done: "§aYou've renamed the clan successfully!"
+  charging: "§5You'll be charged at §b${money}"
+  out-of-letters: "§cToo many or too few letters in your clan name.\nMin: §b{min}§c, Max: &b{max}§c"
+  used-name: "§cThat clan name already exists!"
+
+message:
+  clear: "§aYou've cleared the clan message!"
+  done: "§aYou've successfully changed the message!"
+  lore: "§5Click to set new message"
+social:
+  done: "§aYou've successfully changed the social!"
+  lore: "§5Click to set new social"
+status:
+  done: "§aYou've successfully changed the status!"
+  lore: "§5Click to set new status"
+  too-many-letters: "§aToo many letters! Max: §b{max}"
+role-manager:
+  kick:
+    name: "Kick"
+    lore: "§5Now: §b{current}"
+  join:
+    name: "Join"
+    lore: "§5Now: §b{current}"
+  perms:
+    name: "Permissions"
+    lore: "§5Now: §b{current}"
+  add-money:
+    name: "Add money"
+    lore: "§5Now: §b{current}"

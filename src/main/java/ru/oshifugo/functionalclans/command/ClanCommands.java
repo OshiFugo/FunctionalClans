@@ -2,6 +2,7 @@ package ru.oshifugo.functionalclans.command;
 
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
+import ru.oshifugo.functionalclans.GUITranslate;
 import ru.oshifugo.functionalclans.Main;
 import ru.oshifugo.functionalclans.command.subcommands.topCMD;
 import ru.oshifugo.functionalclans.sql.*;
@@ -16,6 +17,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import xyz.xenondevs.invui.window.Window;
+
 import java.util.*;
 
 public class ClanCommands implements CommandExecutor {
@@ -35,6 +38,7 @@ public class ClanCommands implements CommandExecutor {
         }
         return true;
     }
+
     public static boolean checkSmall(CommandSender sender, String memberName, String clanName, String permission) {
         if (!sender.hasPermission("fc." + permission)) {
             sender.sendMessage(utility.hex(prefix + utility.lang(sender,"common_errors.no_permission")));
@@ -369,7 +373,12 @@ public class ClanCommands implements CommandExecutor {
             utility.debug("getClanByName -> null");
         }
         if (args.length == 0) {
-            help(sender, clanName, memberName, "-1");
+            ClanGUI clanGUI = new ClanGUI(player);
+            clanGUI.home(player);
+            clanGUI.display("Clans");
+
+
+//            help(sender, clanName, memberName, "-1");
             return true;
         } else if (args[0].equalsIgnoreCase("help")) {
             if (args.length == 2) {
@@ -716,10 +725,19 @@ public class ClanCommands implements CommandExecutor {
             for(int i = 2; i < args.length; ++i) {
                 message = message + args[i] + " ";
             }
+            int max_status = Main.instance.getConfig().getInt("max_status");
+            if (message.length() > max_status) {
+                player.sendMessage(GUITranslate.getTranslate(player).get("status.too-many-letters", true)
+                        .replace("{max}", String.valueOf(max_status)));
+                return true;
+            }
             Clan.setStatus(clanName, message);
-            if (utility.configBoolean("chat_status"))
-                Clan.broadcast(clanName, utility.hex(Bukkit.getPlayer(memberName).getName() + utility.lang(sender,"commands.status.message.msg")));
+            if (utility.configBoolean("chat_status")) {
+                Clan.broadcast(clanName, utility.hex(Bukkit.getPlayer(memberName).getName() + utility.lang(sender, "commands.status.message.msg")));
+            }
             return true;
+
+
         } else if (args[0].equalsIgnoreCase("home")) {
             if (!checkSmall(sender, memberName, clanName, "home")) { return true; }
             if (utility.config("home").equalsIgnoreCase("0")) {

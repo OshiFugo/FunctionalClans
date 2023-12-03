@@ -6,22 +6,35 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import ru.oshifugo.functionalclans.command.AdminClanCommands;
 import ru.oshifugo.functionalclans.command.ClanCommands;
 import ru.oshifugo.functionalclans.events.Kill;
+import ru.oshifugo.functionalclans.events.SalaryEvents;
 import ru.oshifugo.functionalclans.sql.SQLite;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.oshifugo.functionalclans.tabcomplete.AdminTab;
 import ru.oshifugo.functionalclans.tabcomplete.CommandsTab;
+
 import java.io.File;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public final class Main extends JavaPlugin {
     public static Main instance;
+
+    private GUITranslate lang;
     private static Economy econ = null;
     public static HashMap<String, String[]> placeholders_config = new HashMap<>();
+
+    public GUITranslate getLang() {
+        return lang;
+    }
+
+
+
     @Override
     public void onEnable() {
+
         long time = System.currentTimeMillis();
+
+//        gui = Gui.normal();
         instance = this;
         saveDefaultConfig();
         SQLite.connect();
@@ -40,6 +53,10 @@ public final class Main extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+        if (getServer().getPluginManager().getPlugin("SalaryManager") != null) {
+            getServer().getPluginManager().registerEvents(new SalaryEvents(), this);
+        }
+
         getCommand("clan").setExecutor(new ClanCommands());
         getServer().getPluginCommand("clan").setTabCompleter(new CommandsTab());
         getCommand("fc").setExecutor(new AdminClanCommands());
@@ -49,6 +66,18 @@ public final class Main extends JavaPlugin {
         if (!new File(getDataFolder(), "message.yml").exists()) {
             saveResource("message.yml", false);
         }
+
+        if (!new File(getDataFolder(), "gui_lang_en.yml").exists()) {
+            saveResource("gui_lang_en.yml", false);
+        }
+        getConfig().addDefault("gui.lang", "en");
+        if (getConfig().getBoolean("gui.override-lang")) {
+            saveResource("gui_lang_en.yml", true);
+        }
+        GUITranslate.init(this, getConfig().getString("gui.lang"));
+        lang = GUITranslate.getInstance();
+        saveDefaultConfig();
+
 //        if (!new File(getDataFolder(), "message.yml").exists()) {
 //            saveResource("message.yml", false);
 //        }

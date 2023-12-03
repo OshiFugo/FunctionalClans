@@ -6,7 +6,7 @@
 
     <groupId>ru.oshifugo</groupId>
     <artifactId><![CDATA[FunctionalClans]]></artifactId>
-    <version>1.0.5.7</version>
+    <version>sm1.0.5.8</version>
     <packaging>jar</packaging>
 
     <name><![CDATA[FunctionalClans&^&s]]></name>
@@ -47,13 +47,17 @@
         </plugins>
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>../FunctionalClansWithSalaryManager/src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>
     </build>
 
     <repositories>
+        <repository>
+            <id>xenondevs</id>
+            <url>https://repo.xenondevs.xyz/releases</url>
+        </repository>
         <repository>
             <id>spigotmc-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
@@ -89,7 +93,23 @@
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
             <version>2.11.3</version>
+
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>me.ford</groupId>
+            <artifactId>salarymanager</artifactId>
+            <version>0.5.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>xyz.xenondevs.invui</groupId>
+            <artifactId>invui</artifactId>
+            <version>1.23</version>
+            <type>pom</type>
+        </dependency>
+
+
     </dependencies>
 </project>
