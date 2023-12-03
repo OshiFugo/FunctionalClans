@@ -2,7 +2,7 @@ package ru.oshifugo.functionalclans.command.gui_items;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Entity;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -19,24 +19,22 @@ import xyz.xenondevs.invui.item.ItemProvider;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
 import xyz.xenondevs.invui.item.impl.AbstractItem;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 public abstract class ItemsBase extends AbstractItem {
 
     protected ItemBuilder itemBuilder;
     private final ClanGUI ui;
-    private Player player;
+    private OfflinePlayer player;
     private GUITranslatePlaceholder translate;
-    String lore;
+    private String lore;
+    private String name;
 
     public GUITranslatePlaceholder getTranslate() {
         return translate;
     }
 
-    public Player getPlayer() {
+    public OfflinePlayer getPlayer() {
         return player;
     }
 
@@ -45,7 +43,7 @@ public abstract class ItemsBase extends AbstractItem {
     }
 
 
-    protected ItemsBase(Player player, ClanGUI ui, String id, ItemStack itemStack, String displayName) {
+    protected ItemsBase(OfflinePlayer player, ClanGUI ui, String id, ItemStack itemStack, String displayName) {
         this.ui = ui;
         this.player = player;
         this.translate = GUITranslate.getTranslate(player);
@@ -72,6 +70,7 @@ public abstract class ItemsBase extends AbstractItem {
 
     public ItemsBase setDisplayedName(String name) {
         if (name != null) {
+            this.name = name;
             itemBuilder.setDisplayName(name);
         }
         return this;
@@ -94,8 +93,12 @@ public abstract class ItemsBase extends AbstractItem {
         setLore(this.getTranslate().getLore(name));
         return this;
     }
-    public ItemsBase replaceRole(String key, String value) {
+    public ItemsBase replaceLore(String key, String value) {
         setLore(lore.replace(key, value));
+        return this;
+    }
+    public ItemsBase replaceName(String key, String value) {
+        setDisplayedName(name.replace(key, value));
         return this;
     }
     protected ItemsBase(Player player, ClanGUI ui, String id, Material material, String displayName, String lore) {

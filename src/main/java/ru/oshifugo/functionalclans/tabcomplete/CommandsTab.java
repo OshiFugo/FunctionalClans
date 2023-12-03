@@ -24,8 +24,6 @@ public class CommandsTab implements TabCompleter {
         String leaderName = null;
         if (members.containsKey(sender.getName())) {
             memberName = members.get(sender.getName())[0].toLowerCase();
-        }
-        if (members.containsKey(sender.getName())) {
             clanName = members.get(sender.getName())[2];
             leaderName = Clan.getLeader(clanName);
         }

@@ -372,12 +372,14 @@ public class ClanCommands implements CommandExecutor {
         } catch (Exception e) {
             utility.debug("getClanByName -> null");
         }
-        if (args.length == 0) {
+        if (args.length == 0 || args[0].equalsIgnoreCase("menu")) {
+            Boolean isActive = Main.instance.getConfig().getBoolean("gui.active");
+            if (!isActive) {
+                return true;
+            }
             ClanGUI clanGUI = new ClanGUI(player);
             clanGUI.home(player);
-            clanGUI.display("Clans");
-
-
+            clanGUI.display(GUITranslate.getTranslate(player).get("root.name"));
 //            help(sender, clanName, memberName, "-1");
             return true;
         } else if (args[0].equalsIgnoreCase("help")) {
@@ -389,7 +391,8 @@ public class ClanCommands implements CommandExecutor {
             }
             help(sender, clanName, memberName, "-1");
             return true;
-        } else if (args[0].equalsIgnoreCase("settings") && args.length == 1) {
+
+        }  else if (args[0].equalsIgnoreCase("settings") && args.length == 1) {
             help(sender, clanName, memberName, "6");
             return true;
         } else if (args[0].equalsIgnoreCase("create")) {

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.oshifugo</groupId>
     <artifactId><![CDATA[FunctionalClans]]></artifactId>
-    <version>sm1.0.5.8</version>
+    <version>2.0.0-alpha</version>
     <packaging>jar</packaging>
 
     <name><![CDATA[FunctionalClans&^&s]]></name>
@@ -46,7 +46,7 @@
         </plugins>
         <resources>
             <resource>
-                <directory>../FunctionalClansWithSalaryManager/src/main/resources</directory>
+                <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>

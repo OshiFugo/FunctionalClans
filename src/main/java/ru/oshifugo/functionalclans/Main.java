@@ -6,6 +6,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import ru.oshifugo.functionalclans.command.AdminClanCommands;
 import ru.oshifugo.functionalclans.command.ClanCommands;
 import ru.oshifugo.functionalclans.events.Kill;
+import ru.oshifugo.functionalclans.events.PlayerJoin;
 import ru.oshifugo.functionalclans.events.SalaryEvents;
 import ru.oshifugo.functionalclans.sql.SQLite;
 import org.bukkit.ChatColor;
@@ -62,13 +63,14 @@ public final class Main extends JavaPlugin {
         getCommand("fc").setExecutor(new AdminClanCommands());
         getServer().getPluginCommand("fc").setTabCompleter(new AdminTab());
         Bukkit.getPluginManager().registerEvents(new Kill(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
 //        saveResource("message.yml", true); // УБРАТЬ ПЕРЕД ОБНОВОЙ
         if (!new File(getDataFolder(), "message.yml").exists()) {
             saveResource("message.yml", false);
         }
 
         if (!new File(getDataFolder(), "gui_lang_en.yml").exists()) {
-            saveResource("gui_lang_en.yml", false);
+            saveResource("gui_lang_en.yml", true);
         }
         getConfig().addDefault("gui.lang", "en");
         if (getConfig().getBoolean("gui.override-lang")) {

@@ -6,10 +6,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.jetbrains.annotations.NotNull;
 import ru.oshifugo.functionalclans.command.ClanGUI;
-import ru.oshifugo.functionalclans.command.gui_items.settings.Message;
-import ru.oshifugo.functionalclans.command.gui_items.settings.Rename;
-import ru.oshifugo.functionalclans.command.gui_items.settings.Social;
-import ru.oshifugo.functionalclans.command.gui_items.settings.Status;
+import ru.oshifugo.functionalclans.command.gui_items.settings.*;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.utility;
 
@@ -96,6 +93,7 @@ public class Settings extends ItemsBase {
                 }
                 Rename newRename = getUi().rename(player);
                 getUi().displayAnvil(getTranslate().get("settings.rename.name"), newRename::editCallback);
+                break;
             case "type":
 
                 if (!utility.hasAnyOfPermsOrLeader(player, "fc.type"))
@@ -116,7 +114,10 @@ public class Settings extends ItemsBase {
                 // 0 - closed
             case "role-manager":
 //                kick join perms, withdraw, demote_promote, announcments, join allieance, dissolve the alliance
-
+                if (utility.hasAnyOfPermsOrLeader(player, "fc.setrole")) {
+                    RoleManager.display(player, getUi());
+                }
+                break;
         }
     }
 }

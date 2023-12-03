@@ -1,11 +1,10 @@
 package ru.oshifugo.functionalclans.command;
 
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import ru.oshifugo.functionalclans.command.gui_items.Members;
+import ru.oshifugo.functionalclans.GUITranslate;
 import ru.oshifugo.functionalclans.command.gui_items.Root;
 import ru.oshifugo.functionalclans.command.gui_items.Settings;
 import ru.oshifugo.functionalclans.command.gui_items.settings.Message;
@@ -13,31 +12,34 @@ import ru.oshifugo.functionalclans.command.gui_items.settings.Rename;
 import ru.oshifugo.functionalclans.command.gui_items.settings.Social;
 import ru.oshifugo.functionalclans.command.gui_items.settings.Status;
 import ru.oshifugo.functionalclans.sql.Clan;
+import ru.oshifugo.functionalclans.sql.Member;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.gui.structure.Structure;
+import xyz.xenondevs.invui.item.builder.ItemBuilder;
 import xyz.xenondevs.invui.window.AnvilWindow;
 import xyz.xenondevs.invui.window.Window;
 
 import java.util.function.Consumer;
 
-import static ru.oshifugo.functionalclans.sql.SQLiteUtility.clans;
 import static ru.oshifugo.functionalclans.sql.SQLiteUtility.members;
 
 public class ClanGUI {
     public Gui gui;
     public AnvilWindow window;
     Player p;
-    private ItemStack voidFill;
+    private ItemBuilder voidFill;
     public Gui getGui() {
         return gui;
     }
 
+    public ItemBuilder getVoidFill() {
+        return voidFill;
+    }
+
     public ClanGUI(Player player) {
         this.p = player;
-        voidFill = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-        ItemMeta meta = voidFill.getItemMeta();
-        meta.setDisplayName("");
-        voidFill.setItemMeta(meta);
+        voidFill = new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayName(GUITranslate.getTranslate(player).get("glass-name"));
+
     }
 
     public void display(String title) {
@@ -52,7 +54,11 @@ public class ClanGUI {
 
 
     public void home(Player player) {
-        gui = Gui.empty(9, 3);
+        if (Member.getClan(player.getName()) == null) {
+            player.sendMessage(GUITranslate.getTranslate(player).get("clan-lack", true));
+            return;
+        }
+            gui = Gui.empty(9, 3);
         gui.applyStructure(new Structure(
                 "#########",
                 "#.......#",
@@ -62,8 +68,8 @@ public class ClanGUI {
         );
 //
         gui.setItem(2, 1, Root.settings(this, player));
-        gui.setItem(4, 1, Root.actions(this, player));
-        gui.setItem(6, 1, Root.info(this, player));
+        gui.setItem(4, 1, Root.information(this, player));
+        gui.setItem(6, 1, Root.members(this, player));
     }
     public void settings(Player player) {
         gui = Gui.empty(9, 3);

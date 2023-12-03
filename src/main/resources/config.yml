@@ -23,6 +23,8 @@ gui:
   # USE IT ONLY IF gui_lang_en.yml WAS CORRUPTED.
   # Delete your language (en) file and copy the default one
   override-lang: false
+  # enable gui
+  active: true
 
 # Plugin prefix
 prefix: '&f[&6FunctionalClans&f] '

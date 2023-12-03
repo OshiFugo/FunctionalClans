@@ -1,6 +1,7 @@
 package ru.oshifugo.functionalclans.command;
 
 import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import ru.oshifugo.functionalclans.GUITranslate;
@@ -9,12 +10,12 @@ import ru.oshifugo.functionalclans.Main;
 import java.io.File;
 
 public class GUITranslatePlaceholder {
-    Player player;
+    OfflinePlayer player;
     protected String lang;
     protected YamlConfiguration yml;
 
 
-    public GUITranslatePlaceholder(Player player, String lang, YamlConfiguration yml) {
+    public GUITranslatePlaceholder(OfflinePlayer player, String lang, YamlConfiguration yml) {
         this.player = player;
         this.lang = lang;
         this.yml = yml;

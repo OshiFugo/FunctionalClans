@@ -32,7 +32,7 @@ public class Rename extends ItemsBase{
         return new Rename(player, ui, "old_message", Material.GREEN_STAINED_GLASS, oldMessageText);
     }
     public static Rename newMessage(ClanGUI ui, Player player) {
-        return (Rename) new Rename(player, ui, "new_message", Material.GREEN_STAINED_GLASS, "");
+        return new Rename(player, ui, "new_message", Material.GREEN_STAINED_GLASS, "");
     }
 
     Rename(Player player, ClanGUI ui, String id, Material material, String displayName) {
