@@ -1,3 +1,7 @@
+# V2.0.0 - meet GUI!
+![minecraft_plugin](https://github.com/OshiFugo/FunctionalClans/assets/57602929/2ec7c8a0-b7a2-4853-b32c-05e0a37e46fe)
+
+
 # SalaryManager
 ![image](https://github.com/bezumnui/FunctionalClansWithSalaryManager/assets/57602929/5c8efa50-066b-4b0b-b84d-b36085428ef3)
 
