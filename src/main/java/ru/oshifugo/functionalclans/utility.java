@@ -9,10 +9,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import ru.oshifugo.functionalclans.sql.Clan;
+import ru.oshifugo.functionalclans.sql.Member;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,6 +25,76 @@ public class utility {
 //        msg = ChatColor.translateAlternateColorCodes('&', msg);
 //        return msg;
 //    }
+
+
+
+    public static boolean hasAnyOfPermsOrLeader(Player player, String... _perms) {
+        Map<String, Integer> ranks = new HashMap<>();
+
+        ranks.put("fc.kick", 2);
+        ranks.put("fc.invite", 3);
+        ranks.put("fc.cash_add", 4);
+        ranks.put("fc.cash_remove", 5);
+        ranks.put("fc.rmanage", 6);
+        ranks.put("fc.chat", 7);
+        ranks.put("fc.msg", 8);
+        ranks.put("fc.alliance_add",9);
+        ranks.put("fc.alliance_remove", 10);
+        //
+        //
+        ranks.put("fc.create", -2);
+        ranks.put("fc.top", -1);
+        ranks.put("fc.list", -1);
+        ranks.put("fc.menu", -1);
+        ranks.put("fc.delete", -2);
+        ranks.put("fc.rename", -2);
+        ranks.put("fc.update", -2);
+        ranks.put("fc.settings", -2);
+        ranks.put("fc.message", -2);
+        ranks.put("fc.status", -2);
+        ranks.put("fc.social", -2);
+        ranks.put("fc.type", -2);
+        ranks.put("fc.role", -2);
+        ranks.put("fc.setrole", -2);
+        ranks.put("fc.sethome", -2);
+        ranks.put("fc.removehome", -2);
+        ranks.put("fc.info", -1);
+        ranks.put("fc.members", -1);
+        ranks.put("fc.accept", -1);
+        ranks.put("fc.deny", -1);
+        ranks.put("fc.leave", -1);
+        ranks.put("fc.home", -1);
+        ranks.put("fc.ally", -1);
+        ranks.put("fc.top", -1);
+        ranks.put("fc.stats", -1);
+
+        String clanName = Member.getClan(player.getName());
+//        Clan.getRank(sender.getName()) > Clan.getRank(Bukkit.getOfflinePlayer(args[1]).getName())
+        List<String> perms = Arrays.asList(_perms);
+        AtomicBoolean returnValue = new AtomicBoolean(false);
+
+        perms.forEach(perm -> {
+            if (!ranks.containsKey(perm)) {
+                throw new RuntimeException(String.format("Permission %s was not found. Report to the plugin creator", perm));
+            }
+            int rank = ranks.get(perm);
+            if (!player.hasPermission(perm)) {
+                return;
+            }
+            if (rank == -1){
+                returnValue.set(true);
+            }
+            if (clanName == null) return;
+            else if (rank == -2 && Clan.getLeader(clanName).equals(player.getName())) {
+               returnValue.set(true);
+            }
+            else if (rank != -1 && rank != -2 && Clan.hasRole(clanName, Integer.valueOf(Member.getRank(player.getName())), rank)) {
+                returnValue.set(true);
+            }
+
+        });
+        return returnValue.get();
+    }
 
     public static String config(String cfg) {
         cfg = Main.instance.getConfig().getString(cfg);

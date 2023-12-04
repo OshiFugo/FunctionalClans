@@ -14,159 +14,87 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import static ru.oshifugo.functionalclans.sql.SQLiteUtility.members;
+
 public class CommandsTab implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        String[] clanInfo = null;
         String memberName = null;
         String clanName = null;
-        try {
-            clanInfo = SQLiteUtility.getClanByName(sender.getName());
-            memberName = clanInfo[0];
-            clanName = clanInfo[1];
-        } catch (Exception e) {
-            utility.debug("getClanByName -> null");
-        }
         String leaderName = null;
-        if (clanName != null) {
+        if (members.containsKey(sender.getName())) {
+            memberName = members.get(sender.getName())[0].toLowerCase();
+            clanName = members.get(sender.getName())[2];
             leaderName = Clan.getLeader(clanName);
         }
 
-        if (args.length == 1) {
-            ArrayList<String> commands = new ArrayList<>();
-            if (leaderName != null) {
-                if (sender.hasPermission("fc.delete") && clanName != null && leaderName.equalsIgnoreCase(sender.getName())) {
-                    commands.add("delete");
-                }
-                if (sender.hasPermission("fc.rename") && clanName != null && leaderName.equalsIgnoreCase(sender.getName())) {
-                    commands.add("rename");
-                }
-                if (sender.hasPermission("fc.update") && clanName != null && !utility.config("add_max_player").equalsIgnoreCase("-1") && leaderName.equalsIgnoreCase(sender.getName())) {
-                    commands.add("update");
-                }
-                if (leaderName.equalsIgnoreCase(sender.getName()) && (sender.hasPermission("fc.message") || sender.hasPermission("fc.status") || sender.hasPermission("fc.social") || sender.hasPermission("fc.type") || sender.hasPermission("fc.role") || sender.hasPermission("fc.sethome") || sender.hasPermission("fc.removehome"))) {
-                    commands.add("settings");
-                }
-            }
-            if (sender.hasPermission("fc.create") && clanName == null) {
-                commands.add("create");
-            }
-            if (sender.hasPermission("fc.info") && clanName != null) {
-                commands.add("info");
-            }
-            if (sender.hasPermission("fc.list")) {
-                commands.add("list");
-            }
-            if (sender.hasPermission("fc.members") && clanName != null) {
-                commands.add("members");
-            }
-            if (sender.hasPermission("fc.accept") && clanName == null) {
-                commands.add("accept");
-            }
-            if (sender.hasPermission("fc.deny") && clanName == null) {
-                commands.add("deny");
-            }
-            if (sender.hasPermission("fc.leave") && clanName != null) {
-                commands.add("leave");
-            }
-            if (sender.hasPermission("fc.home") && clanName != null) {
-                commands.add("home");
-            }
-            if (sender.hasPermission("fc.ally") && clanName != null) {
-                commands.add("ally");
-            }
-            if (sender.hasPermission("fc.top")) {
-                commands.add("top");
-            }
-            if (sender.hasPermission("fc.stats") && clanName != null) {
-                commands.add("stats");
-            }
-            if (memberName != null) {
-                if (sender.hasPermission("fc.cash") && clanName != null && Clan.hasRole(clanName, Integer.valueOf(Member.getRank(memberName)), 4) || Clan.hasRole(clanName, Integer.valueOf(Member.getRank(memberName)), 5)) {
-                    commands.add("cash");
-                }
-                if (sender.hasPermission("fc.invite") && clanName != null && Clan.hasRole(clanName, Integer.valueOf(Member.getRank(memberName)), 3)) {
-                    commands.add("invite");
-                }
-                if (sender.hasPermission("fc.kick") && clanName != null && Clan.hasRole(clanName, Integer.valueOf(Member.getRank(memberName)), 2)) {
-                    commands.add("kick");
-                }
-                if (sender.hasPermission("fc.chat") && clanName != null && Clan.hasRole(clanName, Integer.valueOf(Member.getRank(memberName)), 7)) {
-                    commands.add("chat");
-                }
-                if (sender.hasPermission("fc.msg") && clanName != null && Clan.hasRole(clanName, Integer.valueOf(Member.getRank(memberName)), 8)) {
-                    commands.add("msg");
-                }
-                if (sender.hasPermission("fc.addrank") && clanName != null && Clan.hasRole(clanName, Integer.valueOf(Member.getRank(memberName)), 6)) {
-                    commands.add("addrank");
-                }
-                if (sender.hasPermission("fc.removerank") && clanName != null && Clan.hasRole(clanName, Integer.valueOf(Member.getRank(memberName)), 6)) {
-                    commands.add("removerank");
-                }
-            }
-            return commands;
-        }
+        TabAccessor tabAccessor = new TabAccessor(sender, args);
+        List<String> playerNamesList = new ArrayList<>();
+        Bukkit.getServer().getOnlinePlayers()
+                .forEach(player -> playerNamesList.add(player.getName()));
 
-        if (args[0].equalsIgnoreCase("settings") && args.length == 2) {
-            ArrayList<String> commands = new ArrayList<>();
-            if (sender.hasPermission("fc.message") && clanName != null && leaderName.equalsIgnoreCase(sender.getName())) {
-                commands.add("message");
-            }
-            if (sender.hasPermission("fc.status") && clanName != null && leaderName.equalsIgnoreCase(sender.getName())) {
-                commands.add("status");
-            }
-            if (sender.hasPermission("fc.social") && clanName != null && leaderName.equalsIgnoreCase(sender.getName())) {
-                commands.add("social");
-            }
-            if (sender.hasPermission("fc.type") && clanName != null && leaderName.equalsIgnoreCase(sender.getName())) {
-                commands.add("type");
-            }
-            if (sender.hasPermission("fc.role") && clanName != null && leaderName.equalsIgnoreCase(sender.getName())) {
-                commands.add("role");
-            }
-            if (sender.hasPermission("fc.setrole") && clanName != null && leaderName.equalsIgnoreCase(sender.getName())) {
-                commands.add("setrole");
-            }
-            if (sender.hasPermission("fc.sethome") && clanName != null && leaderName.equalsIgnoreCase(sender.getName())) {
-                commands.add("sethome");
-            }
-            if (sender.hasPermission("fc.removehome") && clanName != null && leaderName.equalsIgnoreCase(sender.getName())) {
-                commands.add("removehome");
-                return commands;
-            }
+        tabAccessor.add("fc.create", "create");
+        tabAccessor.add("fc.top", "top");
+        tabAccessor.add("fc.list", "list");
+        tabAccessor.add("fc.menu", "menu");
+
+        if (leaderName != null && leaderName.equalsIgnoreCase(sender.getName())) {
+            tabAccessor.add("fc.delete", "delete");
+            tabAccessor.add("fc.rename", "rename");
+            tabAccessor.add("fc.update", "update");
+            tabAccessor.add("fc.settings", "settings");
+//        *******************
+//        ** settings part **
+//        *******************
+            tabAccessor.add("fc.message", "settings.message");
+            tabAccessor.add("fc.status", "settings.status");
+            tabAccessor.add("fc.social", "settings.social");
+            tabAccessor.add("fc.type", "settings.type");
+            tabAccessor.add("fc.role", "settings.role");
+            tabAccessor.add("fc.setrole", "settings.setrole");
+            tabAccessor.add("fc.sethome", "settings.sethome");
+            tabAccessor.add("fc.removehome", "settings.removehome");
+
         }
         if (clanName != null) {
-            if (args.length == 3 && args[1].equalsIgnoreCase("type") && sender.hasPermission("fc.type")) {
-                return Arrays.asList("0", "1");
-            }
-            if (args.length == 2 && args[0].equalsIgnoreCase("ally") && sender.hasPermission("fc.ally")) {
-                return Arrays.asList("add", "remove");
-            }
-            if (args.length == 2 && args[0].equalsIgnoreCase("cash") && sender.hasPermission("fc.cash")) {
-                return Arrays.asList("add", "remove");
-            }
-            if (args.length == 2 && args[0].equalsIgnoreCase("invite") && sender.hasPermission("fc.invite")) {
-                Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
-                ArrayList<String> onlinePlayersName = new ArrayList<>();
-                for (Player onlinePlayer : onlinePlayers) {
-                    String name = onlinePlayer.getName();
-                    onlinePlayersName.add(name);
-                }
-                return onlinePlayersName;
-            }
-            if (args.length == 2 && ((args[0].equalsIgnoreCase("kick") && sender.hasPermission("fc.kick")) || (args[0].equalsIgnoreCase("addrank") && sender.hasPermission("fc.addrank")) || (args[0].equalsIgnoreCase("removerank") && sender.hasPermission("fc.removerank")) || (args[0].equalsIgnoreCase("leader") && sender.hasPermission("fc.leader")))) {
-                return Member.getMembers(clanName);
-            }
-            if (args.length == 2 && args[0].equalsIgnoreCase("stats") && sender.hasPermission("fc.stats")) {
-                return Arrays.asList("rating", "kills", "deaths", "kdr");
-            }
-            if (args.length == 3 && args[0].equalsIgnoreCase("ally") && (args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove")) && sender.hasPermission("fc.ally")) {
-                return Clan.getlistUID();
-            }
+            tabAccessor.add("fc.info", "info");
+            tabAccessor.add("fc.members", "members");
+            tabAccessor.add("fc.accept", "accept");
+            tabAccessor.add("fc.deny", "deny");
+            tabAccessor.add("fc.leave", "leave");
+            tabAccessor.add("fc.home", "home");
+            tabAccessor.add("fc.ally", "ally");
+            tabAccessor.add("fc.top", "top");
+            tabAccessor.add("fc.stats", "stats");
+//        *******************
+//        **   ally part   **
+//        *******************
+            tabAccessor.addList("fc.ally", "ally", Arrays.asList("add", "remove"));
+            tabAccessor.addList("fc.ally", "ally.add", Clan.getlistUID());
+            tabAccessor.addList("fc.ally", "ally.remove", Clan.getlistUID());
+//        **     other     **
+            tabAccessor.addList("fc.cash", "cash", Arrays.asList("add", "remove"));
+            tabAccessor.addList("fc.type", "***.type", Arrays.asList("0", "1"));
+            tabAccessor.addList("fc.kick", "kick", Member.getMembers(clanName));
+            tabAccessor.addList("fc.addrank", "addrank", Member.getMembers(clanName));
+            tabAccessor.addList("fc.removerank", "removerank", Member.getMembers(clanName));
+            tabAccessor.addList("fc.leader", "leader", Member.getMembers(clanName));
+            tabAccessor.addList("fc.stats", "stats", Arrays.asList("rating", "kills", "deaths", "kdr"));
+            tabAccessor.addList("fc.top", "top", Arrays.asList("rating", "members", "kills", "deaths", "kdr"));
+            tabAccessor.addList("fc.invite", "invite", playerNamesList);
+            tabAccessor.addList("fc.accept", "accept", playerNamesList);
+
         }
-        if (args.length == 2 && args[0].equalsIgnoreCase("top") && sender.hasPermission("fc.top")) {
-            return Arrays.asList("rating", "members", "kills", "deaths", "kdr");
+
+        if (memberName != null && clanName != null) {
+            tabAccessor.add("fc.cash", "cash");
+            tabAccessor.add("fc.invite", "invite");
+            tabAccessor.add("fc.kick", "kick");
+            tabAccessor.add("fc.chat", "chat");
+            tabAccessor.add("fc.msg", "msg");
+            tabAccessor.add("fc.addrank", "addrank");
+            tabAccessor.add("fc.removerank", "removerank");
         }
-        return new ArrayList<>();
+        return tabAccessor.getCommands();
     }
 }

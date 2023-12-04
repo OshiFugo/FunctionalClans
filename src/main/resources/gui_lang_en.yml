@@ -1,0 +1,151 @@
+#    ███████╗██╗░░░██╗███╗░░██╗░█████╗░████████╗██╗░█████╗░███╗░░██╗░█████╗░██╗░░░░░
+#    ██╔════╝██║░░░██║████╗░██║██╔══██╗╚══██╔══╝██║██╔══██╗████╗░██║██╔══██╗██║░░░░░
+#    █████╗░░██║░░░██║██╔██╗██║██║░░╚═╝░░░██║░░░██║██║░░██║██╔██╗██║███████║██║░░░░░
+#    ██╔══╝░░██║░░░██║██║╚████║██║░░██╗░░░██║░░░██║██║░░██║██║╚████║██╔══██║██║░░░░░
+#    ██║░░░░░╚██████╔╝██║░╚███║╚█████╔╝░░░██║░░░██║╚█████╔╝██║░╚███║██║░░██║███████╗
+#    ╚═╝░░░░░░╚═════╝░╚═╝░░╚══╝░╚════╝░░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝╚═╝░░╚═╝╚══════╝
+#
+#    ░█████╗░██╗░░░░░░█████╗░███╗░░██╗░██████╗
+#    ██╔══██╗██║░░░░░██╔══██╗████╗░██║██╔════╝
+#    ██║░░╚═╝██║░░░░░███████║██╔██╗██║╚█████╗░
+#    ██║░░██╗██║░░░░░██╔══██║██║╚████║░╚═══██╗
+#    ╚█████╔╝███████╗██║░░██║██║░╚███║██████╔╝
+#    ░╚════╝░╚══════╝╚═╝░░╚═╝╚═╝░░╚══╝╚═════╝░
+
+# GUI Language config
+
+lang: en
+
+# You can use placeholders
+# You should use ';' to separate your lines in lore
+# preprocessor change all '&' to '§' so you can choose whatever you want of these two to format
+
+
+
+other:
+  perm-lack: "§cYou haven't permissions to do that!"
+  not-enough-money: "§cYou haven't enough money §b$%vault_eco_balance%/${money}."
+  charged: "§aYou was charged at §b${money}."
+  undefined-price: "§cPrice is undefined in config.yml (use -1 to make it free). Contact the administrator!"
+  clan-lack: "&cYou haven't any clan yet. Create your own or join to an other."
+
+salary-event:
+  on-salary: "§cYou earned §b${earn}. §cClan tax: §b{tax}%. §cTotal you got: §a${total}!"
+  on-report: "§cThe §b{clan}'s§c treasury got §b${money}§c!"
+
+# void glass name
+glass-name:
+  '&f[&6FunctionalClans&f]'
+
+root:
+  name: "Clan"
+  settings:
+    name: "Settings"
+    lore: "§c%fc_player_clan_name%'s §5settings"
+  members:
+    name: "Members"
+    lore: "&5Click to manage members"
+  info:
+    name: "Info"
+    lore: "§5Name: §e%fc_player_clan_name%;§5Leader: §e%fc_player_clan_leader%;§5Treasury: §e$%fc_player_clan_cash%;§5Social: §e%fc_player_clan_social%§e;"
+  go_back:
+    name: "Back"
+    lore: "§5Go to the main menu"
+
+members:
+  member:
+    lore: "§5Name: §b{name};§5Now: {online};§5Rank: §b{player_rank};§5Kills: §b{player_kills};§5Deaths: §b{player_deaths};§5KDR: §b{player_kdr};§5Rating: §b{player_rating}; ;&4Left click - demote;&dMiddle click - kick;&2Right click - promote"
+  self-click: "§cYou can't manage yourself!"
+  cannot-manage: "&cYou can't manage a player with the rank same as yours or above than yours!"
+  leader-manage: "&cYou can't manage the leader!"
+  you-hb-kicked: "§cYou have been kicked from the clan %fc_player_clan_name%!"
+  kick-propaganda: "§d{kicker} has kicked {kicked} from the clan!"
+  lowest-rank: "§dError! He has the lowest rank!"
+  highest-rank: "§dError! He has the highest rank!"
+  online: "&2Online"
+  offline: "&4Offline"
+  was-demoted: "§4{player} has demote {demoted} to {rank}!"
+  was-promoted: "§2{player} has promote {promoted} to {rank}!"
+
+page:
+  next-page:
+    name: "§7Next page"
+    lore: "§7Go to page"
+  no-more-pages:
+    lore: "§cThere are no more pages"
+  prev-page:
+    lore: "§7Go to page"
+    name: "§7Previous page"
+  you-cant-go-further:
+    lore: "§cYou can't go further back"
+
+settings:
+  message:
+    name: "Server Welcome"
+    lore: "§5Click to change a welcome message;Current: §e%fc_player_clan_message%"
+  status:
+    name: "Clan Status"
+    lore: "§5Click to change a clan status;Current: §e%fc_player_clan_status%"
+  rename:
+    name: "Rename clan"
+    lore: "§5Click to change a clan name;Current: §e%fc_player_clan_name%"
+  social:
+    name: "Clan Social"
+    lore: "§5Click to change a clan social;Current: §e%fc_player_clan_social%"
+  type:
+    name: "Clan Type"
+    lore: "§5Click to toggle clan type;Now: {now}"
+    closed: "&2Closed"
+    open: "&4Open"
+  role-manager:
+    name: "Role Manager"
+    lore: "§5Click to manage clan roles"
+
+rename:
+  n-enough-money: "§cYou haven't enough money to create a new clan! (§b${money}/$%vault_eco_balance%)"
+  done: "§aYou've renamed the clan successfully!"
+  charging: "§5You'll be charged at §b${money}"
+  out-of-letters: "§cToo many or too few letters in your clan name.\nMin: §b{min}§c, Max: &b{max}§c"
+  used-name: "§cThat clan name already exists!"
+
+message:
+  clear: "§aYou've cleared the clan message!"
+  done: "§aYou've successfully changed the message!"
+  lore: "§5Click to set new message"
+social:
+  done: "§aYou've successfully changed the social!"
+  lore: "§5Click to set new social"
+status:
+  done: "§aYou've successfully changed the status!"
+  lore: "§5Click to set new status"
+  too-many-letters: "§aToo many letters! Max: §b{max}"
+role-manager:
+  current_true: "§2True"
+  current_false: "§4False"
+  kick:
+    name: "{rank}: §6Kick"
+    lore: "§5Now: §b{current}"
+  invite:
+    name: "{rank}: §6Invite"
+    lore: "§5Now: §b{current}"
+  cash_add:
+    name: "{rank}: §6Cash add"
+    lore: "§5Now: §b{current}"
+  cash_remove:
+    name: "{rank}: §6Cash remove"
+    lore: "§5Now: §b{current}"
+  rmanage:
+    name: "{rank}: §6Promote/Demote"
+    lore: "§5Now: §b{current}"
+  chat:
+    name: "{rank}: §6Chat"
+    lore: "§5Now: §b{current}"
+  msg:
+    name: "{rank}: §6Make important message"
+    lore: "§5Now: §b{current}"
+  alliance_add:
+    name: "{rank}: §6Alliance add"
+    lore: "§5Now: §b{current}"
+  alliance_remove:
+    name: "{rank}: §6Alliance remove"
+    lore: "§5Now: §b{current}"
