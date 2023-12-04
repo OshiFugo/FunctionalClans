@@ -2,18 +2,15 @@
 FunctionalClans — this is a system that allows players to create clans and unite in them. The leader can customize the rights of clan ranks himself, it is also possible to form alliances with other clans, and the rating system allows you to compete​
 
 # V2.0.0 - meet GUI!
-![minecraft_plugin](https://github.com/OshiFugo/FunctionalClans/assets/57602929/2ec7c8a0-b7a2-4853-b32c-05e0a37e46fe)
+![minecraft_plugin](https://github.com/OshiFugo/FunctionalClans/assets/57602929/e74f4892-dda9-410e-9031-9829861e4f4d)
+
 
 
 # SalaryManager
-![image](https://github.com/bezumnui/FunctionalClansWithSalaryManager/assets/57602929/5c8efa50-066b-4b0b-b84d-b36085428ef3)
+![image](https://github.com/OshiFugo/FunctionalClans/assets/57602929/f9d7fcee-bc33-477e-9075-97ca7336a0ac)
+## Look there for SamaryManager plugin help:
+https://github.com/bezumnui/SalaryManagerMod
 
-
-# TODAYS only ua_RU language is supported. Wait for future updates
-
-# Compiled jars here:
-
-[SNAPSHOT](https://github.com/bezumnui/FunctionalClansWithSalaryManager/releases/tag/SNAPHOT_1.0.5.7.2)
 
 Firstly, if you want to edit source code you should to compile dependencies:
 
