@@ -73,10 +73,8 @@ public class Members extends ItemsBase {
         List<Item> players = new ArrayList<>();
         Collections.sort(members);
 
-        for (int i = 0; i < 35; i++ ) {
-            for (String member : members) {
-                players.add(getMember(Bukkit.getOfflinePlayer(member), ui));
-            }
+        for (String member : members) {
+            players.add(getMember(Bukkit.getOfflinePlayer(member), ui));
         }
         ui.gui = PagedGui.items()
                 .setStructure(
