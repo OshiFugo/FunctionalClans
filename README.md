@@ -8,11 +8,11 @@ FunctionalClans — this is a system that allows players to create clans and uni
 
 # SalaryManager
 ![image](https://github.com/OshiFugo/FunctionalClans/assets/57602929/f9d7fcee-bc33-477e-9075-97ca7336a0ac)
-ook there for SamaryManager plugin help:
+### Look there for SamaryManager plugin help:
 https://github.com/bezumnui/SalaryManagerMod
 
 
-### Firstly, if you want to edit source code you should to compile dependencies:
+## Firstly, if you want to edit source code you should to compile dependencies:
 
 1. Download source from `https://github.com/bezumnui/SalaryManagerMod`
 
@@ -20,7 +20,7 @@ https://github.com/bezumnui/SalaryManagerMod
 
 3. Do whatever you want
 
-
+#
 If you lost your config:
 
 ```yml
