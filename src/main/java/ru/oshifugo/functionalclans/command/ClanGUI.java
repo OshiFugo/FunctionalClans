@@ -43,6 +43,9 @@ public class ClanGUI {
     }
 
     public void display(String title) {
+        if (this.getGui() == null) {
+            return;
+        }
         Window window = Window.single()
                 .setViewer(this.p)
                 .setTitle(title)
@@ -55,7 +58,8 @@ public class ClanGUI {
 
     public void home(Player player) {
         if (Member.getClan(player.getName()) == null) {
-            player.sendMessage(GUITranslate.getTranslate(player).get("clan-lack", true));
+            gui = null;
+            player.sendMessage(GUITranslate.getTranslate(player).get("other.clan-lack", true));
             return;
         }
             gui = Gui.empty(9, 3);
@@ -66,7 +70,7 @@ public class ClanGUI {
                 ).addIngredient('#', voidFill)
 
         );
-//
+    //
         gui.setItem(2, 1, Root.settings(this, player));
         gui.setItem(4, 1, Root.information(this, player));
         gui.setItem(6, 1, Root.members(this, player));

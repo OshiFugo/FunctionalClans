@@ -19,6 +19,9 @@ lang: en
 # You can use placeholders
 # You should use ';' to separate your lines in lore
 # preprocessor change all '&' to '§' so you can choose whatever you want of these two to format
+
+
+
 other:
   perm-lack: "§cYou haven't permissions to do that!"
   not-enough-money: "§cYou haven't enough money §b$%vault_eco_balance%/${money}."
@@ -26,6 +29,11 @@ other:
   undefined-price: "§cPrice is undefined in config.yml (use -1 to make it free). Contact the administrator!"
   clan-lack: "&cYou haven't any clan yet. Create your own or join to an other."
 
+salary-event:
+  on-salary: "§cYou earned §b${earn}. §cClan tax: §b{tax}%. §cTotal you got: §a${total}!"
+  on-report: "§cThe §b{clan}'s§c treasury got §b${money}§c!"
+
+# void glass name
 glass-name:
   '&f[&6FunctionalClans&f]'
 
@@ -46,11 +54,14 @@ root:
 
 members:
   member:
-    lore: "§5Name: §b{name};§5Now: {online};§5Rank: §b{player_rank};§5Kills: §b{player_kills};§5Deaths: §b{player_deaths};§5KDR: §b{player_kdr};§5Rating: §b{player_rating};&4Left click - demote;&dMiddle click - kick;&2Right click - promote"
+    lore: "§5Name: §b{name};§5Now: {online};§5Rank: §b{player_rank};§5Kills: §b{player_kills};§5Deaths: §b{player_deaths};§5KDR: §b{player_kdr};§5Rating: §b{player_rating}; ;&4Left click - demote;&dMiddle click - kick;&2Right click - promote"
   self-click: "§cYou can't manage yourself!"
+  cannot-manage: "&cYou can't manage a player with the rank same as yours or above than yours!"
+  leader-manage: "&cYou can't manage the leader!"
   you-hb-kicked: "§cYou have been kicked from the clan %fc_player_clan_name%!"
   kick-propaganda: "§d{kicker} has kicked {kicked} from the clan!"
   lowest-rank: "§dError! He has the lowest rank!"
+  highest-rank: "§dError! He has the highest rank!"
   online: "&2Online"
   offline: "&4Offline"
   was-demoted: "§4{player} has demote {demoted} to {rank}!"
@@ -70,12 +81,11 @@ page:
 
 settings:
   message:
-    name: "Welcome message"
+    name: "Server Welcome"
     lore: "§5Click to change a welcome message;Current: §e%fc_player_clan_message%"
   status:
     name: "Clan Status"
     lore: "§5Click to change a clan status;Current: §e%fc_player_clan_status%"
-
   rename:
     name: "Rename clan"
     lore: "§5Click to change a clan name;Current: §e%fc_player_clan_name%"
@@ -84,7 +94,9 @@ settings:
     lore: "§5Click to change a clan social;Current: §e%fc_player_clan_social%"
   type:
     name: "Clan Type"
-    lore: "§5Click to toggle clan type;Now: §e%fc_player_clan_type%"
+    lore: "§5Click to toggle clan type;Now: {now}"
+    closed: "&2Closed"
+    open: "&4Open"
   role-manager:
     name: "Role Manager"
     lore: "§5Click to manage clan roles"
@@ -129,7 +141,7 @@ role-manager:
     name: "{rank}: §6Chat"
     lore: "§5Now: §b{current}"
   msg:
-    name: "{rank}: §6Edit Message"
+    name: "{rank}: §6Make important message"
     lore: "§5Now: §b{current}"
   alliance_add:
     name: "{rank}: §6Alliance add"

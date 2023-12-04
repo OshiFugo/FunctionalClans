@@ -73,8 +73,10 @@ public class Members extends ItemsBase {
         List<Item> players = new ArrayList<>();
         Collections.sort(members);
 
-        for (String member : members) {
-            players.add(getMember(Bukkit.getOfflinePlayer(member), ui));
+        for (int i = 0; i < 35; i++ ) {
+            for (String member : members) {
+                players.add(getMember(Bukkit.getOfflinePlayer(member), ui));
+            }
         }
         ui.gui = PagedGui.items()
                 .setStructure(
@@ -113,6 +115,21 @@ public class Members extends ItemsBase {
             player.sendMessage(getTranslate().get("members.self-click", true));
             return;
         }
+        if (player.getName().equals(id)) {
+            player.sendMessage(getTranslate().get("members.self-click", true));
+            return;
+        }
+        Integer rank = Integer.valueOf(Member.getRank(id));
+        Integer playerRank = Integer.valueOf(Member.getRank(player.getName()));
+
+        if (rank >= playerRank) {
+            player.sendMessage(getTranslate().get("members.cannot-manage", true));
+            return;
+        }
+        if (rank == 5) {
+            player.sendMessage(getTranslate().get("members.leader-manage", true));
+            return;
+        }
 
         if (clickType == ClickType.MIDDLE) {
             if (!utility.hasAnyOfPermsOrLeader(player, "fc.kick")) {
@@ -128,12 +145,11 @@ public class Members extends ItemsBase {
                 Player memberPlayer = Bukkit.getServer().getPlayer(member);
                 if (memberPlayer == null) return;
                 memberPlayer.sendMessage(getTranslate().get("members.kick-propaganda", true)
-                        .replace("{kicker}", player.getName()).replace("kicked", id));
+                        .replace("{kicker}", player.getName()).replace("{kicked}", id));
             });
             display(player, getUi());
             return;
         }
-        Integer rank = Integer.valueOf(Member.getRank(id));
         if (clickType == ClickType.LEFT) {
             if (!utility.hasAnyOfPermsOrLeader(player, "fc.rmanage")) {
                 player.sendMessage(getTranslate().get("other.perm-lack", true));
@@ -166,7 +182,7 @@ public class Members extends ItemsBase {
                 return;
             }
             if (rank == 4) {
-                player.sendMessage(getTranslate().get("members.was-promoted", true));
+                player.sendMessage(getTranslate().get("members.highest-rank", true));
                 return;
             }
             Clan.addrank(id);

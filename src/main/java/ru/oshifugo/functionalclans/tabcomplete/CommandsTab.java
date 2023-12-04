@@ -90,7 +90,7 @@ public class CommandsTab implements TabCompleter {
             tabAccessor.add("fc.cash", "cash");
             tabAccessor.add("fc.invite", "invite");
             tabAccessor.add("fc.kick", "kick");
-            tabAccessor.add("fc.chat", "cash");
+            tabAccessor.add("fc.chat", "chat");
             tabAccessor.add("fc.msg", "msg");
             tabAccessor.add("fc.addrank", "addrank");
             tabAccessor.add("fc.removerank", "removerank");

@@ -1,5 +1,6 @@
 package ru.oshifugo.functionalclans.command.gui_items.settings;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Material;
@@ -29,20 +30,25 @@ import static ru.oshifugo.functionalclans.sql.SQLiteUtility.members;
 
 
 public class Message extends ItemsBase{
+    OfflinePlayer p;
     String renamed;
 
     public static Message oldMessage(ClanGUI ui, Player player, String oldMessageText) {
+
         return new Message(player, ui, "old_message", Material.GREEN_STAINED_GLASS, oldMessageText);
     }
     public static Message newMessage(ClanGUI ui, Player player) {
-        return new Message(player, ui, "new_message", Material.GREEN_STAINED_GLASS, "");
+        return new Message(player, ui, "new_message", Material.GREEN_STAINED_GLASS, "", player);
 
     }
 
     Message(Player player, ClanGUI ui, String id, Material material, String displayName) {
         super(player, ui, id, material, displayName);
     }
-
+    Message(Player player, ClanGUI ui, String id, Material material, String displayName, OfflinePlayer p) {
+        super(player, ui, id, material, displayName);
+        this.p = p;
+    }
 
 
     public void editCallback(String renamed) {
@@ -53,7 +59,8 @@ public class Message extends ItemsBase{
             String lore = getTranslate().get("message.lore");
             meta.setLore(Arrays.asList(lore.split("\\;")));
             itemStack.setItemMeta(meta);
-            this.setItemBuilder(new ItemBuilder(itemStack).setDisplayName(renamed));
+
+            this.setItemBuilder(new ItemBuilder(itemStack).setDisplayName(PlaceholderAPI.setPlaceholders(p, renamed.replace("&", "§"))));
             this.renamed = renamed;
             notifyWindows();
         }

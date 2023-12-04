@@ -40,6 +40,11 @@ public class Settings extends ItemsBase {
                 .setTranslatedName("settings.type")
                 .setTranslatedLore("settings.type");
         type.clanName = clanName;
+        if (Clan.getType(clanName) == 0) {
+            type.replaceLore("{now}", type.getTranslate().get("settings.type.closed"));
+        } else {
+            type.replaceLore("{now}", type.getTranslate().get("settings.type.open"));
+        }
         return type;
     }
 
@@ -106,8 +111,15 @@ public class Settings extends ItemsBase {
                 } else {
                     Clan.setType(clanName, 0);
                 }
+
                 setTranslatedName("settings.type");
                 setTranslatedLore("settings.type");
+                if (Clan.getType(clanName) == 0) {
+                    replaceLore("{now}", getTranslate().get("settings.type.closed"));
+                } else {
+                    replaceLore("{now}", getTranslate().get("settings.type.open"));
+                }
+
 
                 notifyWindows();
                 break;

@@ -7,6 +7,9 @@ import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import ru.oshifugo.functionalclans.GUITranslate;
+import ru.oshifugo.functionalclans.Main;
+import ru.oshifugo.functionalclans.command.GUITranslatePlaceholder;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
 import ru.oshifugo.functionalclans.sql.SQLiteUtility;
@@ -42,13 +45,18 @@ public class SalaryEvents implements EventListener, Listener {
         int clanCurrentCash = Clan.getCash(clanName);
         Clan.setCash(clanName, String.valueOf(clanCurrentCash + (int) clanTaxes));
         addTax(clanName, (int)clanTaxes);
-        event.getPlayer().sendMessage(String.format(
-                "§cВы заработали §b%s₴. §cНалог клана: §b%d₴. §cИтого вы получаете: §a%d₴!",
-                (int) event.getAmount(), tax, (int)(event.getAmount())
-        ));
+//          "§cВы заработали §b%s₴. §cНалог клана: §b%d₴. §cИтого вы получаете: §a%d₴!",
+        GUITranslatePlaceholder t = GUITranslate.getTranslate(event.getPlayer());
+
+        event.getPlayer().sendMessage(
+                t.get("salary-event.on-salary")
+                        .replace("{earn}", String.valueOf((int) event.getAmount()))
+                        .replace("{tax}", String.valueOf(tax))
+                        .replace("{total}", String.valueOf((int) event.getAmount())));
     }
 
     @EventHandler
+//    §cВ казну клана §b%s§c упало: §b%d₴
     public void  onSalaryReport(SalaryReportPaymentsEvent event) {
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
             String clanName = Member.getClan(player.getName());
@@ -56,7 +64,10 @@ public class SalaryEvents implements EventListener, Listener {
             if (!clansTaxes.containsKey(clanName)) continue;
             int tax = clansTaxes.get(clanName);
             if (tax == 0) continue;
-            player.sendMessage(String.format("§cВ казну клана §b%s§c упало: §b%d₴", clanName, tax));
+            GUITranslatePlaceholder t = GUITranslate.getTranslate(player);
+            player.sendMessage(t.get("salary-event.on-report")
+                    .replace("{clan}", clanName)
+                    .replace("{money}", String.valueOf(tax)));
         }
         clearTaxes();
     }

@@ -14,7 +14,7 @@ public class BackItem extends PageItem {
     OfflinePlayer player;
 
     public BackItem(OfflinePlayer player) {
-        super(true);
+        super(false);
         this.player = player;
     }
 

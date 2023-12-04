@@ -72,6 +72,9 @@ public final class Main extends JavaPlugin {
         if (!new File(getDataFolder(), "gui_lang_en.yml").exists()) {
             saveResource("gui_lang_en.yml", true);
         }
+        if (!new File(getDataFolder(), "gui_lang_ru.yml").exists()) {
+            saveResource("gui_lang_ru.yml", true);
+        }
         getConfig().addDefault("gui.lang", "en");
         if (getConfig().getBoolean("gui.override-lang")) {
             saveResource("gui_lang_en.yml", true);

@@ -88,7 +88,7 @@ public class utility {
             else if (rank == -2 && Clan.getLeader(clanName).equals(player.getName())) {
                returnValue.set(true);
             }
-            else if (Clan.hasRole(clanName, Integer.valueOf(Member.getRank(player.getName())), rank)) {
+            else if (rank != -1 && rank != -2 && Clan.hasRole(clanName, Integer.valueOf(Member.getRank(player.getName())), rank)) {
                 returnValue.set(true);
             }
 

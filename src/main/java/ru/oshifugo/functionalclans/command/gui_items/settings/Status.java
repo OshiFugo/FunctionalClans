@@ -41,7 +41,7 @@ public class Status extends ItemsBase{
             String lore = getTranslate().get("status.lore");
             meta.setLore(Arrays.asList(lore.split("\\;")));
             itemStack.setItemMeta(meta);
-            this.setItemBuilder(new ItemBuilder(itemStack).setDisplayName(renamed));
+            this.setItemBuilder(new ItemBuilder(itemStack).setDisplayName(renamed.replace("&", "§")));
             this.renamed = renamed;
             notifyWindows();
         }
