@@ -2,6 +2,7 @@
 FunctionalClans — this is a system that allows players to create clans and unite in them. The leader can customize the rights of clan ranks himself, it is also possible to form alliances with other clans, and the rating system allows you to compete​
 
 # V2.0.0 - meet GUI!
+### Use /c or /c menu to invoke the GUI:
 ![minecraft_plugin](https://github.com/OshiFugo/FunctionalClans/assets/57602929/e74f4892-dda9-410e-9031-9829861e4f4d)
 
 
