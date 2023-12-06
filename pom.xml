@@ -99,6 +99,7 @@
             <groupId>com.github.bezumnui</groupId>
             <artifactId>SalaryManagerMod</artifactId>
             <version>bm1.5.5</version>
+            <scope>provided</scope>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>me.ford</groupId>-->
