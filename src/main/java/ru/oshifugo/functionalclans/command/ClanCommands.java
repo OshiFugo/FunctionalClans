@@ -475,7 +475,7 @@ public class ClanCommands implements CommandExecutor {
             online.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(utility.hex(utility.lang(sender,"commands.info.message.line_9-1"))).create()));
             online.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/clan members"));
             text.addExtra(online);
-            if (!Clan.getMessage(clanName).equalsIgnoreCase("null")) {
+            if (!Clan.getMessage(clanName).equalsIgnoreCase("")) {
                 text.addExtra(utility.hex(utility.lang(sender,"commands.info.message.line_10")+ "\n"));
             }
             sender.spigot().sendMessage(text);

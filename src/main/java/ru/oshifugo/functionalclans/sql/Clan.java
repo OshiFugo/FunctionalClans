@@ -61,6 +61,7 @@ public class Clan {
     }
     public static String getMessage(String clanName) {
         String s = SQLiteUtility.clans.get(clanName)[10];
+        if (Objects.equals(s, "null")) return "";
         return s;
     }
     public static String getWorld(String clanName) {
