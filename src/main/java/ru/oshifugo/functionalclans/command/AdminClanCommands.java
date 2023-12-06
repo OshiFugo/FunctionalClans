@@ -158,7 +158,7 @@ public class AdminClanCommands implements CommandExecutor {
             online.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(utility.hex(utility.lang(sender,"commands.info.message-fc.line_9-1") + Member.getOnlineCount(clanName))).create()));
             online.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/fc members " + args[1]));
             text.addExtra(online);
-            if (!Clan.getMessage(clanName).equalsIgnoreCase("null")) {
+            if (!Clan.getMessage(clanName).equalsIgnoreCase("")) {
                 text.addExtra(utility.hex(utility.lang(sender,"commands.info.message-fc.line_10") + Clan.getMessage(clanName)) + "\n");
             }
             sender.spigot().sendMessage(text);
