@@ -377,6 +377,10 @@ public class ClanCommands implements CommandExecutor {
             if (!isActive) {
                 return true;
             }
+            if (!ClanGUI.isSupported()) {
+                player.sendMessage("§cSorry, your server version is bellow 1.14.0 (contact developer if not). This mean that you cannot use GUI :(");
+                return true;
+            }
             ClanGUI clanGUI = new ClanGUI(player);
             clanGUI.home(player);
             clanGUI.display(GUITranslate.getTranslate(player).get("root.name"));

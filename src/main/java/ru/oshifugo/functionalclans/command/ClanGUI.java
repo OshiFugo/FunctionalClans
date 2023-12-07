@@ -1,5 +1,6 @@
 package ru.oshifugo.functionalclans.command;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -13,6 +14,7 @@ import ru.oshifugo.functionalclans.command.gui_items.settings.Social;
 import ru.oshifugo.functionalclans.command.gui_items.settings.Status;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
+import ru.oshifugo.functionalclans.utility;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.gui.structure.Structure;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
@@ -34,6 +36,16 @@ public class ClanGUI {
 
     public ItemBuilder getVoidFill() {
         return voidFill;
+    }
+    public static boolean isSupported() {
+//        if version < 1.14: false
+        String version = Bukkit.getServer().getClass().getPackage().getName();
+        String[] ver = version.split("\\.");
+        if (ver.length < 4) {
+            utility.debug("ClanGUI -> Unknown version!");
+            return true;
+        }
+        return Integer.parseInt(ver[3].split("_")[1]) >= 14;
     }
 
     public ClanGUI(Player player) {
