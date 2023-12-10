@@ -15,7 +15,10 @@
 
 # The plugin is under development, the final version will be different from the Beta
 
-
+# DO NOT CHANGE IT IN ANY CASE
+conf-version: 1
+db-ver: 2
+#
 
 
 # Plugin prefix
@@ -37,7 +40,7 @@ gui:
   # USE IT ONLY IF gui_lang_en.yml WAS CORRUPTED.
   # Delete your language (en) file and copy the default one
   override-lang: false
-  # enable gui
+  # enable gui. Recommended if your version is below 1.14, otherwise you'll get error message
   active: true
 
 welcome-message:
@@ -49,6 +52,7 @@ welcome-message:
 
 # *** SETTINGS ***
 
+default-pvp: 1 # 0 - off, 1 - on
 # When using the /c home command, an action is performed:
 # 0 - command (/c home, /c sethome, /c removehome) disabled, 1 - teleportation, 2 - coordinates
 home: 1
@@ -116,6 +120,10 @@ invite_price: 10
 leader_price: 5000
 # Rename the name of the clan
 rename_price: 5000
+# Change status the name of the clan
+change_status_price: 1000
+# Will the first status changing free (just after creating)
+first_status_free: true
 # The ability to buy new places, increasing the number of clan members
 # Attention! If the parameter is enabled, it is recommended to set max_player << max_player_limit
 # For example: ( max_player: 5; max_player_limit: 50; add_max_player: 1000; count_max_player: 2)

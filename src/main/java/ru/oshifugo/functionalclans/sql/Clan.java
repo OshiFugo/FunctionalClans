@@ -23,41 +23,38 @@ public class Clan {
         }
         return s;
     }
+    public static void togglePVP(String clanName) {
+        setPVP(clanName, !getPVP(clanName));
+    }
+    public static boolean getPVP(String clanName) {
+        return Objects.equals(SQLiteUtility.clans.get(clanName)[20], "1");
+    }
     public static String getLeader(String clanName) {
-        String s = SQLiteUtility.clans.get(clanName)[1];
-        return s;
+        return SQLiteUtility.clans.get(clanName)[1];
     }
     public static Integer getCash(String clanName) {
-        Integer i = Integer.valueOf(SQLiteUtility.clans.get(clanName)[2]);
-        return i;
+        return Integer.valueOf(SQLiteUtility.clans.get(clanName)[2]);
     }
     public static Integer getRating(String clanName) {
-        Integer i = Integer.valueOf(SQLiteUtility.clans.get(clanName)[3]);
-        return i;
+        return Integer.valueOf(SQLiteUtility.clans.get(clanName)[3]);
     }
     public static Integer getType(String clanName) {
-        Integer i = Integer.valueOf(SQLiteUtility.clans.get(clanName)[4]);
-        return i;
+        return Integer.valueOf(SQLiteUtility.clans.get(clanName)[4]);
     }
     public static Integer getTax(String clanName) {
-        Integer i = Integer.valueOf(SQLiteUtility.clans.get(clanName)[5]);
-        return i;
+        return Integer.valueOf(SQLiteUtility.clans.get(clanName)[5]);
     }
     public static String getStatus(String clanName) {
-        String s = SQLiteUtility.clans.get(clanName)[6];
-        return s;
+        return SQLiteUtility.clans.get(clanName)[6];
     }
     public static String getSocial(String clanName) {
-        String s = SQLiteUtility.clans.get(clanName)[7];
-        return s;
+        return SQLiteUtility.clans.get(clanName)[7];
     }
     public static boolean getVerification(String clanName) {
-        Boolean b = Boolean.valueOf(SQLiteUtility.clans.get(clanName)[8]);
-        return b;
+        return Boolean.valueOf(SQLiteUtility.clans.get(clanName)[8]);
     }
     public static Integer getMax_player(String clanName) {
-        Integer i = Integer.valueOf(SQLiteUtility.clans.get(clanName)[9]);
-        return i;
+        return Integer.valueOf(SQLiteUtility.clans.get(clanName)[9]);
     }
     public static String getMessage(String clanName) {
         String s = SQLiteUtility.clans.get(clanName)[10];
@@ -95,6 +92,7 @@ public class Clan {
         String s = SQLiteUtility.clans.get(clanName)[17];
         return s;
     }
+
     public static String getUID(String clanName) {
         String s = SQLiteUtility.clans.get(clanName)[18];
         return s;
@@ -214,6 +212,11 @@ public class Clan {
     public static void setType(String clanName, Integer type) {
         SQLiteUtility.clans.get(clanName)[4] = String.valueOf(type);
         SQLite.execute("UPDATE clan_list SET type='" + String.valueOf(type) + "' WHERE name='" + clanName + "'");
+    }
+    public static void setPVP(String clanName, boolean isActive) {
+        String raw = isActive ? "1" : "0";
+        SQLiteUtility.clans.get(clanName)[20] = raw;
+        SQLite.execute("UPDATE clan_list SET pvp='" + raw + "' WHERE name='" + clanName + "'");
     }
     public static void setLeader(String clanName, String newLeader) {
         String leader = getLeader(clanName);

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.oshifugo</groupId>
     <artifactId><![CDATA[FunctionalClans]]></artifactId>
-    <version>2.0.2</version>
+    <version>2.1.0</version>
     <packaging>jar</packaging>
 
     <name><![CDATA[FunctionalClans&^&s]]></name>
@@ -107,7 +107,6 @@
 <!--            <version>0.5.5</version>-->
 <!--            <scope>provided</scope>-->
 <!--        </dependency>-->
-
 
         <dependency>
             <groupId>xyz.xenondevs.invui</groupId>

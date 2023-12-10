@@ -375,12 +375,14 @@ public class ClanCommands implements CommandExecutor {
         if (args.length == 0 || args[0].equalsIgnoreCase("menu")) {
             Boolean isActive = Main.instance.getConfig().getBoolean("gui.active");
             if (!isActive) {
+                help(sender, clanName, memberName, "-1");
                 return true;
             }
             if (!ClanGUI.isSupported()) {
                 player.sendMessage("§cSorry, your server version is bellow 1.14.0 (contact developer if not). This mean that you cannot use GUI :(");
                 return true;
             }
+
             ClanGUI clanGUI = new ClanGUI(player);
             clanGUI.home(player);
             clanGUI.display(GUITranslate.getTranslate(player).get("root.name"));
@@ -420,7 +422,8 @@ public class ClanCommands implements CommandExecutor {
                 sender.sendMessage(utility.hex(prefix + utility.lang(sender,"common_errors.no_name")));
                 return true;
             }
-            if (Clan.hasClanName(args[1])) {
+            if (utility.getRawClan(args[1]) == null) {
+//                utility.getRawClan(renamed);
                 if (Integer.valueOf(Clan.getCountClan()) == 9000) {
                     sender.sendMessage(utility.hex("&c[&4ERROR&c] &4&lClan creation limit reached"));
                     return true;
@@ -430,6 +433,7 @@ public class ClanCommands implements CommandExecutor {
                 }
                 SQLiteUtility.create(args[1], sender.getName());
                 sender.sendMessage(utility.hex(prefix + utility.lang(sender,"commands.create.message.msg")));
+
             } else sender.sendMessage(utility.hex(prefix + utility.lang(sender,"common_errors.name_taken")));
             return true;
         } else if (args[0].equalsIgnoreCase("delete")) {
@@ -484,7 +488,21 @@ public class ClanCommands implements CommandExecutor {
             }
             sender.spigot().sendMessage(text);
             return true;
-        } else if (args[0].equalsIgnoreCase("settings") && args[1].equalsIgnoreCase("role")) {
+
+        } else if (args[0].equalsIgnoreCase("settings") && args[1].equalsIgnoreCase("pvp")) {
+            if (!utility.hasAnyOfPermsOrLeader(player, "fc.mpvp")) { return true; }
+            Clan.togglePVP(clanName);
+            String now;
+            GUITranslatePlaceholder translate = GUITranslate.getTranslate(player);
+            if (Clan.getPVP(clanName)) {
+                now = translate.get("settings.pvp.enabled");
+            } else {
+                now = translate.get("settings.pvp.disabled");
+            }
+            player.sendMessage(translate.get("settings.pvp.success").replace("{now}", now));
+            return true;
+
+        }else if (args[0].equalsIgnoreCase("settings") && args[1].equalsIgnoreCase("role")) {
             if (!check(sender, memberName, clanName, "role")) { return true; }
             ArrayList<String> role = new ArrayList<>();
             int role_count = 5, max_role = 9;
@@ -884,7 +902,7 @@ public class ClanCommands implements CommandExecutor {
             } else if (!(args[1].length() >= Integer.valueOf(utility.config("min_name")) && args[1].length() <= Integer.valueOf(utility.config("max_name")))) {
                     sender.sendMessage(String.format(utility.hex(prefix + utility.lang(sender,"common_errors.name_length")), utility.config("min_name"), utility.config("max_name")));
                 return true;
-            } else if (!Clan.hasClanName(args[1])) {
+            } else if (utility.getRawClan(args[1]) != null) {
                 sender.sendMessage(utility.hex(prefix + utility.lang(sender,"common_errors.name_taken")));
                 return true;
             }

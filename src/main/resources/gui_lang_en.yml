@@ -100,9 +100,15 @@ settings:
   role-manager:
     name: "Role Manager"
     lore: "§5Click to manage clan roles"
+  pvp:
+    name: "Toggle pvp"
+    lore: "§5Click to toggle clan pvp;Now: {now}"
+    success: "§bYou have successfully toggled pvp. Now: {now}"
+    enabled: "&2On"
+    disabled: "&4Off"
 
 rename:
-  n-enough-money: "§cYou haven't enough money to create a new clan! (§b${money}/$%vault_eco_balance%)"
+  n-enough-money: "§cYou haven't enough money to rename the clan! (§b${money}/$%vault_eco_balance%)"
   done: "§aYou've renamed the clan successfully!"
   charging: "§5You'll be charged at §b${money}"
   out-of-letters: "§cToo many or too few letters in your clan name.\nMin: §b{min}§c, Max: &b{max}§c"

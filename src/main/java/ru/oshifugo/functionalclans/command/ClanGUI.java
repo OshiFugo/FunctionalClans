@@ -3,8 +3,6 @@ package ru.oshifugo.functionalclans.command;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import ru.oshifugo.functionalclans.GUITranslate;
 import ru.oshifugo.functionalclans.command.gui_items.Root;
 import ru.oshifugo.functionalclans.command.gui_items.Settings;
@@ -101,9 +99,11 @@ public class ClanGUI {
             gui.setItem(2, 1, Settings.message(this, player));
             gui.setItem(3, 1, Settings.status(this, player));
             gui.setItem(4, 0, Settings.social(this, player));
+            gui.setItem(4, 1, Settings.pvp(this, player, clanName));
             gui.setItem(4, 2, Settings.rename(this, player));
             gui.setItem(5, 1, Settings.type(this, player, clanName));
             gui.setItem(6, 1, Settings.setrole(this, player));
+
             gui.setItem(8, 2, Root.go_back(this, player));
         }
 

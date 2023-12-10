@@ -48,6 +48,20 @@ public class Settings extends ItemsBase {
         return type;
     }
 
+    public static Settings pvp(ClanGUI ui, Player player, String clanName) {
+        Settings type = (Settings) new Settings(player, ui, "pvp", Material.DIAMOND_SWORD)
+                .setTranslatedName("settings.pvp")
+                .setTranslatedLore("settings.pvp");
+        type.clanName = clanName;
+        if (Clan.getPVP(clanName)) {
+            type.replaceLore("{now}", type.getTranslate().get("settings.pvp.enabled"));
+        } else {
+            type.replaceLore("{now}", type.getTranslate().get("settings.pvp.disabled"));
+        }
+
+        return type;
+    }
+
     public static Settings setrole(ClanGUI ui, Player player) {
         return (Settings) new Settings(player, ui, "role-manager", Material.PLAYER_HEAD)
                 .setTranslatedName("settings.role-manager")
@@ -121,6 +135,23 @@ public class Settings extends ItemsBase {
                 }
 
 
+                notifyWindows();
+                break;
+            case "pvp":
+
+                if (!utility.hasAnyOfPermsOrLeader(player, "fc.mpvp"))
+                {
+                    player.sendMessage(getTranslate().get("other.perm-lack", true));
+                    break;
+                }
+                Clan.togglePVP(clanName);
+                setTranslatedName("settings.pvp");
+                setTranslatedLore("settings.pvp");
+                if (Clan.getPVP(clanName)) {
+                    replaceLore("{now}", getTranslate().get("settings.pvp.enabled"));
+                } else {
+                    replaceLore("{now}", getTranslate().get("settings.pvp.disabled"));
+                }
                 notifyWindows();
                 break;
                 // 0 - closed
