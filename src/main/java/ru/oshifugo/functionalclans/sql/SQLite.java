@@ -4,9 +4,7 @@ import ru.oshifugo.functionalclans.Main;
 import ru.oshifugo.functionalclans.utility;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.logging.Level;
 
 public class SQLite {
@@ -49,6 +47,7 @@ public class SQLite {
             return false;
         }
     }
+    @Deprecated
     public static void execute(String query) {
         if (!hasConnected()) {
             connect();
@@ -58,6 +57,21 @@ public class SQLite {
             connection.createStatement().execute(query);
         } catch (Exception var2) {
             var2.printStackTrace();
+        }
+    }
+
+    public static void execute(String sql, String... args) {
+        if (!hasConnected()) {
+            connect();
+        }
+        PreparedStatement pstmt;
+        try {
+            pstmt = connection.prepareStatement(sql);
+            for (int i = 0; i < args.length; i++)  {
+                pstmt.setObject(i + 1, args[i]);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     public static ResultSet executeQuery(String query) {
