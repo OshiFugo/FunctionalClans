@@ -2,10 +2,10 @@ package ru.oshifugo.functionalclans.sql;
 
 import ru.oshifugo.functionalclans.Main;
 import ru.oshifugo.functionalclans.utility;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.util.HashMap;
+
+import java.io.IOException;
+import java.sql.*;
+import java.util.logging.Level;
 
 public class SQLite {
     public static Connection connection = null;
@@ -17,15 +17,29 @@ public class SQLite {
                 Main.instance.getDataFolder().mkdirs();
             }
             Class.forName("org.sqlite.JDBC").getConstructor().newInstance();
+            String defaultPVP = Main.instance.getConfig().getString("default-pvp");
             connection = DriverManager.getConnection("jdbc:sqlite://" + Main.instance.getDataFolder().getAbsolutePath() + "/clans.db");
-            execute("CREATE TABLE IF NOT EXISTS `clan_list` (`id` INTEGER PRIMARY KEY,`name` varchar(255) NOT NULL,`leader` varchar(255) NOT NULL,`cash` varchar(255) NOT NULL,`rating` varchar(255) NOT NULL,`type` varchar(255) NOT NULL,`tax` varchar(255) NOT NULL,`status` varchar(255) NOT NULL,`social` varchar(255) NOT NULL,`verification` varchar(255) NOT NULL,`max_player` varchar(255) NOT NULL,`message` varchar(255) NOT NULL,`world` varchar(255) NOT NULL,`x` varchar(255) NOT NULL,`y` varchar(255) NOT NULL,`z` varchar(255) NOT NULL,`xcur` varchar(255) NOT NULL,`ycur` varchar(255) NOT NULL,`date` varchar(255) NOT NULL,`uid` varchar(255) NOT NULL,`creator` varchar(255) NOT NULL)");
+            execute("CREATE TABLE IF NOT EXISTS `clan_list` (`id` INTEGER PRIMARY KEY,`name` varchar(255) NOT NULL,`leader` varchar(255) NOT NULL,`cash` varchar(255) NOT NULL,`rating` varchar(255) NOT NULL,`type` varchar(255) NOT NULL,`tax` varchar(255) NOT NULL,`status` varchar(255) NOT NULL,`social` varchar(255) NOT NULL,`verification` varchar(255) NOT NULL,`max_player` varchar(255) NOT NULL,`message` varchar(255) NOT NULL,`world` varchar(255) NOT NULL,`x` varchar(255) NOT NULL,`y` varchar(255) NOT NULL,`z` varchar(255) NOT NULL,`xcur` varchar(255) NOT NULL,`ycur` varchar(255) NOT NULL,`date` varchar(255) NOT NULL,`uid` varchar(255) NOT NULL,`creator` varchar(255) NOT NULL, `pvp` varchar(255) NOT NULL DEFAULT " + defaultPVP  + ")");
             execute("CREATE TABLE IF NOT EXISTS `clan_members` (`id` INTEGER PRIMARY KEY,`name` varchar(255) NOT NULL,`role` varchar(255) NOT NULL,`clan` varchar(255) NOT NULL,`kills` varchar(255) NOT NULL,`death` varchar(255) NOT NULL,`quest` varchar(255) NOT NULL,`rating` varchar(255) NOT NULL)");
             execute("CREATE TABLE IF NOT EXISTS `clan_permissions` (`id` INTEGER PRIMARY KEY,`clan` varchar(255) NOT NULL,`role` varchar(255) NOT NULL,`role_name` varchar(255) NOT NULL,`kick` boolean NOT NULL,`invite` boolean NOT NULL,`cash_add` boolean NOT NULL,`cash_remove` boolean NOT NULL,`rmanage` boolean NOT NULL,`chat` boolean NOT NULL,`msg` boolean NOT NULL,`alliance_add` boolean NOT NULL,`alliance_remove` boolean NOT NULL)");
             execute("CREATE TABLE IF NOT EXISTS 'clan_alliance' ('id' INTEGER PRIMARY KEY, 'UID_1' varchar(255) NOT NULL, 'UID_2' varchar(255) NOT NULL)");
+
+//            update alters
+            update2p1p0();
+
+
         } catch (Exception e) {
             utility.error("An error occurred while connecting to the database.");
         }
     }
+
+    private static void update2p1p0() throws IOException {
+        if (Main.instance.getDBVersion() < 2) {
+            execute("ALTER TABLE clan_list ADD COLUMN pvp varchar(255) DEFAULT '1'");
+            Main.instance.setDBVersion(2);
+        }
+    }
+
     public static boolean hasConnected() {
         try {
             return !connection.isClosed();
@@ -33,6 +47,7 @@ public class SQLite {
             return false;
         }
     }
+    @Deprecated
     public static void execute(String query) {
         if (!hasConnected()) {
             connect();
@@ -42,6 +57,21 @@ public class SQLite {
             connection.createStatement().execute(query);
         } catch (Exception var2) {
             var2.printStackTrace();
+        }
+    }
+
+    public static void execute(String sql, String... args) {
+        if (!hasConnected()) {
+            connect();
+        }
+        PreparedStatement pstmt;
+        try {
+            pstmt = connection.prepareStatement(sql);
+            for (int i = 0; i < args.length; i++)  {
+                pstmt.setObject(i + 1, args[i]);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     public static ResultSet executeQuery(String query) {
@@ -63,7 +93,7 @@ public class SQLite {
             try {
                 resultSet = executeQuery("SELECT * FROM clan_list");
                 for (a = 0; resultSet.next(); a++) {
-                    String[] clan = {resultSet.getString("name"), resultSet.getString("leader"), resultSet.getString("cash"), resultSet.getString("rating"), resultSet.getString("type"), resultSet.getString("tax"), resultSet.getString("status"), resultSet.getString("social"), resultSet.getString("verification"), resultSet.getString("max_player"), resultSet.getString("message"), resultSet.getString("world"), resultSet.getString("x"), resultSet.getString("y"), resultSet.getString("z"), resultSet.getString("xcur"), resultSet.getString("ycur"), resultSet.getString("date"), resultSet.getString("uid"), resultSet.getString("creator")};
+                    String[] clan = {resultSet.getString("name"), resultSet.getString("leader"), resultSet.getString("cash"), resultSet.getString("rating"), resultSet.getString("type"), resultSet.getString("tax"), resultSet.getString("status"), resultSet.getString("social"), resultSet.getString("verification"), resultSet.getString("max_player"), resultSet.getString("message"), resultSet.getString("world"), resultSet.getString("x"), resultSet.getString("y"), resultSet.getString("z"), resultSet.getString("xcur"), resultSet.getString("ycur"), resultSet.getString("date"), resultSet.getString("uid"), resultSet.getString("creator"), resultSet.getString("pvp")};
                     SQLiteUtility.clans.put(resultSet.getString("name"), clan);
                 }
             } catch (Exception errors) {

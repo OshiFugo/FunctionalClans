@@ -52,6 +52,15 @@ public class Rename extends ItemsBase{
             notifyWindows();
         }
     }
+    public static int getFormatLength(String text) {
+        int l = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) != '&' && text.charAt(i) != '§') {
+                l++;
+            }
+        }
+        return l;
+    }
 
     @Override
     public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent inventoryClickEvent, String id) {
@@ -72,25 +81,27 @@ public class Rename extends ItemsBase{
                 //max_name: 30
                 int minName = config.getInt("min_name");
                 int maxName = config.getInt("max_name");
-
-                if (!(minName <= renamed.length() && renamed.length() <= maxName)) {
+                int renamedLength = getFormatLength(renamed);
+                if (!(minName <= renamedLength && renamedLength <= maxName)) {
                     player.sendMessage(getTranslate().get("rename.out-of-letters", true)
                             .replace("{min}", String.valueOf(minName))
                             .replace("{max}", String.valueOf(maxName)));
                     break;
                 }
-                if (SQLiteUtility.clans.get(renamed) != null) {
+                if (utility.getRawClan(renamed) != null) {
                     player.sendMessage(getTranslate().get("rename.used-name", true));
                     break;
                 }
                 if (members.containsKey(player.getName())) {
-                    EconomyResponse result = Main.getEconomy().withdrawPlayer(player, price);
-                    if (!result.transactionSuccess()) {
-                        player.sendMessage(getTranslate().get("rename.n-enough-money", true)
-                                .replace("{money}", String.valueOf(price)));
-                        break;
+                    if (price != -1) {
+                        EconomyResponse result = Main.getEconomy().withdrawPlayer(player, price);
+                        if (!result.transactionSuccess()) {
+                            player.sendMessage(getTranslate().get("rename.n-enough-money", true)
+                                    .replace("{money}", String.valueOf(price)));
+                            break;
+                        }
+                        player.sendMessage(getTranslate().get("other.charged", true).replace( "{money}", String.valueOf(price)));
                     }
-                    player.sendMessage(getTranslate().get("other.charged", true).replace( "{money}", String.valueOf(price)));
                     String clanName = members.get(player.getName())[2];
                     Clan.setClanName(clanName, renamed);
                     player.sendMessage(getTranslate().get("rename.done", true));

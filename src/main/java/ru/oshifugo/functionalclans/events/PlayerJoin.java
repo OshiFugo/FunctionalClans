@@ -24,7 +24,7 @@ public class PlayerJoin implements EventListener, Listener {
         String clanName = Member.getClan(p.getName());
         if (clanName == null) return;
         String message = Clan.getMessage(clanName);
-        if (message == null) return;
+        if (message == null)  return;
         if (message.isEmpty()) return;
         message = message.replace("&", "§");
         if (config.getBoolean("welcome-message.placeholders")) {

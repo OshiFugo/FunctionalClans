@@ -47,6 +47,7 @@ public class CommandsTab implements TabCompleter {
 //        ** settings part **
 //        *******************
             tabAccessor.add("fc.message", "settings.message");
+            tabAccessor.add("fc.mpvp", "settings.pvp");
             tabAccessor.add("fc.status", "settings.status");
             tabAccessor.add("fc.social", "settings.social");
             tabAccessor.add("fc.type", "settings.type");

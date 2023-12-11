@@ -26,7 +26,27 @@ public class utility {
 //        return msg;
 //    }
 
+    public static String getRawClan(String name) {
+        for (String clan : Clan.getlistClans()) {
+            if (getRawName(clan).equals(getRawName(name))) {
+                return clan;
+            }
+        }
+        return null;
+    }
 
+    public static String getRawName(String name) {
+//        ff&
+        StringBuilder total = new StringBuilder();
+        for (int i = 0; i < name.length(); i++) {
+            if (name.charAt(i) == '&' || name.charAt(i) == '§') {
+                i ++;
+                continue;
+            }
+            total.append(name.charAt(i));
+        }
+        return total.toString();
+    }
 
     public static boolean hasAnyOfPermsOrLeader(Player player, String... _perms) {
         Map<String, Integer> ranks = new HashMap<>();
@@ -51,6 +71,7 @@ public class utility {
         ranks.put("fc.update", -2);
         ranks.put("fc.settings", -2);
         ranks.put("fc.message", -2);
+        ranks.put("fc.mpvp", -2);
         ranks.put("fc.status", -2);
         ranks.put("fc.social", -2);
         ranks.put("fc.type", -2);

@@ -1,9 +1,8 @@
 package ru.oshifugo.functionalclans.command;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import ru.oshifugo.functionalclans.GUITranslate;
 import ru.oshifugo.functionalclans.command.gui_items.Root;
 import ru.oshifugo.functionalclans.command.gui_items.Settings;
@@ -13,6 +12,7 @@ import ru.oshifugo.functionalclans.command.gui_items.settings.Social;
 import ru.oshifugo.functionalclans.command.gui_items.settings.Status;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
+import ru.oshifugo.functionalclans.utility;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.gui.structure.Structure;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
@@ -34,6 +34,16 @@ public class ClanGUI {
 
     public ItemBuilder getVoidFill() {
         return voidFill;
+    }
+    public static boolean isSupported() {
+//        if version < 1.14: false
+        String version = Bukkit.getServer().getClass().getPackage().getName();
+        String[] ver = version.split("\\.");
+        if (ver.length < 4) {
+            utility.debug("ClanGUI -> Unknown version!");
+            return true;
+        }
+        return Integer.parseInt(ver[3].split("_")[1]) >= 14;
     }
 
     public ClanGUI(Player player) {
@@ -89,9 +99,11 @@ public class ClanGUI {
             gui.setItem(2, 1, Settings.message(this, player));
             gui.setItem(3, 1, Settings.status(this, player));
             gui.setItem(4, 0, Settings.social(this, player));
+            gui.setItem(4, 1, Settings.pvp(this, player, clanName));
             gui.setItem(4, 2, Settings.rename(this, player));
             gui.setItem(5, 1, Settings.type(this, player, clanName));
             gui.setItem(6, 1, Settings.setrole(this, player));
+
             gui.setItem(8, 2, Root.go_back(this, player));
         }
 

@@ -2,10 +2,12 @@ package ru.oshifugo.functionalclans;
 
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import ru.oshifugo.functionalclans.command.AdminClanCommands;
 import ru.oshifugo.functionalclans.command.ClanCommands;
 import ru.oshifugo.functionalclans.events.Kill;
+import ru.oshifugo.functionalclans.events.OnPlayerHit;
 import ru.oshifugo.functionalclans.events.PlayerJoin;
 import ru.oshifugo.functionalclans.events.SalaryEvents;
 import ru.oshifugo.functionalclans.sql.SQLite;
@@ -15,6 +17,7 @@ import ru.oshifugo.functionalclans.tabcomplete.AdminTab;
 import ru.oshifugo.functionalclans.tabcomplete.CommandsTab;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 public final class Main extends JavaPlugin {
@@ -29,6 +32,17 @@ public final class Main extends JavaPlugin {
     }
 
 
+    public int getDBVersion() {
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "config.yml"));
+        int r = config.getInt("db-ver");
+        return r;
+    }
+    public void setDBVersion(int value) throws IOException {
+        File file = new File(getDataFolder(), "config.yml");
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+        config.set("db-ver", value);
+        config.save(file);
+    }
 
     @Override
     public void onEnable() {
@@ -63,7 +77,9 @@ public final class Main extends JavaPlugin {
         getCommand("fc").setExecutor(new AdminClanCommands());
         getServer().getPluginCommand("fc").setTabCompleter(new AdminTab());
         Bukkit.getPluginManager().registerEvents(new Kill(), this);
+        Bukkit.getPluginManager().registerEvents(new OnPlayerHit(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
+
 //        saveResource("message.yml", true); // УБРАТЬ ПЕРЕД ОБНОВОЙ
         if (!new File(getDataFolder(), "message.yml").exists()) {
             saveResource("message.yml", false);
@@ -93,6 +109,7 @@ public final class Main extends JavaPlugin {
         utility.info(utility.hex("<#00CED1>Successfully enabled. &7(" + ChatColor.YELLOW + (System.currentTimeMillis() - time) + " ms" + ChatColor.GREEN + "&7)"));
         utility.info(utility.hex("<#FF00FF>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
     }
+
 
     private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {

@@ -1,5 +1,6 @@
 package ru.oshifugo.functionalclans.sql;
 
+import org.bukkit.configuration.file.YamlConfiguration;
 import ru.oshifugo.functionalclans.Main;
 import ru.oshifugo.functionalclans.utility;
 
@@ -25,10 +26,11 @@ public class SQLiteUtility {
         Date date = new Date();
         String d = formater.format(date.getTime());
         String uid;
+        YamlConfiguration config = (YamlConfiguration) Main.instance.getConfig();
         if (Clan.createUID() != null) {
             uid = Clan.createUID();
         } else return;
-        String[] c = {clan, leader, utility.config("cash"), utility.config("rating"), utility.config("type"), utility.config("tax"), "&7╰(*´︶`*)╯&c♡", "null", String.valueOf(utility.configBoolean("verification")), utility.config("max_player"), "null", "null", String.valueOf(0.0), String.valueOf(0.0), String.valueOf(0.0), String.valueOf(0.0F), String.valueOf(0.0F), d, uid, leader};
+        String[] c = {clan, leader, utility.config("cash"), utility.config("rating"), utility.config("type"), utility.config("tax"), "&7╰(*´︶`*)╯&c♡", "null", String.valueOf(utility.configBoolean("verification")), utility.config("max_player"), "null", "null", String.valueOf(0.0), String.valueOf(0.0), String.valueOf(0.0), String.valueOf(0.0F), String.valueOf(0.0F), d, uid, leader, config.getString("default-pvp")};
         String[] m = {leader, "5", clan, "0", "0", "0", "0"};
         String[] role_1 = {"1", utility.config("role_1"), String.valueOf(utility.configBoolean("kick_default")), String.valueOf(utility.configBoolean("invite_default")), String.valueOf(utility.configBoolean("cash_add_default")), String.valueOf(utility.configBoolean("cash_remove_default")), String.valueOf(utility.configBoolean("rmanage_default")), String.valueOf(utility.configBoolean("chat_default")), String.valueOf(utility.configBoolean("msg_default")), String.valueOf(utility.configBoolean("alliance_add_default")), String.valueOf(utility.configBoolean("alliance_remove_default"))};
         String[] role_2 = {"2", utility.config("role_2"), String.valueOf(utility.configBoolean("kick_default")), String.valueOf(utility.configBoolean("invite_default")), String.valueOf(utility.configBoolean("cash_add_default")), String.valueOf(utility.configBoolean("cash_remove_default")), String.valueOf(utility.configBoolean("rmanage_default")), String.valueOf(utility.configBoolean("chat_default")), String.valueOf(utility.configBoolean("msg_default")), String.valueOf(utility.configBoolean("alliance_add_default")), String.valueOf(utility.configBoolean("alliance_remove_default"))};
@@ -41,7 +43,7 @@ public class SQLiteUtility {
         clan_role.put(clan + "_2", role_2);
         clan_role.put(clan + "_3", role_3);
         clan_role.put(clan + "_4", role_4);
-        SQLite.execute("INSERT INTO clan_list (name, leader, cash, rating, type, tax, status, social, verification, max_player, message, world, x, y, z, xcur, ycur, date, uid, creator) VALUES ('" + clan + "', '" + leader + "', '" + utility.config("cash") + "', '" + utility.config("rating") + "', '" + utility.config("type") + "', '" + utility.config("tax") + "', '" + "&7╰(*´︶`*)╯&c♡" + "', 'null', '" + utility.configBoolean("verification") + "', '" + utility.config("max_player") + "', 'null', 'null', '0', '0', '0', '0', '0', '" + d + "', '" + uid + "', '" + leader + "')");
+        SQLite.execute("INSERT INTO clan_list (name, leader, cash, rating, type, tax, status, social, verification, max_player, message, world, x, y, z, xcur, ycur, date, uid, creator, pvp) VALUES ('" + clan + "', '" + leader + "', '" + utility.config("cash") + "', '" + utility.config("rating") + "', '" + utility.config("type") + "', '" + utility.config("tax") + "', '" + "&7╰(*´︶`*)╯&c♡" + "', 'null', '" + utility.configBoolean("verification") + "', '" + utility.config("max_player") + "', 'null', 'null', '0', '0', '0', '0', '0', '" + d + "', '" + uid + "', '" + leader + "', '" + config.getInt("default-pvp") + "')");
         SQLite.execute("INSERT INTO clan_members (name, role, clan, kills, death, quest, rating) VALUES ('" + leader + "', '5', '" + clan + "', '0', '0', '0', '0')");
         SQLite.execute("INSERT INTO clan_permissions (clan, role, role_name, kick, invite, cash_add, cash_remove, rmanage, chat, msg, alliance_add, alliance_remove) VALUES ('" + clan +"', '1', '" + utility.config("role_1") +"', '" + utility.configBoolean("kick_default") +"', '" + utility.configBoolean("invite_default") +"', '" + utility.configBoolean("cash_add_default") +"', '" + utility.configBoolean("cash_remove_default") +"', '" + utility.configBoolean("rmanage_default") +"', '" + utility.configBoolean("chat_default") +"', '" + utility.configBoolean("msg_default") +"', '" + utility.configBoolean("alliance_add_default") +"', '" + utility.configBoolean("alliance_remove_default") +"')");
         SQLite.execute("INSERT INTO clan_permissions (clan, role, role_name, kick, invite, cash_add, cash_remove, rmanage, chat, msg, alliance_add, alliance_remove) VALUES ('" + clan +"', '2', '" + utility.config("role_2") +"', '" + utility.configBoolean("kick_default") +"', '" + utility.configBoolean("invite_default") +"', '" + utility.configBoolean("cash_add_default") +"', '" + utility.configBoolean("cash_remove_default") +"', '" + utility.configBoolean("rmanage_default") +"', '" + utility.configBoolean("chat_default") +"', '" + utility.configBoolean("msg_default") +"', '" + utility.configBoolean("alliance_add_default") +"', '" + utility.configBoolean("alliance_remove_default") +"')");
