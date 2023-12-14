@@ -70,6 +70,7 @@ public class SQLite {
             for (int i = 0; i < args.length; i++)  {
                 pstmt.setObject(i + 1, args[i]);
             }
+            pstmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -179,6 +179,12 @@ public class ClanCommands implements CommandExecutor {
                 message.addExtra(text);
                 i++;
             }
+            if (sender.hasPermission("fc.pvp") && clanName != null && leaderName.equalsIgnoreCase(sender.getName())) {
+                TextComponent text = new TextComponent(utility.hex(utility.lang (sender, "commands.pvp.errors.e") + "\n"));
+                text.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/clan settings pvp"));
+                message.addExtra(text);
+                i++;
+            }
             if (sender.hasPermission("fc.setrole") && clanName != null && leaderName.equalsIgnoreCase(sender.getName())) {
                 TextComponent text = new TextComponent(utility.hex(utility.lang(sender, "commands.setrole.errors.e") + "\n"));
                 text.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/clan settings setrole"));

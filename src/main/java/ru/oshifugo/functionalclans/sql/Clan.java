@@ -175,7 +175,9 @@ public class Clan {
             roleName = "alliance_remove";
         }
         assert roleName != null;
-        SQLite.execute("UPDATE clan_permissions SET {role} = ? WHERE clan = ? AND role = ?".replace("{role}", roleName), String.valueOf(bool), clanName, String.valueOf(rank));
+        SQLite.execute("UPDATE clan_permissions SET {role} = ? WHERE clan = ? AND role = ?"
+                .replace("{role}", roleName),
+                String.valueOf(bool), clanName, String.valueOf(rank));
 
     }
     public static void setMessage(String clanName, String message) {

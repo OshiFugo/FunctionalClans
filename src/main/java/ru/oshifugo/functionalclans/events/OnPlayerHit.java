@@ -21,6 +21,7 @@ public class OnPlayerHit implements EventListener, Listener {
         Player p1 = (Player) damager;
         Player p2 = (Player) whoDamage;
         String clanName = Member.getClan(p1.getName());
+        if (clanName == null) return;
         if (!clanName.equals(Member.getClan(p2.getName()))) return;
         if (Clan.getPVP(clanName)) return;
         event.setCancelled(true);
