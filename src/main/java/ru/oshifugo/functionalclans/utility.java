@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
 
-import java.io.File;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
@@ -55,7 +55,7 @@ public class utility {
         ranks.put("fc.invite", 3);
         ranks.put("fc.cash_add", 4);
         ranks.put("fc.cash_remove", 5);
-        ranks.put("fc.rmanage", 6);
+//        ranks.put("fc.rmanage", 6);
         ranks.put("fc.chat", 7);
         ranks.put("fc.msg", 8);
         ranks.put("fc.alliance_add",9);
@@ -148,12 +148,38 @@ public class utility {
 //        } else cfg = " Could not find message.yml file";
 //        return cfg;
 //    }
+    private static void copyInputStreamToFile(InputStream inputStream, File file)
+            throws IOException {
+
+        // append = false
+        try (FileOutputStream outputStream = new FileOutputStream(file, false)) {
+            int read;
+            byte[] bytes = new byte[2048];
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+        }
+
+    }
     public static String lang(CommandSender sender, String cfg) {
         if (Files.exists(Paths.get(Main.instance.getDataFolder() + "/message.yml"))) {
             File langYml = new File(Main.instance.getDataFolder()+"/message.yml");
             FileConfiguration langConfig = YamlConfiguration.loadConfiguration(langYml);
             if (langConfig.getString(utility.config("lang") + "." + cfg) == null) {
-                cfg = " There was an error in message.yml. The required key could not be found. Recheck the values.";
+                File temp = new File("temp");
+                InputStream stream = Main.instance.getResource("message.yml");
+                assert stream != null;
+                try {
+                    copyInputStreamToFile(stream, temp);
+                    langConfig = YamlConfiguration.loadConfiguration(temp);
+                    cfg = langConfig.getString(utility.config("lang") + "."  + cfg);
+                    if (cfg == null) {
+                        cfg = " There was an error in message.yml. The required key could not be found. Recheck the values.";
+                    }
+                } catch (IOException e) {
+                    cfg = " There was an error in message.yml. The required key could not be found. Recheck the values.";
+                }
+
             } else cfg = langConfig.getString(utility.config("lang") + "."  + cfg);
         } else cfg = " Could not find message.yml file";
         if (!(sender instanceof Player)) {

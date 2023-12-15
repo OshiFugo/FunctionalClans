@@ -28,6 +28,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertThat;
+import static ru.oshifugo.functionalclans.utility.hasAnyOfPermsOrLeader;
 
 public class Members extends ItemsBase {
 
@@ -117,8 +118,8 @@ public class Members extends ItemsBase {
             player.sendMessage(getTranslate().get("members.self-click", true));
             return;
         }
-        Integer rank = Integer.valueOf(Member.getRank(id));
-        Integer playerRank = Integer.valueOf(Member.getRank(player.getName()));
+        int rank = Integer.parseInt(Member.getRank(id));
+        int playerRank = Integer.parseInt(Member.getRank(player.getName()));
 
         if (rank >= playerRank) {
             player.sendMessage(getTranslate().get("members.cannot-manage", true));
@@ -128,9 +129,13 @@ public class Members extends ItemsBase {
             player.sendMessage(getTranslate().get("members.leader-manage", true));
             return;
         }
+        if (!Clan.hasRole(clanName, Integer.valueOf(Member.getRank(player.getName())), 6)) { // 6 - rmanage
+            player.sendMessage(getTranslate().get("other.perm-lack", true));
+            return;
+        }
 
         if (clickType == ClickType.MIDDLE) {
-            if (!utility.hasAnyOfPermsOrLeader(player, "fc.kick")) {
+            if (!hasAnyOfPermsOrLeader(player, "fc.kick")) {
                 player.sendMessage(getTranslate().get("other.perm-lack", true));
                 return;
             }
@@ -149,7 +154,7 @@ public class Members extends ItemsBase {
             return;
         }
         if (clickType == ClickType.LEFT) {
-            if (!utility.hasAnyOfPermsOrLeader(player, "fc.rmanage")) {
+            if (!player.hasPermission("fc.removerank")) {
                 player.sendMessage(getTranslate().get("other.perm-lack", true));
                 return;
             }
@@ -175,7 +180,7 @@ public class Members extends ItemsBase {
             return;
         }
         if (clickType == ClickType.RIGHT) {
-            if (!utility.hasAnyOfPermsOrLeader(player, "fc.rmanage")) {
+            if (!player.hasPermission("fc.addrank")) {
                 player.sendMessage(getTranslate().get("other.perm-lack", true));
                 return;
             }

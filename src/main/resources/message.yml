@@ -107,6 +107,11 @@ en:
         line_9: '&7Members: (&a%s&7/&4%s&7)'
         line_9-1: '&fOnline members: &a'
         line_10: '&7Pinned message: &6'
+    pvp:
+      errors:
+        e: "&b/clan settings pvp - toggle clan's pvp"
+      message:
+        msg: '&aToggle pvp.'
     role:
       errors:
         e: '&b/clan settings role - List of ranks and their permissions'
@@ -473,6 +478,13 @@ ru:
         line_9: '&7Участники: (&a%s&7/&4%s&7)'
         line_9-1: '&fОнлайн участники:  &a'
         line_10: '&7Закрепленное сообщение: &6'
+
+    pvp:
+      errors:
+        e: "&b/clan settings pvp - переключить pvp в клане"
+      message:
+        msg: '&aПереключить pvp.'
+
     role:
       errors:
         e: '&b/clan settings role - Список рангов и их прав'
