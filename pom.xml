@@ -111,7 +111,7 @@
         <dependency>
             <groupId>xyz.xenondevs.invui</groupId>
             <artifactId>invui</artifactId>
-            <version>1.23</version>
+            <version>1.24</version>
             <type>pom</type>
         </dependency>
 
