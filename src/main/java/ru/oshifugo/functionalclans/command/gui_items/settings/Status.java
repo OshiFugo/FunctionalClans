@@ -66,7 +66,7 @@ public class Status extends ItemsBase{
                 if (members.containsKey(player.getName())) {
                     String clanName = members.get(player.getName())[2];
                     Clan.setStatus(clanName, renamed);
-                    player.sendMessage(getTranslate().get("settings.status", true));
+                    player.sendMessage(getTranslate().get("status.done", true));
                 }
                 break;
         }
