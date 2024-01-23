@@ -13,17 +13,25 @@ public class SQLite {
 
     public static void connect() {
         try {
-            if (!Main.instance.getDataFolder().mkdirs()) {
+            if (!Main.instance.getDataFolder().mkdirs())
                 Main.instance.getDataFolder().mkdirs();
-            }
-            Class.forName("org.sqlite.JDBC").getConstructor().newInstance();
-            String defaultPVP = Main.instance.getConfig().getString("default-pvp");
-            connection = DriverManager.getConnection("jdbc:sqlite://" + Main.instance.getDataFolder().getAbsolutePath() + "/clans.db");
-            execute("CREATE TABLE IF NOT EXISTS `clan_list` (`id` INTEGER PRIMARY KEY,`name` varchar(255) NOT NULL,`leader` varchar(255) NOT NULL,`cash` varchar(255) NOT NULL,`rating` varchar(255) NOT NULL,`type` varchar(255) NOT NULL,`tax` varchar(255) NOT NULL,`status` varchar(255) NOT NULL,`social` varchar(255) NOT NULL,`verification` varchar(255) NOT NULL,`max_player` varchar(255) NOT NULL,`message` varchar(255) NOT NULL,`world` varchar(255) NOT NULL,`x` varchar(255) NOT NULL,`y` varchar(255) NOT NULL,`z` varchar(255) NOT NULL,`xcur` varchar(255) NOT NULL,`ycur` varchar(255) NOT NULL,`date` varchar(255) NOT NULL,`uid` varchar(255) NOT NULL,`creator` varchar(255) NOT NULL, `pvp` varchar(255) NOT NULL DEFAULT " + defaultPVP  + ")");
-            execute("CREATE TABLE IF NOT EXISTS `clan_members` (`id` INTEGER PRIMARY KEY,`name` varchar(255) NOT NULL,`role` varchar(255) NOT NULL,`clan` varchar(255) NOT NULL,`kills` varchar(255) NOT NULL,`death` varchar(255) NOT NULL,`quest` varchar(255) NOT NULL,`rating` varchar(255) NOT NULL)");
-            execute("CREATE TABLE IF NOT EXISTS `clan_permissions` (`id` INTEGER PRIMARY KEY,`clan` varchar(255) NOT NULL,`role` varchar(255) NOT NULL,`role_name` varchar(255) NOT NULL,`kick` boolean NOT NULL,`invite` boolean NOT NULL,`cash_add` boolean NOT NULL,`cash_remove` boolean NOT NULL,`rmanage` boolean NOT NULL,`chat` boolean NOT NULL,`msg` boolean NOT NULL,`alliance_add` boolean NOT NULL,`alliance_remove` boolean NOT NULL)");
-            execute("CREATE TABLE IF NOT EXISTS 'clan_alliance' ('id' INTEGER PRIMARY KEY, 'UID_1' varchar(255) NOT NULL, 'UID_2' varchar(255) NOT NULL)");
 
+            String defaultPVP = Main.instance.getConfig().getString("default-pvp");
+            if (utility.config("data.type").equalsIgnoreCase("SQLITE")) {
+                Class.forName("org.sqlite.JDBC");
+                connection = DriverManager.getConnection("jdbc:sqlite://" + Main.instance.getDataFolder().getAbsolutePath() + "/clans.db");
+            }
+            else if (utility.config("data.type").equalsIgnoreCase("MYSQL")) {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                connection = DriverManager.getConnection("jdbc:mysql://" + utility.config("data.host") + "/" + utility.config("data.database"),  utility.config("data.username"),  utility.config("data.password"));
+            } else {
+                utility.error("Database type not found");
+                return;
+            }
+            execute("CREATE TABLE IF NOT EXISTS `clan_list` (`id` INTEGER PRIMARY KEY AUTO_INCREMENT,`name` varchar(255) NOT NULL,`leader` varchar(255) NOT NULL,`cash` varchar(255) NOT NULL,`rating` varchar(255) NOT NULL,`type` varchar(255) NOT NULL,`tax` varchar(255) NOT NULL,`status` varchar(255) NOT NULL,`social` varchar(255) NOT NULL,`verification` varchar(255) NOT NULL,`max_player` varchar(255) NOT NULL,`message` varchar(255) NOT NULL,`world` varchar(255) NOT NULL,`x` varchar(255) NOT NULL,`y` varchar(255) NOT NULL,`z` varchar(255) NOT NULL,`xcur` varchar(255) NOT NULL,`ycur` varchar(255) NOT NULL,`date` varchar(255) NOT NULL,`uid` varchar(255) NOT NULL,`creator` varchar(255) NOT NULL, `pvp` varchar(255) NOT NULL DEFAULT " + defaultPVP  + ")");
+            execute("CREATE TABLE IF NOT EXISTS `clan_members` (`id` INTEGER PRIMARY KEY AUTO_INCREMENT,`name` varchar(255) NOT NULL,`role` varchar(255) NOT NULL,`clan` varchar(255) NOT NULL,`kills` varchar(255) NOT NULL,`death` varchar(255) NOT NULL,`quest` varchar(255) NOT NULL,`rating` varchar(255) NOT NULL)");
+            execute("CREATE TABLE IF NOT EXISTS `clan_permissions` (`id` INTEGER PRIMARY KEY AUTO_INCREMENT,`clan` varchar(255) NOT NULL,`role` varchar(255) NOT NULL,`role_name` varchar(255) NOT NULL,`kick` boolean NOT NULL,`invite` boolean NOT NULL,`cash_add` boolean NOT NULL,`cash_remove` boolean NOT NULL,`rmanage` boolean NOT NULL,`chat` boolean NOT NULL,`msg` boolean NOT NULL,`alliance_add` boolean NOT NULL,`alliance_remove` boolean NOT NULL)");
+            execute("CREATE TABLE IF NOT EXISTS `clan_alliance` (`id` INTEGER PRIMARY KEY AUTO_INCREMENT, `UID_1` varchar(255) NOT NULL, `UID_2` varchar(255) NOT NULL)");
 //            update alters
             update2p1p0();
 
@@ -55,8 +63,8 @@ public class SQLite {
         utility.debug("Sended Query: " + query);
         try {
             connection.createStatement().execute(query);
-        } catch (Exception var2) {
-            var2.printStackTrace();
+        } catch (Exception e) {
+            utility.debug(e.getMessage());
         }
     }
 
