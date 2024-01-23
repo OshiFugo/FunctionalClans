@@ -20,7 +20,6 @@ conf-version: 1
 db-ver: 2
 
 data:
-
   # data types: SQLITE, MYSQL
   type: sqlite
   host: localhost:3306

@@ -48,6 +48,7 @@ public class SQLite {
         }
     }
 
+
     public static boolean hasConnected() {
         try {
             return !connection.isClosed();
