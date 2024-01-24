@@ -18,7 +18,14 @@
 # DO NOT CHANGE IT IN ANY CASE
 conf-version: 1
 db-ver: 2
-#
+
+data:
+  # data types: SQLITE, MYSQL
+  type: sqlite
+  host: localhost:3306
+  database: fclans
+  username: OshiFugo
+  password: MyVeryHardPassword2937
 
 
 # Plugin prefix

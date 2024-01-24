@@ -25,6 +25,8 @@ public final class Main extends JavaPlugin {
 
     private GUITranslate lang;
     private static Economy econ = null;
+
+
     public static HashMap<String, String[]> placeholders_config = new HashMap<>();
 
     public GUITranslate getLang() {
