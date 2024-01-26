@@ -34,8 +34,6 @@ public class SQLite {
             execute("CREATE TABLE IF NOT EXISTS `clan_alliance` (`id` varchar(255) NOT NULL, `UID_1` varchar(255) NOT NULL, `UID_2` varchar(255) NOT NULL)");
 //            update alters
             update2p1p0();
-
-
         } catch (Exception e) {
             e.printStackTrace();
             utility.error("An error occurred while connecting to the database.");
