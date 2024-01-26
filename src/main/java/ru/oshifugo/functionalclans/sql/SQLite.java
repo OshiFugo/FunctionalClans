@@ -32,7 +32,6 @@ public class SQLite {
             execute("CREATE TABLE IF NOT EXISTS `clan_members` (`id` varchar(255) NOT NULL ,`name` varchar(255) NOT NULL,`role` varchar(255) NOT NULL,`clan` varchar(255) NOT NULL,`kills` varchar(255) NOT NULL,`death` varchar(255) NOT NULL,`quest` varchar(255) NOT NULL,`rating` varchar(255) NOT NULL)");
             execute("CREATE TABLE IF NOT EXISTS `clan_permissions` (`id` varchar(255) NOT NULL,`clan` varchar(255) NOT NULL,`role` varchar(255) NOT NULL,`role_name` varchar(255) NOT NULL,`kick` boolean NOT NULL,`invite` boolean NOT NULL,`cash_add` boolean NOT NULL,`cash_remove` boolean NOT NULL,`rmanage` boolean NOT NULL,`chat` boolean NOT NULL,`msg` boolean NOT NULL,`alliance_add` boolean NOT NULL,`alliance_remove` boolean NOT NULL)");
             execute("CREATE TABLE IF NOT EXISTS `clan_alliance` (`id` varchar(255) NOT NULL, `UID_1` varchar(255) NOT NULL, `UID_2` varchar(255) NOT NULL)");
-//            update alters
             update2p1p0();
         } catch (Exception e) {
             e.printStackTrace();
