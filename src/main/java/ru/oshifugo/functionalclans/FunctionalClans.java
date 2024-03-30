@@ -20,8 +20,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-public final class Main extends JavaPlugin {
-    public static Main instance;
+public final class FunctionalClans extends JavaPlugin {
+    public static FunctionalClans instance;
 
     private GUITranslate lang;
     private static Economy econ = null;

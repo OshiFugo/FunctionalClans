@@ -1,31 +1,23 @@
 package ru.oshifugo.functionalclans.command.gui_items.settings;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.AnvilInventory;
 
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
-import ru.oshifugo.functionalclans.Main;
 import ru.oshifugo.functionalclans.command.ClanGUI;
 import ru.oshifugo.functionalclans.command.gui_items.ItemsBase;
-import ru.oshifugo.functionalclans.command.gui_items.Root;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.utility;
-import xyz.xenondevs.invui.gui.Gui;
-import xyz.xenondevs.invui.gui.structure.Structure;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static org.bukkit.Bukkit.getServer;
 import static ru.oshifugo.functionalclans.sql.SQLiteUtility.members;
 
 

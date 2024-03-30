@@ -1,11 +1,10 @@
 package ru.oshifugo.functionalclans.sql;
 
-import ru.oshifugo.functionalclans.Main;
+import ru.oshifugo.functionalclans.FunctionalClans;
 import ru.oshifugo.functionalclans.utility;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.logging.Level;
 
 public class SQLite {
     public static Connection connection = null;
@@ -13,13 +12,13 @@ public class SQLite {
 
     public static void connect() {
         try {
-            if (!Main.instance.getDataFolder().mkdirs())
-                Main.instance.getDataFolder().mkdirs();
+            if (!FunctionalClans.instance.getDataFolder().mkdirs())
+                FunctionalClans.instance.getDataFolder().mkdirs();
 
-            String defaultPVP = Main.instance.getConfig().getString("default-pvp");
+            String defaultPVP = FunctionalClans.instance.getConfig().getString("default-pvp");
             if (utility.config("data.type").equalsIgnoreCase("SQLITE")) {
                 Class.forName("org.sqlite.JDBC");
-                connection = DriverManager.getConnection("jdbc:sqlite:" + Main.instance.getDataFolder().getAbsolutePath() + "/clans.db");
+                connection = DriverManager.getConnection("jdbc:sqlite:" + FunctionalClans.instance.getDataFolder().getAbsolutePath() + "/clans.db");
             }
             else if (utility.config("data.type").equalsIgnoreCase("MYSQL")) {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -40,9 +39,9 @@ public class SQLite {
     }
 
     private static void update2p1p0() throws IOException {
-        if (Main.instance.getDBVersion() < 2) {
+        if (FunctionalClans.instance.getDBVersion() < 2) {
             execute("ALTER TABLE clan_list ADD COLUMN pvp varchar(255) DEFAULT '1'");
-            Main.instance.setDBVersion(2);
+            FunctionalClans.instance.setDBVersion(2);
         }
     }
 

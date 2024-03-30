@@ -5,7 +5,7 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
-import ru.oshifugo.functionalclans.Main;
+import ru.oshifugo.functionalclans.FunctionalClans;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
 import ru.oshifugo.functionalclans.sql.SQLiteUtility;
@@ -29,8 +29,8 @@ public class AdminClanCommands implements CommandExecutor {
     }
     private static void override(CommandSender sender) {
 
-        if (sender.isOp() && Main.instance.getConfig().getBoolean("gui.override-lang")) {
-            Main.instance.saveResource("gui_lang_en.yml", true);
+        if (sender.isOp() && FunctionalClans.instance.getConfig().getBoolean("gui.override-lang")) {
+            FunctionalClans.instance.saveResource("gui_lang_en.yml", true);
             sender.sendMessage("gui_lang_en.yml override was complete!");
         }
 

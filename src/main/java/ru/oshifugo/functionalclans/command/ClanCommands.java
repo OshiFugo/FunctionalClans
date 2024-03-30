@@ -3,7 +3,7 @@ package ru.oshifugo.functionalclans.command;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import ru.oshifugo.functionalclans.GUITranslate;
-import ru.oshifugo.functionalclans.Main;
+import ru.oshifugo.functionalclans.FunctionalClans;
 import ru.oshifugo.functionalclans.command.subcommands.topCMD;
 import ru.oshifugo.functionalclans.sql.*;
 import ru.oshifugo.functionalclans.utility;
@@ -17,7 +17,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import xyz.xenondevs.invui.window.Window;
 
 import java.util.*;
 
@@ -51,7 +50,7 @@ public class ClanCommands implements CommandExecutor {
         return true;
     }
     public static boolean removeEconomyCfg(Player player, String cfg) {
-        Economy economy = Main.getEconomy();
+        Economy economy = FunctionalClans.getEconomy();
         if (!utility.config(cfg).equalsIgnoreCase("-1")) {
             EconomyResponse response = economy.withdrawPlayer(player, Integer.valueOf(utility.config(cfg)));
             if (!response.transactionSuccess()) {
@@ -62,7 +61,7 @@ public class ClanCommands implements CommandExecutor {
         return true;
     }
     public static boolean removeEconomy(Player player, String cash) {
-        Economy economy = Main.getEconomy();
+        Economy economy = FunctionalClans.getEconomy();
         EconomyResponse response = economy.withdrawPlayer(player, Integer.valueOf(cash));
         if (!response.transactionSuccess()) {
             player.sendMessage(utility.hex(prefix + utility.lang(player,"common_errors.no_transfer_money") + cash));
@@ -71,7 +70,7 @@ public class ClanCommands implements CommandExecutor {
         return true;
     }
     public static boolean addEconomy(Player player, String cash) {
-        Economy economy = Main.getEconomy();
+        Economy economy = FunctionalClans.getEconomy();
         EconomyResponse response = economy.depositPlayer(player, Integer.valueOf(cash));
         if (!response.transactionSuccess()) {
             player.sendMessage(utility.hex(prefix + utility.lang(player,"common_errors.no_transfer_money") + cash));
@@ -379,7 +378,7 @@ public class ClanCommands implements CommandExecutor {
             utility.debug("getClanByName -> null");
         }
         if (args.length == 0 || args[0].equalsIgnoreCase("menu")) {
-            Boolean isActive = Main.instance.getConfig().getBoolean("gui.active");
+            Boolean isActive = FunctionalClans.instance.getConfig().getBoolean("gui.active");
             if (!isActive) {
                 help(sender, clanName, memberName, "-1");
                 return true;
@@ -756,7 +755,7 @@ public class ClanCommands implements CommandExecutor {
             for(int i = 2; i < args.length; ++i) {
                 message = message + args[i] + " ";
             }
-            int max_status = Main.instance.getConfig().getInt("max_status");
+            int max_status = FunctionalClans.instance.getConfig().getInt("max_status");
             if (message.length() > max_status) {
                 player.sendMessage(GUITranslate.getTranslate(player).get("status.too-many-letters", true)
                         .replace("{max}", String.valueOf(max_status)));
@@ -786,7 +785,7 @@ public class ClanCommands implements CommandExecutor {
                     final int[] timer = {timerInSeconds};
                     Location originalLocation = player.getLocation();
                     final int[] taskId = new int[1];
-                    taskId[0] = Bukkit.getScheduler().runTaskTimer(Main.instance, new Runnable() {
+                    taskId[0] = Bukkit.getScheduler().runTaskTimer(FunctionalClans.instance, new Runnable() {
                         @Override
                         public void run() {
                             if (utility.config("home_protection_tp").equalsIgnoreCase("1")) {

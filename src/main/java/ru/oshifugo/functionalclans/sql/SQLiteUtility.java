@@ -1,7 +1,7 @@
 package ru.oshifugo.functionalclans.sql;
 
 import org.bukkit.configuration.file.YamlConfiguration;
-import ru.oshifugo.functionalclans.Main;
+import ru.oshifugo.functionalclans.FunctionalClans;
 import ru.oshifugo.functionalclans.utility;
 
 import java.text.SimpleDateFormat;
@@ -26,7 +26,7 @@ public class SQLiteUtility {
         Date date = new Date();
         String d = formater.format(date.getTime());
         String uid;
-        YamlConfiguration config = (YamlConfiguration) Main.instance.getConfig();
+        YamlConfiguration config = (YamlConfiguration) FunctionalClans.instance.getConfig();
         if (Clan.createUID() != null) {
             uid = Clan.createUID();
         } else return;
@@ -71,7 +71,7 @@ public class SQLiteUtility {
         InviteRequest.request = new HashMap<>();
         SQLite.getClans();
 
-        Main.placeholders_config = new HashMap<>(); // Неработает, конфиг тот же
-        Main.HashConfig(); // Неработает, конфиг тот же
+        FunctionalClans.placeholders_config = new HashMap<>(); // Неработает, конфиг тот же
+        FunctionalClans.HashConfig(); // Неработает, конфиг тот же
     }
 }

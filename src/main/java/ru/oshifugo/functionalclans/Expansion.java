@@ -45,20 +45,20 @@ public class Expansion extends PlaceholderExpansion {
 
     public String space(String parameter, String type) { // Если не ошибаюсь это выводит когда все хорошо
         type = "fc_" + type;
-        if (Arrays.asList(Main.placeholders_config.get("placeholder_list")).contains(type)) {
-            return utility.hex(Main.placeholders_config.get("settings")[1] + parameter + Main.placeholders_config.get("settings")[2]);
-        } else if (Main.placeholders_config.get("settings")[0].equalsIgnoreCase("true")) {
+        if (Arrays.asList(FunctionalClans.placeholders_config.get("placeholder_list")).contains(type)) {
+            return utility.hex(FunctionalClans.placeholders_config.get("settings")[1] + parameter + FunctionalClans.placeholders_config.get("settings")[2]);
+        } else if (FunctionalClans.placeholders_config.get("settings")[0].equalsIgnoreCase("true")) {
             return utility.hex(" " + parameter + " ");
         } else return utility.hex(parameter);
     }
 
     public String placeholderReturn(String type) {
         type = "fc_" + type;
-        if (Arrays.asList(Main.placeholders_config.get("placeholder_null_list")).contains(type)) {
-            return utility.hex(Main.placeholders_config.get("settings")[4]);
+        if (Arrays.asList(FunctionalClans.placeholders_config.get("placeholder_null_list")).contains(type)) {
+            return utility.hex(FunctionalClans.placeholders_config.get("settings")[4]);
         } else if (type.equals("fc_null")) {
-            return utility.hex(Main.placeholders_config.get("settings")[3]);
-        } else return utility.hex(Main.placeholders_config.get("settings")[3]);
+            return utility.hex(FunctionalClans.placeholders_config.get("settings")[3]);
+        } else return utility.hex(FunctionalClans.placeholders_config.get("settings")[3]);
     }
 
     public boolean isOfflinePlayerExists(String playerName) {

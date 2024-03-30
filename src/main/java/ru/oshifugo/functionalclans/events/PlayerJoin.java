@@ -6,8 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import ru.oshifugo.functionalclans.GUITranslate;
-import ru.oshifugo.functionalclans.Main;
+import ru.oshifugo.functionalclans.FunctionalClans;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
 
@@ -16,7 +15,7 @@ import java.util.EventListener;
 public class PlayerJoin implements EventListener, Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
-        FileConfiguration config = Main.instance.getConfig();
+        FileConfiguration config = FunctionalClans.instance.getConfig();
         if (!config.getBoolean("welcome-message.allow")) {
             return;
         }
