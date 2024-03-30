@@ -12,13 +12,13 @@ public class SQLite {
 
     public static void connect() {
         try {
-            if (!FunctionalClans.instance.getDataFolder().mkdirs())
-                FunctionalClans.instance.getDataFolder().mkdirs();
+            if (!FunctionalClans.getInstance().getDataFolder().mkdirs())
+                FunctionalClans.getInstance().getDataFolder().mkdirs();
 
-            String defaultPVP = FunctionalClans.instance.getConfig().getString("default-pvp");
+            String defaultPVP = FunctionalClans.getInstance().getConfig().getString("default-pvp");
             if (utility.config("data.type").equalsIgnoreCase("SQLITE")) {
                 Class.forName("org.sqlite.JDBC");
-                connection = DriverManager.getConnection("jdbc:sqlite:" + FunctionalClans.instance.getDataFolder().getAbsolutePath() + "/clans.db");
+                connection = DriverManager.getConnection("jdbc:sqlite:" + FunctionalClans.getInstance().getDataFolder().getAbsolutePath() + "/clans.db");
             }
             else if (utility.config("data.type").equalsIgnoreCase("MYSQL")) {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -39,9 +39,9 @@ public class SQLite {
     }
 
     private static void update2p1p0() throws IOException {
-        if (FunctionalClans.instance.getDBVersion() < 2) {
+        if (FunctionalClans.getInstance().getDBVersion() < 2) {
             execute("ALTER TABLE clan_list ADD COLUMN pvp varchar(255) DEFAULT '1'");
-            FunctionalClans.instance.setDBVersion(2);
+            FunctionalClans.getInstance().setDBVersion(2);
         }
     }
 

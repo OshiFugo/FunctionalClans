@@ -135,7 +135,7 @@ public abstract class ItemsBase extends AbstractItem {
             utility.debug("setId -> meta == null");
             return;
         }
-        NamespacedKey key = new NamespacedKey(FunctionalClans.instance, "id");
+        NamespacedKey key = new NamespacedKey(FunctionalClans.getInstance(), "id");
         meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, id);
         item.setItemMeta(meta);
     }
@@ -154,7 +154,7 @@ public abstract class ItemsBase extends AbstractItem {
             utility.debug("getId -> meta == null");
             return null;
         }
-        NamespacedKey key = new NamespacedKey(FunctionalClans.instance, "id");
+        NamespacedKey key = new NamespacedKey(FunctionalClans.getInstance(), "id");
 
         String id = meta.getPersistentDataContainer().get(key, PersistentDataType.STRING);
         if (id == null) {

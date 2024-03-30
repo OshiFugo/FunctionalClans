@@ -26,7 +26,7 @@ public class SQLiteUtility {
         Date date = new Date();
         String d = formater.format(date.getTime());
         String uid;
-        YamlConfiguration config = (YamlConfiguration) FunctionalClans.instance.getConfig();
+        YamlConfiguration config = (YamlConfiguration) FunctionalClans.getInstance().getConfig();
         if (Clan.createUID() != null) {
             uid = Clan.createUID();
         } else return;

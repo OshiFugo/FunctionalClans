@@ -57,7 +57,7 @@ public class Status extends ItemsBase{
                     player.sendMessage(getTranslate().get("other.perm-lack", true));
                     break;
                 }
-                int max_status = FunctionalClans.instance.getConfig().getInt("max_status");
+                int max_status = FunctionalClans.getInstance().getConfig().getInt("max_status");
                 if (renamed.length() > max_status) {
                     player.sendMessage(GUITranslate.getTranslate(player).get("status.too-many-letters", true)
                             .replace("{max}", String.valueOf(max_status)));

@@ -40,7 +40,7 @@ public class Rename extends ItemsBase{
             ItemStack itemStack = new ItemStack(Material.GREEN_STAINED_GLASS);
             setId(itemStack, "new_message");
             ItemMeta meta = itemStack.getItemMeta();
-            int price = FunctionalClans.instance.getConfig().getInt("rename_price");
+            int price = FunctionalClans.getInstance().getConfig().getInt("rename_price");
             String lore = getTranslate().get("rename.charging");
             meta.setLore(Arrays.asList(lore.replace("{money}", String.valueOf(price)).split("\\;")));
             itemStack.setItemMeta(meta);
@@ -63,7 +63,7 @@ public class Rename extends ItemsBase{
     public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent inventoryClickEvent, String id) {
         switch (id) {
             case "new_message":
-                FileConfiguration config = FunctionalClans.instance.getConfig();
+                FileConfiguration config = FunctionalClans.getInstance().getConfig();
                 player.setLevel(player.getLevel());
                 if (!utility.hasAnyOfPermsOrLeader(player, "fc.rename")) {
                     player.sendMessage(getTranslate().get("other.perm-lack", true));

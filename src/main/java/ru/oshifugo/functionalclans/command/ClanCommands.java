@@ -378,7 +378,7 @@ public class ClanCommands implements CommandExecutor {
             utility.debug("getClanByName -> null");
         }
         if (args.length == 0 || args[0].equalsIgnoreCase("menu")) {
-            Boolean isActive = FunctionalClans.instance.getConfig().getBoolean("gui.active");
+            Boolean isActive = FunctionalClans.getInstance().getConfig().getBoolean("gui.active");
             if (!isActive) {
                 help(sender, clanName, memberName, "-1");
                 return true;
@@ -755,7 +755,7 @@ public class ClanCommands implements CommandExecutor {
             for(int i = 2; i < args.length; ++i) {
                 message = message + args[i] + " ";
             }
-            int max_status = FunctionalClans.instance.getConfig().getInt("max_status");
+            int max_status = FunctionalClans.getInstance().getConfig().getInt("max_status");
             if (message.length() > max_status) {
                 player.sendMessage(GUITranslate.getTranslate(player).get("status.too-many-letters", true)
                         .replace("{max}", String.valueOf(max_status)));
@@ -785,7 +785,7 @@ public class ClanCommands implements CommandExecutor {
                     final int[] timer = {timerInSeconds};
                     Location originalLocation = player.getLocation();
                     final int[] taskId = new int[1];
-                    taskId[0] = Bukkit.getScheduler().runTaskTimer(FunctionalClans.instance, new Runnable() {
+                    taskId[0] = Bukkit.getScheduler().runTaskTimer(FunctionalClans.getInstance(), new Runnable() {
                         @Override
                         public void run() {
                             if (utility.config("home_protection_tp").equalsIgnoreCase("1")) {

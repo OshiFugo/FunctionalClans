@@ -29,8 +29,8 @@ public class AdminClanCommands implements CommandExecutor {
     }
     private static void override(CommandSender sender) {
 
-        if (sender.isOp() && FunctionalClans.instance.getConfig().getBoolean("gui.override-lang")) {
-            FunctionalClans.instance.saveResource("gui_lang_en.yml", true);
+        if (sender.isOp() && FunctionalClans.getInstance().getConfig().getBoolean("gui.override-lang")) {
+            FunctionalClans.getInstance().saveResource("gui_lang_en.yml", true);
             sender.sendMessage("gui_lang_en.yml override was complete!");
         }
 

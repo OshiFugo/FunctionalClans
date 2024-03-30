@@ -31,7 +31,7 @@ public class GUITranslatePlaceholder {
 
     public String get(String path, boolean usePrefix) {
         if (usePrefix) {
-            String prefix = FunctionalClans.instance.getConfig().getString("prefix");
+            String prefix = FunctionalClans.getInstance().getConfig().getString("prefix");
             return prefix.replace("&", "§") + get(path);
         }
         return get(path);

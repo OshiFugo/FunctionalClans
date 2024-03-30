@@ -21,7 +21,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public final class FunctionalClans extends JavaPlugin {
-    public static FunctionalClans instance;
+
+    private static FunctionalClans instance;
 
     private GUITranslate lang;
     private static Economy econ = null;
@@ -141,4 +142,9 @@ public final class FunctionalClans extends JavaPlugin {
         utility.info(utility.hex("<#00CED1>Plugin disabled."));
         utility.info(utility.hex("<#FF00FF>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
     }
+
+    public static FunctionalClans getInstance() {
+        return instance;
+    }
+
 }

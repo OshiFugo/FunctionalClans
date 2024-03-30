@@ -15,7 +15,7 @@ import java.util.EventListener;
 public class PlayerJoin implements EventListener, Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
-        FileConfiguration config = FunctionalClans.instance.getConfig();
+        FileConfiguration config = FunctionalClans.getInstance().getConfig();
         if (!config.getBoolean("welcome-message.allow")) {
             return;
         }

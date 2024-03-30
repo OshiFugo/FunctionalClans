@@ -120,7 +120,7 @@ public class Clan {
         return String.valueOf(getlistClans().size());
     }
     public static String getRoleName(String clanName, Integer rank) {
-        if (rank == 5) { return utility.hex(utility.lang(FunctionalClans.instance.getServer().getPlayer(clanName), "main.leader")); }
+        if (rank == 5) { return utility.hex(utility.lang(FunctionalClans.getInstance().getServer().getPlayer(clanName), "main.leader")); }
         return SQLiteUtility.clan_role.get(clanName + "_" + rank)[1];
     }
     public static Integer getRank(String memberName) {
