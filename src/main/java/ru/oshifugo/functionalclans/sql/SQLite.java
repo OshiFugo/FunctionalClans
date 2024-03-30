@@ -106,7 +106,8 @@ public class SQLite {
                 }
             } catch (Exception errors) {
                 a = -1;
-                utility.error("getClans -> SELECT * FROM clan_list. " + errors);
+                utility.error("getClans -> SELECT * FROM clan_list");
+                errors.printStackTrace();
             }
             try {
                 resultSet = executeQuery("SELECT * FROM clan_members");
@@ -117,7 +118,8 @@ public class SQLite {
                 }
             } catch (Exception errors) {
                 b = -1;
-                utility.error("getClans -> SELECT * FROM clan_members. " + errors);
+                utility.error("getClans -> SELECT * FROM clan_members");
+                errors.printStackTrace();
             }
             try {
                 resultSet = executeQuery("SELECT * FROM clan_permissions");
@@ -128,7 +130,8 @@ public class SQLite {
                 }
             } catch (Exception errors) {
                 p = -1;
-                utility.error("getClans -> SELECT * FROM clan_permissions. " + errors);
+                utility.error("getClans -> SELECT * FROM clan_permissions");
+                errors.printStackTrace();
             }
             try {
                 resultSet = executeQuery("SELECT * FROM clan_alliance");
@@ -139,14 +142,16 @@ public class SQLite {
                 }
             } catch (Exception errors) {
                 d = -1;
-                utility.error("getClans -> SELECT * FROM clan_alliance. " + errors);
+                utility.error("getClans -> SELECT * FROM clan_alliance");
+                errors.printStackTrace();
             }
             utility.debug("The clan base is loaded. (" + a + ")");
             utility.debug("The player base is loaded. (" + b + ")");
             utility.debug("The rank database is loaded. (" + p + ")");
             utility.debug("Alliance database is loading. (" + d + ")");
         } catch (Exception e) {
-            utility.error("An error occurred while requesting clans. " + e);
+            utility.error("An error occurred while requesting clans");
+            e.printStackTrace();
         }
     }
 
