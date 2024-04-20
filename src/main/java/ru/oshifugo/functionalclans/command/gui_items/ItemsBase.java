@@ -11,7 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import ru.oshifugo.functionalclans.GUITranslate;
-import ru.oshifugo.functionalclans.Main;
+import ru.oshifugo.functionalclans.FunctionalClans;
 import ru.oshifugo.functionalclans.command.ClanGUI;
 import ru.oshifugo.functionalclans.command.GUITranslatePlaceholder;
 import ru.oshifugo.functionalclans.utility;
@@ -135,7 +135,7 @@ public abstract class ItemsBase extends AbstractItem {
             utility.debug("setId -> meta == null");
             return;
         }
-        NamespacedKey key = new NamespacedKey(Main.instance, "id");
+        NamespacedKey key = new NamespacedKey(FunctionalClans.getInstance(), "id");
         meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, id);
         item.setItemMeta(meta);
     }
@@ -154,7 +154,7 @@ public abstract class ItemsBase extends AbstractItem {
             utility.debug("getId -> meta == null");
             return null;
         }
-        NamespacedKey key = new NamespacedKey(Main.instance, "id");
+        NamespacedKey key = new NamespacedKey(FunctionalClans.getInstance(), "id");
 
         String id = meta.getPersistentDataContainer().get(key, PersistentDataType.STRING);
         if (id == null) {

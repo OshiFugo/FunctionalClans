@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import ru.oshifugo.functionalclans.GUITranslate;
-import ru.oshifugo.functionalclans.Main;
+import ru.oshifugo.functionalclans.FunctionalClans;
 import ru.oshifugo.functionalclans.command.ClanGUI;
 import ru.oshifugo.functionalclans.command.gui_items.ItemsBase;
 import ru.oshifugo.functionalclans.sql.Clan;
@@ -57,7 +57,7 @@ public class Status extends ItemsBase{
                     player.sendMessage(getTranslate().get("other.perm-lack", true));
                     break;
                 }
-                int max_status = Main.instance.getConfig().getInt("max_status");
+                int max_status = FunctionalClans.getInstance().getConfig().getInt("max_status");
                 if (renamed.length() > max_status) {
                     player.sendMessage(GUITranslate.getTranslate(player).get("status.too-many-letters", true)
                             .replace("{max}", String.valueOf(max_status)));

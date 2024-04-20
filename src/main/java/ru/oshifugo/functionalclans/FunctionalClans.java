@@ -20,8 +20,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-public final class Main extends JavaPlugin {
-    public static Main instance;
+public final class FunctionalClans extends JavaPlugin {
+
+    private static FunctionalClans instance;
 
     private GUITranslate lang;
     private static Economy econ = null;
@@ -141,4 +142,9 @@ public final class Main extends JavaPlugin {
         utility.info(utility.hex("<#00CED1>Plugin disabled."));
         utility.info(utility.hex("<#FF00FF>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"));
     }
+
+    public static FunctionalClans getInstance() {
+        return instance;
+    }
+
 }

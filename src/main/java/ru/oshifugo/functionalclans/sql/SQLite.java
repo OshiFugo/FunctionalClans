@@ -1,11 +1,10 @@
 package ru.oshifugo.functionalclans.sql;
 
-import ru.oshifugo.functionalclans.Main;
+import ru.oshifugo.functionalclans.FunctionalClans;
 import ru.oshifugo.functionalclans.utility;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.logging.Level;
 
 public class SQLite {
     public static Connection connection = null;
@@ -13,13 +12,13 @@ public class SQLite {
 
     public static void connect() {
         try {
-            if (!Main.instance.getDataFolder().mkdirs())
-                Main.instance.getDataFolder().mkdirs();
+            if (!FunctionalClans.getInstance().getDataFolder().mkdirs())
+                FunctionalClans.getInstance().getDataFolder().mkdirs();
 
-            String defaultPVP = Main.instance.getConfig().getString("default-pvp");
+            String defaultPVP = FunctionalClans.getInstance().getConfig().getString("default-pvp");
             if (utility.config("data.type").equalsIgnoreCase("SQLITE")) {
                 Class.forName("org.sqlite.JDBC");
-                connection = DriverManager.getConnection("jdbc:sqlite:" + Main.instance.getDataFolder().getAbsolutePath() + "/clans.db");
+                connection = DriverManager.getConnection("jdbc:sqlite:" + FunctionalClans.getInstance().getDataFolder().getAbsolutePath() + "/clans.db");
             }
             else if (utility.config("data.type").equalsIgnoreCase("MYSQL")) {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -40,9 +39,9 @@ public class SQLite {
     }
 
     private static void update2p1p0() throws IOException {
-        if (Main.instance.getDBVersion() < 2) {
+        if (FunctionalClans.getInstance().getDBVersion() < 2) {
             execute("ALTER TABLE clan_list ADD COLUMN pvp varchar(255) DEFAULT '1'");
-            Main.instance.setDBVersion(2);
+            FunctionalClans.getInstance().setDBVersion(2);
         }
     }
 
@@ -108,6 +107,7 @@ public class SQLite {
             } catch (Exception errors) {
                 a = -1;
                 utility.error("getClans -> SELECT * FROM clan_list");
+                errors.printStackTrace();
             }
             try {
                 resultSet = executeQuery("SELECT * FROM clan_members");
@@ -119,6 +119,7 @@ public class SQLite {
             } catch (Exception errors) {
                 b = -1;
                 utility.error("getClans -> SELECT * FROM clan_members");
+                errors.printStackTrace();
             }
             try {
                 resultSet = executeQuery("SELECT * FROM clan_permissions");
@@ -130,6 +131,7 @@ public class SQLite {
             } catch (Exception errors) {
                 p = -1;
                 utility.error("getClans -> SELECT * FROM clan_permissions");
+                errors.printStackTrace();
             }
             try {
                 resultSet = executeQuery("SELECT * FROM clan_alliance");
@@ -141,13 +143,15 @@ public class SQLite {
             } catch (Exception errors) {
                 d = -1;
                 utility.error("getClans -> SELECT * FROM clan_alliance");
+                errors.printStackTrace();
             }
             utility.debug("The clan base is loaded. (" + a + ")");
             utility.debug("The player base is loaded. (" + b + ")");
             utility.debug("The rank database is loaded. (" + p + ")");
             utility.debug("Alliance database is loading. (" + d + ")");
         } catch (Exception e) {
-            utility.error("An error occurred while requesting clans.");
+            utility.error("An error occurred while requesting clans");
+            e.printStackTrace();
         }
     }
 

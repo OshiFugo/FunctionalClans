@@ -1,6 +1,6 @@
 name: FunctionalClans
 version: '${project.version}'
-main: ru.oshifugo.functionalclans.Main
+main: ru.oshifugo.functionalclans.FunctionalClans
 api-version: 1.13
 authors: [ OshiFugo ]
 description: I'm in charge of the clan system. Only shhh....

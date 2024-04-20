@@ -1,6 +1,6 @@
 package ru.oshifugo.functionalclans.sql;
 
-import ru.oshifugo.functionalclans.Main;
+import ru.oshifugo.functionalclans.FunctionalClans;
 import ru.oshifugo.functionalclans.utility;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -120,7 +120,7 @@ public class Clan {
         return String.valueOf(getlistClans().size());
     }
     public static String getRoleName(String clanName, Integer rank) {
-        if (rank == 5) { return utility.hex(utility.lang(Main.instance.getServer().getPlayer(clanName), "main.leader")); }
+        if (rank == 5) { return utility.hex(utility.lang(FunctionalClans.getInstance().getServer().getPlayer(clanName), "main.leader")); }
         return SQLiteUtility.clan_role.get(clanName + "_" + rank)[1];
     }
     public static Integer getRank(String memberName) {

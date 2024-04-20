@@ -118,18 +118,18 @@ public class utility {
     }
 
     public static String config(String cfg) {
-        cfg = Main.instance.getConfig().getString(cfg);
+        cfg = FunctionalClans.getInstance().getConfig().getString(cfg);
         return cfg;
     }
 
     public static boolean configBoolean(String cfg) {
         boolean bool;
-        bool = Main.instance.getConfig().getBoolean(cfg);
+        bool = FunctionalClans.getInstance().getConfig().getBoolean(cfg);
         return bool;
     }
 
     public static String[] configList(String cfg) {
-        List<String> myArray =  Main.instance.getConfig().getStringList(cfg);
+        List<String> myArray =  FunctionalClans.getInstance().getConfig().getStringList(cfg);
         String[] response = myArray.toArray(new String[myArray.size()]);
         int i = 0;
         for (String element : myArray) {
@@ -162,12 +162,12 @@ public class utility {
 
     }
     public static String lang(CommandSender sender, String cfg) {
-        if (Files.exists(Paths.get(Main.instance.getDataFolder() + "/message.yml"))) {
-            File langYml = new File(Main.instance.getDataFolder()+"/message.yml");
+        if (Files.exists(Paths.get(FunctionalClans.getInstance().getDataFolder() + "/message.yml"))) {
+            File langYml = new File(FunctionalClans.getInstance().getDataFolder()+"/message.yml");
             FileConfiguration langConfig = YamlConfiguration.loadConfiguration(langYml);
             if (langConfig.getString(utility.config("lang") + "." + cfg) == null) {
                 File temp = new File("temp");
-                InputStream stream = Main.instance.getResource("message.yml");
+                InputStream stream = FunctionalClans.getInstance().getResource("message.yml");
                 assert stream != null;
                 try {
                     copyInputStreamToFile(stream, temp);
@@ -198,17 +198,17 @@ public class utility {
 //        return cfg;
 //    }
     public static void info(Object text) {
-        Bukkit.getConsoleSender().sendMessage(hex("[" + Main.instance.getName() + "] " + text));
+        Bukkit.getConsoleSender().sendMessage(hex("[" + FunctionalClans.getInstance().getName() + "] " + text));
     }
     public static void warning(Object text) {
-        Bukkit.getConsoleSender().sendMessage(utility.hex("&6[" + Main.instance.getName() + "] [warning]" + text));
+        Bukkit.getConsoleSender().sendMessage(utility.hex("&6[" + FunctionalClans.getInstance().getName() + "] [warning]" + text));
     }
     public static void error(Object text) {
-        Bukkit.getConsoleSender().sendMessage(hex("&4[" + Main.instance.getName() + "] [ERROR] " + text));
+        Bukkit.getConsoleSender().sendMessage(hex("&4[" + FunctionalClans.getInstance().getName() + "] [ERROR] " + text));
     }
     public static void debug(Object text) {
-        if (Main.instance.getConfig().getBoolean("debug")) {
-            Bukkit.getConsoleSender().sendMessage(hex("&e[" + Main.instance.getName() + "] [Debug] " + text));
+        if (FunctionalClans.getInstance().getConfig().getBoolean("debug")) {
+            Bukkit.getConsoleSender().sendMessage(hex("&e[" + FunctionalClans.getInstance().getName() + "] [Debug] " + text));
         }
     }
     public static String hex(String msg) {

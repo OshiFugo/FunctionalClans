@@ -3,11 +3,7 @@ package ru.oshifugo.functionalclans.command;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
-import ru.oshifugo.functionalclans.GUITranslate;
-import ru.oshifugo.functionalclans.Main;
-
-import java.io.File;
+import ru.oshifugo.functionalclans.FunctionalClans;
 
 public class GUITranslatePlaceholder {
     OfflinePlayer player;
@@ -35,7 +31,7 @@ public class GUITranslatePlaceholder {
 
     public String get(String path, boolean usePrefix) {
         if (usePrefix) {
-            String prefix = Main.instance.getConfig().getString("prefix");
+            String prefix = FunctionalClans.getInstance().getConfig().getString("prefix");
             return prefix.replace("&", "§") + get(path);
         }
         return get(path);

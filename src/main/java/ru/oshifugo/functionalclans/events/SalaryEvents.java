@@ -3,16 +3,13 @@ package ru.oshifugo.functionalclans.events;
 import me.ford.salarymanager.OnSalaryEvent;
 import me.ford.salarymanager.SalaryReportPaymentsEvent;
 import org.bukkit.Bukkit;
-import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import ru.oshifugo.functionalclans.GUITranslate;
-import ru.oshifugo.functionalclans.Main;
 import ru.oshifugo.functionalclans.command.GUITranslatePlaceholder;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
-import ru.oshifugo.functionalclans.sql.SQLiteUtility;
 
 import java.util.EventListener;
 import java.util.HashMap;
