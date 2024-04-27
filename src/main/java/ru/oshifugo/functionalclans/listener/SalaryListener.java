@@ -1,4 +1,4 @@
-package ru.oshifugo.functionalclans.events;
+package ru.oshifugo.functionalclans.listener;
 
 import me.ford.salarymanager.OnSalaryEvent;
 import me.ford.salarymanager.SalaryReportPaymentsEvent;
@@ -11,27 +11,15 @@ import ru.oshifugo.functionalclans.command.GUITranslatePlaceholder;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
 
-import java.util.EventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SalaryEvents implements EventListener, Listener {
-    Map<String, Integer> clansTaxes;
-    public SalaryEvents() {
-        clansTaxes = new HashMap<>();
-    }
-    private void addTax(String clan, int tax) {
-        int clanTaxesNow = 0;
-        if (clansTaxes.containsKey(clan)){
-            clanTaxesNow = clansTaxes.get(clan);
-        }
-        clansTaxes.put(clan, clanTaxesNow + tax);
-    }
-    private void clearTaxes() {
-        clansTaxes.clear();
-    }
+public class SalaryListener implements Listener {
+
+    private final Map<String, Integer> clansTaxes = new HashMap<>();
+
     @EventHandler
-    public void onSalaryEvent(OnSalaryEvent event) {
+    private void onSalaryEvent(OnSalaryEvent event) {
         String clanName = Member.getClan(event.getPlayer().getName());
         if (clanName == null) return;
         int tax = Clan.getTax(clanName);
@@ -53,8 +41,8 @@ public class SalaryEvents implements EventListener, Listener {
     }
 
     @EventHandler
-//    §cВ казну клана §b%s§c упало: §b%d₴
-    public void  onSalaryReport(SalaryReportPaymentsEvent event) {
+    //    §cВ казну клана §b%s§c упало: §b%d₴
+    private void onSalaryReportPaymentsEvent(SalaryReportPaymentsEvent event) {
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
             String clanName = Member.getClan(player.getName());
             if (clanName == null) continue;
@@ -68,5 +56,18 @@ public class SalaryEvents implements EventListener, Listener {
         }
         clearTaxes();
     }
+
+    private void addTax(String clan, int tax) {
+        int clanTaxesNow = 0;
+        if (clansTaxes.containsKey(clan)){
+            clanTaxesNow = clansTaxes.get(clan);
+        }
+        clansTaxes.put(clan, clanTaxesNow + tax);
+    }
+
+    private void clearTaxes() {
+        clansTaxes.clear();
+    }
+
 }
 

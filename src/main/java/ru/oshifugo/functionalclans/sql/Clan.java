@@ -1,11 +1,14 @@
 package ru.oshifugo.functionalclans.sql;
 
-import ru.oshifugo.functionalclans.FunctionalClans;
-import ru.oshifugo.functionalclans.utility;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import ru.oshifugo.functionalclans.FunctionalClans;
+import ru.oshifugo.functionalclans.Utility;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Random;
+import java.util.concurrent.CompletableFuture;
 
 public class Clan {
     public static String getClanRealName(String clanName) {
@@ -120,7 +123,7 @@ public class Clan {
         return String.valueOf(getlistClans().size());
     }
     public static String getRoleName(String clanName, Integer rank) {
-        if (rank == 5) { return utility.hex(utility.lang(FunctionalClans.getInstance().getServer().getPlayer(clanName), "main.leader")); }
+        if (rank == 5) { return Utility.hex(Utility.lang(FunctionalClans.getInstance().getServer().getPlayer(clanName), "main.leader")); }
         return SQLiteUtility.clan_role.get(clanName + "_" + rank)[1];
     }
     public static Integer getRank(String memberName) {
@@ -218,13 +221,13 @@ public class Clan {
     }
     public static void setType(String clanName, Integer type) {
         SQLiteUtility.clans.get(clanName)[4] = String.valueOf(type);
-        SQLite.execute("UPDATE clan_list SET type = ? WHERE name = ?", String.valueOf(type), clanName);
+        CompletableFuture.runAsync(() -> SQLite.execute("UPDATE clan_list SET type = ? WHERE name = ?", String.valueOf(type), clanName));
 
     }
     public static void setPVP(String clanName, boolean isActive) {
         String raw = isActive ? "1" : "0";
         SQLiteUtility.clans.get(clanName)[20] = raw;
-        SQLite.execute("UPDATE clan_list SET pvp = ? WHERE name = ?", raw, clanName);
+        CompletableFuture.runAsync(() -> SQLite.execute("UPDATE clan_list SET pvp = ? WHERE name = ?", raw, clanName));
     }
     public static void setLeader(String clanName, String newLeader) {
         String leader = getLeader(clanName);
@@ -269,7 +272,7 @@ public class Clan {
         String msg = "";
         for (int i = 0; i < Member.getMembers(clanName).size(); i++) {
             if (Bukkit.getOfflinePlayer(Member.getMembers(clanName).get(i)).isOnline()) {
-                Bukkit.getPlayer(Member.getMembers(clanName).get(i)).sendMessage(utility.hex("&f[&7@&f] " + Member.getRankName(clanName, memberName) + " &7[" + Bukkit.getPlayer(memberName).getName() + "&7]: &f" + message));
+                Bukkit.getPlayer(Member.getMembers(clanName).get(i)).sendMessage(Utility.hex("&f[&7@&f] " + Member.getRankName(clanName, memberName) + " &7[" + Bukkit.getPlayer(memberName).getName() + "&7]: &f" + message));
             }
         }
     }
@@ -277,7 +280,7 @@ public class Clan {
         String msg = "";
         for (int i = 0; i < Member.getMembers(clanName).size(); i++) {
             if (Bukkit.getOfflinePlayer(Member.getMembers(clanName).get(i)).isOnline()) {
-                Bukkit.getPlayer(Member.getMembers(clanName).get(i)).sendMessage(utility.hex("&f[&4@&f] " + Member.getRankName(clanName, memberName) + " &7[" + Bukkit.getPlayer(memberName).getName() + "&7]: &a" + message));
+                Bukkit.getPlayer(Member.getMembers(clanName).get(i)).sendMessage(Utility.hex("&f[&4@&f] " + Member.getRankName(clanName, memberName) + " &7[" + Bukkit.getPlayer(memberName).getName() + "&7]: &a" + message));
             }
         }
     }
@@ -285,7 +288,7 @@ public class Clan {
         String msg = "";
         for (int i = 0; i < Member.getMembers(clanName).size(); i++) {
             if (Bukkit.getOfflinePlayer(Member.getMembers(clanName).get(i)).isOnline()) {
-                Bukkit.getPlayer(Member.getMembers(clanName).get(i)).sendMessage(utility.hex("&f[&c@&f]: " + message));
+                Bukkit.getPlayer(Member.getMembers(clanName).get(i)).sendMessage(Utility.hex("&f[&c@&f]: " + message));
             }
         }
     }

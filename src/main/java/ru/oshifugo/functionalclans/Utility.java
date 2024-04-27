@@ -12,15 +12,21 @@ import org.bukkit.entity.Player;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class utility {
+public class Utility {
 //    public static String ColorTratslate(String msg) {
 //        msg = ChatColor.translateAlternateColorCodes('&', msg);
 //        return msg;
@@ -165,14 +171,14 @@ public class utility {
         if (Files.exists(Paths.get(FunctionalClans.getInstance().getDataFolder() + "/message.yml"))) {
             File langYml = new File(FunctionalClans.getInstance().getDataFolder()+"/message.yml");
             FileConfiguration langConfig = YamlConfiguration.loadConfiguration(langYml);
-            if (langConfig.getString(utility.config("lang") + "." + cfg) == null) {
+            if (langConfig.getString(Utility.config("lang") + "." + cfg) == null) {
                 File temp = new File("temp");
                 InputStream stream = FunctionalClans.getInstance().getResource("message.yml");
                 assert stream != null;
                 try {
                     copyInputStreamToFile(stream, temp);
                     langConfig = YamlConfiguration.loadConfiguration(temp);
-                    cfg = langConfig.getString(utility.config("lang") + "."  + cfg);
+                    cfg = langConfig.getString(Utility.config("lang") + "."  + cfg);
                     if (cfg == null) {
                         cfg = " There was an error in message.yml. The required key could not be found. Recheck the values.";
                     }
@@ -180,7 +186,7 @@ public class utility {
                     cfg = " There was an error in message.yml. The required key could not be found. Recheck the values.";
                 }
 
-            } else cfg = langConfig.getString(utility.config("lang") + "."  + cfg);
+            } else cfg = langConfig.getString(Utility.config("lang") + "."  + cfg);
         } else cfg = " Could not find message.yml file";
         if (!(sender instanceof Player)) {
             return cfg;
@@ -201,7 +207,7 @@ public class utility {
         Bukkit.getConsoleSender().sendMessage(hex("[" + FunctionalClans.getInstance().getName() + "] " + text));
     }
     public static void warning(Object text) {
-        Bukkit.getConsoleSender().sendMessage(utility.hex("&6[" + FunctionalClans.getInstance().getName() + "] [warning]" + text));
+        Bukkit.getConsoleSender().sendMessage(Utility.hex("&6[" + FunctionalClans.getInstance().getName() + "] [warning]" + text));
     }
     public static void error(Object text) {
         Bukkit.getConsoleSender().sendMessage(hex("&4[" + FunctionalClans.getInstance().getName() + "] [ERROR] " + text));
@@ -237,14 +243,14 @@ public class utility {
     public static TextComponent page_msg(CommandSender sender, String[] args, int page, int max_line, int count) {
         TextComponent msg = new TextComponent("");
         if (count == 0) {
-            msg.addExtra(utility.hex(utility.lang(sender, "pages.no_values")));
+            msg.addExtra(Utility.hex(Utility.lang(sender, "pages.no_values")));
             return msg;
         }
         int end_count = page * max_line;
         int start_count = end_count - max_line;
         int page_max = (int) Math.ceil((double) count / max_line);
         if (count < start_count) {
-            msg.addExtra(utility.hex(utility.lang(sender, "pages.no_page")));
+            msg.addExtra(Utility.hex(Utility.lang(sender, "pages.no_page")));
             return msg;
         }
         TextComponent back = new TextComponent(), next = new TextComponent();
@@ -253,15 +259,15 @@ public class utility {
             cmd = "/clan list %s";
         }
         if (start_count - 1 > 0) {
-            back.addExtra(utility.hex(utility.lang(sender, "pages.back")));
+            back.addExtra(Utility.hex(Utility.lang(sender, "pages.back")));
             back.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, String.format(cmd, String.valueOf(page - 1))));
         }
         if (end_count <= count) {
-            next.addExtra(utility.hex(utility.lang(sender, "pages.next")));
+            next.addExtra(Utility.hex(Utility.lang(sender, "pages.next")));
             next.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, String.format(cmd, String.valueOf(page + 1))));
         }
         msg.addExtra(back);
-        msg.addExtra(utility.hex(String.format(utility.lang(sender,"pages.page"), page, page_max)));
+        msg.addExtra(Utility.hex(String.format(Utility.lang(sender,"pages.page"), page, page_max)));
         msg.addExtra(next);
         return msg;
     }

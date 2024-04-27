@@ -1,4 +1,4 @@
-package ru.oshifugo.functionalclans.events;
+package ru.oshifugo.functionalclans.listener;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -10,11 +10,11 @@ import ru.oshifugo.functionalclans.FunctionalClans;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
 
-import java.util.EventListener;
+public class PlayerJoinListener implements Listener {
 
-public class PlayerJoin implements EventListener, Listener {
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent e) {
+    private void onPlayerJoin(PlayerJoinEvent e) {
+
         FileConfiguration config = FunctionalClans.getInstance().getConfig();
         if (!config.getBoolean("welcome-message.allow")) {
             return;
@@ -30,5 +30,7 @@ public class PlayerJoin implements EventListener, Listener {
             message = PlaceholderAPI.setPlaceholders(p, message);
         }
         p.sendMessage(message);
+
     }
+
 }

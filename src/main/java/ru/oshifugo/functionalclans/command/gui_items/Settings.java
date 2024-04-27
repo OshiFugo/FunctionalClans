@@ -5,10 +5,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.jetbrains.annotations.NotNull;
+import ru.oshifugo.functionalclans.Utility;
 import ru.oshifugo.functionalclans.command.ClanGUI;
 import ru.oshifugo.functionalclans.command.gui_items.settings.*;
 import ru.oshifugo.functionalclans.sql.Clan;
-import ru.oshifugo.functionalclans.utility;
 
 public class Settings extends ItemsBase {
 
@@ -78,7 +78,7 @@ public class Settings extends ItemsBase {
     public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent inventoryClickEvent, String id){
         switch (id) {
             case "message":
-                if (!utility.hasAnyOfPermsOrLeader(player, "fc.message"))
+                if (!Utility.hasAnyOfPermsOrLeader(player, "fc.message"))
                 {
                     player.sendMessage(getTranslate().get("other.perm-lack", true));
                     break;
@@ -87,7 +87,7 @@ public class Settings extends ItemsBase {
                 getUi().displayAnvil(getTranslate().get("settings.message.name"), newMessage::editCallback);
                 break;
             case "status":
-                if (!utility.hasAnyOfPermsOrLeader(player, "fc.status"))
+                if (!Utility.hasAnyOfPermsOrLeader(player, "fc.status"))
                 {
                     player.sendMessage(getTranslate().get("other.perm-lack", true));
                     break;
@@ -96,7 +96,7 @@ public class Settings extends ItemsBase {
                 getUi().displayAnvil(getTranslate().get("settings.status.name"), newStatus::editCallback);
                 break;
             case "social":
-                if (!utility.hasAnyOfPermsOrLeader(player, "fc.social"))
+                if (!Utility.hasAnyOfPermsOrLeader(player, "fc.social"))
                 {
                     player.sendMessage(getTranslate().get("other.perm-lack", true));
                     break;
@@ -105,7 +105,7 @@ public class Settings extends ItemsBase {
                 getUi().displayAnvil(getTranslate().get("settings.social.name"), newSocial::editCallback);
                 break;
             case "rename":
-                if (!utility.hasAnyOfPermsOrLeader(player, "fc.rename"))
+                if (!Utility.hasAnyOfPermsOrLeader(player, "fc.rename"))
                 {
                     player.sendMessage(getTranslate().get("other.perm-lack", true));
                     break;
@@ -115,7 +115,7 @@ public class Settings extends ItemsBase {
                 break;
             case "type":
 
-                if (!utility.hasAnyOfPermsOrLeader(player, "fc.type"))
+                if (!Utility.hasAnyOfPermsOrLeader(player, "fc.type"))
                 {
                     player.sendMessage(getTranslate().get("other.perm-lack", true));
                     break;
@@ -139,7 +139,7 @@ public class Settings extends ItemsBase {
                 break;
             case "pvp":
 
-                if (!utility.hasAnyOfPermsOrLeader(player, "fc.mpvp"))
+                if (!Utility.hasAnyOfPermsOrLeader(player, "fc.mpvp"))
                 {
                     player.sendMessage(getTranslate().get("other.perm-lack", true));
                     break;
@@ -157,7 +157,7 @@ public class Settings extends ItemsBase {
                 // 0 - closed
             case "role-manager":
 //                kick join perms, withdraw, demote_promote, announcments, join allieance, dissolve the alliance
-                if (utility.hasAnyOfPermsOrLeader(player, "fc.setrole")) {
+                if (Utility.hasAnyOfPermsOrLeader(player, "fc.setrole")) {
                     RoleManager.display(player, getUi());
                 }
                 break;

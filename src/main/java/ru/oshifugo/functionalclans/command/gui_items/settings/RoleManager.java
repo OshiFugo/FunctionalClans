@@ -6,13 +6,13 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.jetbrains.annotations.NotNull;
 import ru.oshifugo.functionalclans.GUITranslate;
+import ru.oshifugo.functionalclans.Utility;
 import ru.oshifugo.functionalclans.command.ClanGUI;
 import ru.oshifugo.functionalclans.command.gui_items.ItemsBase;
 import ru.oshifugo.functionalclans.command.gui_items.Root;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
 import ru.oshifugo.functionalclans.sql.SQLiteUtility;
-import ru.oshifugo.functionalclans.utility;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.gui.structure.Structure;
 
@@ -27,7 +27,7 @@ public class RoleManager extends ItemsBase {
     public static void display(Player player, ClanGUI ui) {
         String clanName = Member.getClan(player.getName());
         if (clanName == null) {
-            utility.debug("displayRow -> clanName == 0");
+            Utility.debug("displayRow -> clanName == 0");
             return;
         }
 //        ranks.put("fc.kick", 2);
@@ -165,7 +165,7 @@ public class RoleManager extends ItemsBase {
 
     @Override
     public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent inventoryClickEvent, String id) {
-        if (!utility.hasAnyOfPermsOrLeader(player, "fc.setrole")) {
+        if (!Utility.hasAnyOfPermsOrLeader(player, "fc.setrole")) {
             player.sendMessage(getTranslate().get("other.perm-lack", true));
             return;
         }

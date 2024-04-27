@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import ru.oshifugo.functionalclans.command.subcommands.topCMD;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -46,19 +47,19 @@ public class Expansion extends PlaceholderExpansion {
     public String space(String parameter, String type) { // Если не ошибаюсь это выводит когда все хорошо
         type = "fc_" + type;
         if (Arrays.asList(FunctionalClans.placeholders_config.get("placeholder_list")).contains(type)) {
-            return utility.hex(FunctionalClans.placeholders_config.get("settings")[1] + parameter + FunctionalClans.placeholders_config.get("settings")[2]);
+            return Utility.hex(FunctionalClans.placeholders_config.get("settings")[1] + parameter + FunctionalClans.placeholders_config.get("settings")[2]);
         } else if (FunctionalClans.placeholders_config.get("settings")[0].equalsIgnoreCase("true")) {
-            return utility.hex(" " + parameter + " ");
-        } else return utility.hex(parameter);
+            return Utility.hex(" " + parameter + " ");
+        } else return Utility.hex(parameter);
     }
 
     public String placeholderReturn(String type) {
         type = "fc_" + type;
         if (Arrays.asList(FunctionalClans.placeholders_config.get("placeholder_null_list")).contains(type)) {
-            return utility.hex(FunctionalClans.placeholders_config.get("settings")[4]);
+            return Utility.hex(FunctionalClans.placeholders_config.get("settings")[4]);
         } else if (type.equals("fc_null")) {
-            return utility.hex(FunctionalClans.placeholders_config.get("settings")[3]);
-        } else return utility.hex(FunctionalClans.placeholders_config.get("settings")[3]);
+            return Utility.hex(FunctionalClans.placeholders_config.get("settings")[3]);
+        } else return Utility.hex(FunctionalClans.placeholders_config.get("settings")[3]);
     }
 
     public boolean isOfflinePlayerExists(String playerName) {
@@ -124,18 +125,18 @@ public class Expansion extends PlaceholderExpansion {
                 return placeholderReturn("clan_type_uid_");
             } else if (params.contains("clan_type_uid_")) {
                 if (Clan.getType(Clan.getClanNameUID(params.substring(params.lastIndexOf("_") + 1))) == 0) {
-                    return space(utility.hex(utility.lang(onlinePlayer,"main.closed")), "clan_type_uid_");
+                    return space(Utility.hex(Utility.lang(onlinePlayer,"main.closed")), "clan_type_uid_");
                 } else {
-                    return space(utility.hex(utility.lang(onlinePlayer,"main.open")), "clan_type_uid_");
+                    return space(Utility.hex(Utility.lang(onlinePlayer,"main.open")), "clan_type_uid_");
                 }
             }
             if (Member.getClan(player.getName()) == null) {
                 return placeholderReturn("player_clan_type");
             }
             if (Clan.getType(Member.getClan(player.getName())) == 0) {
-                return space(utility.hex(utility.lang(onlinePlayer,"main.closed")), "player_clan_type");
+                return space(Utility.hex(Utility.lang(onlinePlayer,"main.closed")), "player_clan_type");
             } else {
-                return space(utility.hex(utility.lang(onlinePlayer,"main.open")), "player_clan_type");
+                return space(Utility.hex(Utility.lang(onlinePlayer,"main.open")), "player_clan_type");
             }
         } else if (params.contains("player_clan_tax")|| params.contains("clan_tax_uid_")) {
             if (Clan.hasUID(params.substring(params.lastIndexOf("_") + 1)) == true && params.contains("clan_tax_uid_")) {
@@ -156,7 +157,7 @@ public class Expansion extends PlaceholderExpansion {
             if (Member.getClan(player.getName()) == null) {
                 return placeholderReturn("player_clan_status");
             }
-            return space(utility.hex(Clan.getStatus(Member.getClan(player.getName()))), "player_clan_status");
+            return space(Utility.hex(Clan.getStatus(Member.getClan(player.getName()))), "player_clan_status");
         } else if (params.contains("player_clan_social") || params.contains("clan_social_uid_")) {
             if (Clan.hasUID(params.substring(params.lastIndexOf("_") + 1)) == true && params.contains("clan_social_uid_")) {
                 return placeholderReturn("clan_social_uid_");
@@ -166,24 +167,24 @@ public class Expansion extends PlaceholderExpansion {
             if (Member.getClan(player.getName()) == null) {
                 return placeholderReturn("player_clan_social");
             }
-            return space(utility.hex(Clan.getSocial(Member.getClan(player.getName()))), "player_clan_social");
+            return space(Utility.hex(Clan.getSocial(Member.getClan(player.getName()))), "player_clan_social");
         } else if (params.contains("player_clan_verification") || params.contains("clan_verification_uid_")) {
             if (Clan.hasUID(params.substring(params.lastIndexOf("_") + 1)) == true && params.contains("clan_verification_uid_")) {
                 return placeholderReturn("clan_verification_uid_");
             } else if (params.contains("clan_verification_uid_")) {
                 if (Clan.getVerification(Clan.getClanNameUID(params.substring(params.lastIndexOf("_") + 1)))) {
-                    return space(utility.hex(utility.lang(onlinePlayer,"main.true")), "clan_verification_uid_");
+                    return space(Utility.hex(Utility.lang(onlinePlayer,"main.true")), "clan_verification_uid_");
                 } else {
-                    return space(utility.hex(utility.lang(onlinePlayer,"main.false")), "clan_verification_uid_");
+                    return space(Utility.hex(Utility.lang(onlinePlayer,"main.false")), "clan_verification_uid_");
                 }
             }
             if (Member.getClan(player.getName()) == null) {
                 return placeholderReturn("player_clan_verification");
             }
             if (Clan.getVerification(Member.getClan(player.getName()))) {
-                return space(utility.hex(utility.lang(onlinePlayer,"main.true")), "player_clan_verification");
+                return space(Utility.hex(Utility.lang(onlinePlayer,"main.true")), "player_clan_verification");
             } else {
-                return space(utility.hex(utility.lang(onlinePlayer,"main.false")), "player_clan_verification");
+                return space(Utility.hex(Utility.lang(onlinePlayer,"main.false")), "player_clan_verification");
             }
         } else if (params.contains("player_clan_max-player") || params.contains("clan_max-player_uid_")) {
             if (Clan.hasUID(params.substring(params.lastIndexOf("_") + 1)) == true && params.contains("clan_max-player_uid_")) {
@@ -219,12 +220,12 @@ public class Expansion extends PlaceholderExpansion {
             if (Clan.hasUID(params.substring(params.lastIndexOf("_") + 1)) == true && params.contains("clan_message_uid_")) {
                 return placeholderReturn("clan_message_uid_");
             } else if (params.contains("clan_message_uid_")) {
-                return space(utility.hex(Clan.getMessage(Clan.getClanNameUID(params.substring(params.lastIndexOf("_") + 1)))), "clan_message_uid_");
+                return space(Utility.hex(Clan.getMessage(Clan.getClanNameUID(params.substring(params.lastIndexOf("_") + 1)))), "clan_message_uid_");
             }
             if (Member.getClan(player.getName()) == null) {
                 return placeholderReturn("player_clan_message");
             }
-            return space(utility.hex(Clan.getMessage(Member.getClan(player.getName()))), "player_clan_message");
+            return space(Utility.hex(Clan.getMessage(Member.getClan(player.getName()))), "player_clan_message");
         } else if (params.contains("player_clan_home-world") || params.contains("clan_home-world_uid_")) {
             if (Clan.hasUID(params.substring(params.lastIndexOf("_") + 1)) == true && params.contains("clan_home-world_uid_")) {
                 return placeholderReturn("clan_home-world_uid_");

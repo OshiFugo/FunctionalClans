@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import ru.oshifugo.functionalclans.GUITranslate;
+import ru.oshifugo.functionalclans.Utility;
 import ru.oshifugo.functionalclans.command.gui_items.Root;
 import ru.oshifugo.functionalclans.command.gui_items.Settings;
 import ru.oshifugo.functionalclans.command.gui_items.settings.Message;
@@ -12,7 +13,6 @@ import ru.oshifugo.functionalclans.command.gui_items.settings.Social;
 import ru.oshifugo.functionalclans.command.gui_items.settings.Status;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
-import ru.oshifugo.functionalclans.utility;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.gui.structure.Structure;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
@@ -40,7 +40,7 @@ public class ClanGUI {
         String version = Bukkit.getServer().getClass().getPackage().getName();
         String[] ver = version.split("\\.");
         if (ver.length < 4) {
-            utility.debug("ClanGUI -> Unknown version!");
+            Utility.debug("ClanGUI -> Unknown version!");
             return true;
         }
         return Integer.parseInt(ver[3].split("_")[1]) >= 14;

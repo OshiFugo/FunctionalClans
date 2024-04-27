@@ -10,10 +10,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import ru.oshifugo.functionalclans.FunctionalClans;
+import ru.oshifugo.functionalclans.Utility;
 import ru.oshifugo.functionalclans.command.ClanGUI;
 import ru.oshifugo.functionalclans.command.gui_items.ItemsBase;
 import ru.oshifugo.functionalclans.sql.Clan;
-import ru.oshifugo.functionalclans.utility;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
 
 import java.util.Arrays;
@@ -65,7 +65,7 @@ public class Rename extends ItemsBase{
             case "new_message":
                 FileConfiguration config = FunctionalClans.getInstance().getConfig();
                 player.setLevel(player.getLevel());
-                if (!utility.hasAnyOfPermsOrLeader(player, "fc.rename")) {
+                if (!Utility.hasAnyOfPermsOrLeader(player, "fc.rename")) {
                     player.sendMessage(getTranslate().get("other.perm-lack", true));
                     break;
                 }
@@ -85,7 +85,7 @@ public class Rename extends ItemsBase{
                             .replace("{max}", String.valueOf(maxName)));
                     break;
                 }
-                if (utility.getRawClan(renamed) != null) {
+                if (Utility.getRawClan(renamed) != null) {
                     player.sendMessage(getTranslate().get("rename.used-name", true));
                     break;
                 }

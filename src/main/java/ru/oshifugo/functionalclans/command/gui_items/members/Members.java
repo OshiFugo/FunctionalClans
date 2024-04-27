@@ -15,20 +15,18 @@ import ru.oshifugo.functionalclans.command.gui_items.ItemsBase;
 import ru.oshifugo.functionalclans.command.gui_items.Root;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
-import ru.oshifugo.functionalclans.utility;
 import xyz.xenondevs.invui.gui.Gui;
 import xyz.xenondevs.invui.gui.PagedGui;
 import xyz.xenondevs.invui.gui.structure.Markers;
 import xyz.xenondevs.invui.item.Item;
-import xyz.xenondevs.invui.item.builder.ItemBuilder;
 import xyz.xenondevs.invui.item.impl.SimpleItem;
 import xyz.xenondevs.invui.window.Window;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import static org.junit.Assert.assertThat;
-import static ru.oshifugo.functionalclans.utility.hasAnyOfPermsOrLeader;
+import static ru.oshifugo.functionalclans.Utility.hasAnyOfPermsOrLeader;
 
 public class Members extends ItemsBase {
 
