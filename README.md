@@ -6,23 +6,13 @@ FunctionalClans — this is a system that allows players to create clans and uni
 ![minecraft_plugin](https://github.com/OshiFugo/FunctionalClans/assets/57602929/e74f4892-dda9-410e-9031-9829861e4f4d)
 
 
-
-# SalaryManager
-![image](https://github.com/OshiFugo/FunctionalClans/assets/57602929/f9d7fcee-bc33-477e-9075-97ca7336a0ac)
-## Look there for SalaryManager plugin help and [DOWNLOAD](https://github.com/bezumnui/SalaryManagerMod/releases):
-###  https://github.com/bezumnui/SalaryManagerMod
-
-
-## Firstly, if you want to edit source code you should to compile dependencies:
-
-1. Download source from `https://github.com/bezumnui/SalaryManagerMod`
-
-2. Compile them via mvn clean install
-
-3. Do whatever you want
+# Plugin development has been temporarily suspended
+The official development and support of the plugin has been temporarily frozen due to certain events in the developer's life.
+However, unofficial plugin updates from craftsmen who care about the plugin may be released in the discord
+https://discord.com/invite/9EHKbdTGAR
 
 #
-If you lost your config:
+If you lost your config (outdated):
 
 ```yml
 // config.yml
