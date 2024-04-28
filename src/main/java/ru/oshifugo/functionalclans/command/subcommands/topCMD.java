@@ -3,15 +3,16 @@ package ru.oshifugo.functionalclans.command.subcommands;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.CommandSender;
+import ru.oshifugo.functionalclans.Utility;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
-import ru.oshifugo.functionalclans.utility;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class topCMD {
-    public static String prefix = utility.config("prefix");
+    public static String prefix = Utility.config("prefix");
     private String name;
     private int count;
 
@@ -34,7 +35,7 @@ public class topCMD {
         if (args[0].equals("top") || args[0].equals("stats")) {
             cash = sorting(sender, args);
             if (cash == null) {
-                sender.sendMessage(utility.hex(prefix + utility.lang(sender,"common_errors.no_args")));
+                sender.sendMessage(Utility.hex(prefix + Utility.lang(sender,"common_errors.no_args")));
                 return;
             }
         }
@@ -48,10 +49,10 @@ public class topCMD {
         page = String.valueOf(Integer.parseInt(page) * 7 - 7);
         try {
             if (args[2].equals("min")) {
-                arrow = utility.lang(sender,"top.text_12");
-            } else arrow = utility.lang(sender,"top.text_11");
+                arrow = Utility.lang(sender,"top.text_12");
+            } else arrow = Utility.lang(sender,"top.text_11");
         } catch (Exception e) {
-            arrow = utility.lang(sender,"top.text_11");
+            arrow = Utility.lang(sender,"top.text_11");
         }
         try {
             function = args[2];
@@ -71,58 +72,58 @@ public class topCMD {
                 bool[1] = false;
             }
         } catch (Exception e) {
-            sender.sendMessage(utility.hex(prefix + utility.lang(sender,"common_errors.no_page")));
+            sender.sendMessage(Utility.hex(prefix + Utility.lang(sender,"common_errors.no_page")));
             return;
         }
         TextComponent message = new TextComponent();
         switch (args[0]) {
-            case "top": message = new TextComponent(utility.hex(utility.lang(sender,"top.text_1"))); break;
-            case "stats": message = new TextComponent(utility.hex(utility.lang(sender,"top.text_2"))); break;
+            case "top": message = new TextComponent(Utility.hex(Utility.lang(sender,"top.text_1"))); break;
+            case "stats": message = new TextComponent(Utility.hex(Utility.lang(sender,"top.text_2"))); break;
             default: break;
         }
         switch (type) {
-            case "rating": message.addExtra(utility.hex(utility.lang(sender,"top.text_3") + " " + arrow + "\n")); break;
-            case "members": message.addExtra(utility.hex(utility.lang(sender,"top.text_4") + " " + arrow + "\n")); break;
-            case "kills": message.addExtra(utility.hex(utility.lang(sender,"top.text_5") + " " + arrow + "\n")); break;
-            case "deaths": message.addExtra(utility.hex(utility.lang(sender,"top.text_6") + " " + arrow + "\n")); break;
-            case "kdr": message.addExtra(utility.hex(utility.lang(sender,"top.text_7") + " " + arrow + "\n")); break;
+            case "rating": message.addExtra(Utility.hex(Utility.lang(sender,"top.text_3") + " " + arrow + "\n")); break;
+            case "members": message.addExtra(Utility.hex(Utility.lang(sender,"top.text_4") + " " + arrow + "\n")); break;
+            case "kills": message.addExtra(Utility.hex(Utility.lang(sender,"top.text_5") + " " + arrow + "\n")); break;
+            case "deaths": message.addExtra(Utility.hex(Utility.lang(sender,"top.text_6") + " " + arrow + "\n")); break;
+            case "kdr": message.addExtra(Utility.hex(Utility.lang(sender,"top.text_7") + " " + arrow + "\n")); break;
             default: break;
         }
         for (int i = Integer.parseInt(page), count = Integer.parseInt(page) + 1; i < Integer.parseInt(page) + 7; i++, count++) {
             try {
-                message.addExtra(utility.hex("&f" + String.valueOf(count) + ". " + String.valueOf(cash.get(i).getName() + "&f, &6" + cash.get(i).getCount() + "\n")));
+                message.addExtra(Utility.hex("&f" + String.valueOf(count) + ". " + String.valueOf(cash.get(i).getName() + "&f, &6" + cash.get(i).getCount() + "\n")));
             } catch (Exception e) {
                 i = Integer.parseInt(page) + 7;
             }
         }
         if (bool[0] == true) {
-            TextComponent msg = new TextComponent(utility.hex(utility.lang(sender,"top.text_8")));
+            TextComponent msg = new TextComponent(Utility.hex(Utility.lang(sender,"top.text_8")));
             if (bool[1] == true) {
-                msg.addExtra(utility.hex(String.format(" &f|&a %s/%s", String.valueOf((Integer.parseInt(page) + 7) / 7), String.valueOf((int) Math.ceil((double) cash.size() / 7)))));
+                msg.addExtra(Utility.hex(String.format(" &f|&a %s/%s", String.valueOf((Integer.parseInt(page) + 7) / 7), String.valueOf((int) Math.ceil((double) cash.size() / 7)))));
             }
             msg.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/clan " + args[0] + " " + type + " " + function + " " + String.valueOf((Integer.parseInt(page) + 7) / 7 - 1)));
             message.addExtra(msg);
         } else {
-            TextComponent msg = new TextComponent(utility.hex(String.format(utility.lang(sender,"pages.page"), "1", String.valueOf((int) Math.ceil((double) cash.size() / 7)))));
+            TextComponent msg = new TextComponent(Utility.hex(String.format(Utility.lang(sender,"pages.page"), "1", String.valueOf((int) Math.ceil((double) cash.size() / 7)))));
             message.addExtra(msg);
         }
         if (bool[1] == true) {
-            TextComponent msg = new TextComponent(utility.hex(utility.lang(sender,"top.text_9")));
+            TextComponent msg = new TextComponent(Utility.hex(Utility.lang(sender,"top.text_9")));
             msg.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/clan " + args[0] + " " + type + " " + function + " " + String.valueOf((Integer.parseInt(page) + 7) / 7 + 1)));
             message.addExtra(msg);
         } else {
-            TextComponent msg = new TextComponent(utility.hex(String.format(" | " + utility.lang(sender,"pages.page"), String.valueOf((int) Math.ceil((double) cash.size() / 7)), String.valueOf((int) Math.ceil((double) cash.size() / 7)))));
+            TextComponent msg = new TextComponent(Utility.hex(String.format(" | " + Utility.lang(sender,"pages.page"), String.valueOf((int) Math.ceil((double) cash.size() / 7)), String.valueOf((int) Math.ceil((double) cash.size() / 7)))));
             message.addExtra(msg);
         }
-        message.addExtra(utility.hex("\n" + utility.lang(sender,"top.text_10")));
+        message.addExtra(Utility.hex("\n" + Utility.lang(sender,"top.text_10")));
         sender.spigot().sendMessage(message);
         } else {
             if (args[0].equals("top")) {
                 if (Member.getClan(sender.getName()) == null) {
-                    sender.sendMessage(utility.hex(prefix + utility.lang(sender,"top.text_0")));
+                    sender.sendMessage(Utility.hex(prefix + Utility.lang(sender,"top.text_0")));
                     return;
                 }
-                TextComponent message = new TextComponent(utility.hex(utility.lang(sender,"top.text_1") + "\n"));
+                TextComponent message = new TextComponent(Utility.hex(Utility.lang(sender,"top.text_1") + "\n"));
                 for (int i = 0; i < 5; i++) {
                     String[] func = new String[]{"rating", "members", "kills", "deaths", "kdr"};
                     cash = sorting(sender, new String[]{"top", func[i], "max"});
@@ -130,21 +131,21 @@ public class topCMD {
                         if (cash.get(i1).getName().equals(Member.getClan(sender.getName()))) {
                             String text = "";
                             switch (func[i]) {
-                                case "rating": text = utility.lang(sender,"top.text_3"); break;
-                                case "members": text = utility.lang(sender,"top.text_4"); break;
-                                case "kills": text = utility.lang(sender,"top.text_5"); break;
-                                case "deaths": text = utility.lang(sender,"top.text_6"); break;
-                                case "kdr": text = utility.lang(sender,"top.text_7"); break;
+                                case "rating": text = Utility.lang(sender,"top.text_3"); break;
+                                case "members": text = Utility.lang(sender,"top.text_4"); break;
+                                case "kills": text = Utility.lang(sender,"top.text_5"); break;
+                                case "deaths": text = Utility.lang(sender,"top.text_6"); break;
+                                case "kdr": text = Utility.lang(sender,"top.text_7"); break;
                                 default: break;
                             }
-                            message.addExtra(utility.hex("&a- " + text + String.format(utility.lang(sender,"top.text_13"), i1 + 1) + "\n"));
+                            message.addExtra(Utility.hex("&a- " + text + String.format(Utility.lang(sender,"top.text_13"), i1 + 1) + "\n"));
                         }
                     }
                 }
-                message.addExtra(utility.hex(utility.lang(sender,"top.text_10")));
+                message.addExtra(Utility.hex(Utility.lang(sender,"top.text_10")));
                 sender.spigot().sendMessage(message);
             } else {
-                TextComponent message = new TextComponent(utility.hex(utility.lang(sender,"top.text_2") + "\n"));
+                TextComponent message = new TextComponent(Utility.hex(Utility.lang(sender,"top.text_2") + "\n"));
                 for (int i = 0; i < 4; i++) {
                     String[] func = new String[]{"rating", "kills", "deaths", "kdr"};
                     cash = sorting(sender, new String[]{"stats", func[i], "max"});
@@ -152,24 +153,24 @@ public class topCMD {
                         if (cash.get(i1).getName().equals(sender.getName())) {
                             String text = "";
                             switch (func[i]) {
-                                case "rating": text = utility.lang(sender,"top.text_3"); break;
-                                case "kills": text = utility.lang(sender,"top.text_5"); break;
-                                case "deaths": text = utility.lang(sender,"top.text_6"); break;
-                                case "kdr": text = utility.lang(sender,"top.text_7"); break;
+                                case "rating": text = Utility.lang(sender,"top.text_3"); break;
+                                case "kills": text = Utility.lang(sender,"top.text_5"); break;
+                                case "deaths": text = Utility.lang(sender,"top.text_6"); break;
+                                case "kdr": text = Utility.lang(sender,"top.text_7"); break;
                                 default: break;
                             }
-                            message.addExtra(utility.hex("&a- " + text + String.format(utility.lang(sender,"top.text_13"), i1 + 1) + "\n"));
+                            message.addExtra(Utility.hex("&a- " + text + String.format(Utility.lang(sender,"top.text_13"), i1 + 1) + "\n"));
                         }
                     }
                 }
-                message.addExtra(utility.hex(utility.lang(sender,"top.text_10")));
+                message.addExtra(Utility.hex(Utility.lang(sender,"top.text_10")));
                 sender.spigot().sendMessage(message);
             }
         }
     }
     public static ArrayList<topCMD> sorting(CommandSender sender, String[] args) {
         String[] function = new String[1];
-        String[] arrow = {utility.lang(sender,"top.text_8")};
+        String[] arrow = {Utility.lang(sender,"top.text_8")};
         String type = args[1];
         ArrayList<topCMD> cash = new ArrayList<topCMD>();
 

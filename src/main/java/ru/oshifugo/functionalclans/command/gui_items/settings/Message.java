@@ -6,15 +6,15 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import ru.oshifugo.functionalclans.Utility;
 import ru.oshifugo.functionalclans.command.ClanGUI;
 import ru.oshifugo.functionalclans.command.gui_items.ItemsBase;
 import ru.oshifugo.functionalclans.sql.Clan;
-import ru.oshifugo.functionalclans.utility;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -63,7 +63,7 @@ public class Message extends ItemsBase{
         switch (id) {
             case "new_message":
                 player.setLevel(player.getLevel());
-                if (!utility.hasAnyOfPermsOrLeader(player, "fc.message")) {
+                if (!Utility.hasAnyOfPermsOrLeader(player, "fc.message")) {
                     player.sendMessage(getTranslate().get("other.perm-lack", true));
                     return;
                 }

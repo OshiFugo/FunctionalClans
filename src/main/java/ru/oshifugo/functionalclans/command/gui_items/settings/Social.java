@@ -7,10 +7,10 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import ru.oshifugo.functionalclans.Utility;
 import ru.oshifugo.functionalclans.command.ClanGUI;
 import ru.oshifugo.functionalclans.command.gui_items.ItemsBase;
 import ru.oshifugo.functionalclans.sql.Clan;
-import ru.oshifugo.functionalclans.utility;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
 
 import java.util.Arrays;
@@ -52,7 +52,7 @@ public class Social extends ItemsBase{
         switch (id) {
             case "new_social":
                 player.setLevel(player.getLevel());
-                if (!utility.hasAnyOfPermsOrLeader(player, "fc.social")) {
+                if (!Utility.hasAnyOfPermsOrLeader(player, "fc.social")) {
                     player.sendMessage(getTranslate().get("other.perm-lack", true));
                     return;
                 }

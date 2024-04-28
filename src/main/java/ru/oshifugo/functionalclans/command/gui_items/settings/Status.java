@@ -7,12 +7,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
-import ru.oshifugo.functionalclans.GUITranslate;
 import ru.oshifugo.functionalclans.FunctionalClans;
+import ru.oshifugo.functionalclans.GUITranslate;
+import ru.oshifugo.functionalclans.Utility;
 import ru.oshifugo.functionalclans.command.ClanGUI;
 import ru.oshifugo.functionalclans.command.gui_items.ItemsBase;
 import ru.oshifugo.functionalclans.sql.Clan;
-import ru.oshifugo.functionalclans.utility;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
 
 import java.util.Arrays;
@@ -53,7 +53,7 @@ public class Status extends ItemsBase{
         switch (id) {
             case "new_status":
                 player.setLevel(player.getLevel());
-                if (!utility.hasAnyOfPermsOrLeader(player, "fc.status")) {
+                if (!Utility.hasAnyOfPermsOrLeader(player, "fc.status")) {
                     player.sendMessage(getTranslate().get("other.perm-lack", true));
                     break;
                 }

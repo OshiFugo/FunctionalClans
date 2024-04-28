@@ -4,14 +4,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.bukkit.entity.Player;
 import ru.oshifugo.functionalclans.sql.Clan;
 import ru.oshifugo.functionalclans.sql.Member;
-import ru.oshifugo.functionalclans.sql.SQLiteUtility;
-import ru.oshifugo.functionalclans.utility;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import static ru.oshifugo.functionalclans.sql.SQLiteUtility.members;

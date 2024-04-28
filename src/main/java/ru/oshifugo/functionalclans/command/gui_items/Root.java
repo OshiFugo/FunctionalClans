@@ -5,9 +5,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.jetbrains.annotations.NotNull;
+import ru.oshifugo.functionalclans.Utility;
 import ru.oshifugo.functionalclans.command.ClanGUI;
 import ru.oshifugo.functionalclans.command.gui_items.members.Members;
-import ru.oshifugo.functionalclans.utility;
 
 public class Root extends ItemsBase{
     static public Root settings(ClanGUI ui, Player player) {
@@ -40,7 +40,7 @@ public class Root extends ItemsBase{
     public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent inventoryClickEvent, String id) {
         switch (id) {
             case "settings":
-                if (!utility.hasAnyOfPermsOrLeader(player, "fc.message", "fc.rename",
+                if (!Utility.hasAnyOfPermsOrLeader(player, "fc.message", "fc.rename",
                         "fc.social", "fc.status", "fc.type", "fc.role"))
                 {
                     player.sendMessage(getTranslate().get("other.perm-lack", true));

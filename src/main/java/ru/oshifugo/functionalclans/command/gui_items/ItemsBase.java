@@ -10,11 +10,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
-import ru.oshifugo.functionalclans.GUITranslate;
 import ru.oshifugo.functionalclans.FunctionalClans;
+import ru.oshifugo.functionalclans.GUITranslate;
+import ru.oshifugo.functionalclans.Utility;
 import ru.oshifugo.functionalclans.command.ClanGUI;
 import ru.oshifugo.functionalclans.command.GUITranslatePlaceholder;
-import ru.oshifugo.functionalclans.utility;
 import xyz.xenondevs.invui.item.ItemProvider;
 import xyz.xenondevs.invui.item.builder.ItemBuilder;
 import xyz.xenondevs.invui.item.impl.AbstractItem;
@@ -127,12 +127,12 @@ public abstract class ItemsBase extends AbstractItem {
 
     protected void setId(ItemStack item, String id) {
         if (item == null) {
-            utility.debug("setId -> item == null");
+            Utility.debug("setId -> item == null");
             return;
         }
         ItemMeta meta = item.getItemMeta();
         if (meta == null) {
-            utility.debug("setId -> meta == null");
+            Utility.debug("setId -> meta == null");
             return;
         }
         NamespacedKey key = new NamespacedKey(FunctionalClans.getInstance(), "id");
@@ -146,19 +146,19 @@ public abstract class ItemsBase extends AbstractItem {
     public String getId() {
         ItemStack item = itemBuilder.get();
         if (item == null) {
-            utility.debug("getId -> item == null");
+            Utility.debug("getId -> item == null");
             return null;
         }
         ItemMeta meta = item.getItemMeta();
         if (meta == null) {
-            utility.debug("getId -> meta == null");
+            Utility.debug("getId -> meta == null");
             return null;
         }
         NamespacedKey key = new NamespacedKey(FunctionalClans.getInstance(), "id");
 
         String id = meta.getPersistentDataContainer().get(key, PersistentDataType.STRING);
         if (id == null) {
-            utility.debug("getId -> id == null");
+            Utility.debug("getId -> id == null");
         }
         return id;
     }
@@ -166,7 +166,7 @@ public abstract class ItemsBase extends AbstractItem {
     public void handleClick(@NotNull ClickType clickType, @NotNull Player player, @NotNull InventoryClickEvent inventoryClickEvent) {
         String id = getId();
         if (id == null) {
-            utility.debug("handleClick -> id == null");
+            Utility.debug("handleClick -> id == null");
             return;
         }
         handleClick(clickType, player, inventoryClickEvent, id);
